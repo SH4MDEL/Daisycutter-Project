@@ -21,10 +21,11 @@ public:
 						// virtual 타고 상위 클래스의 끝까지 올라간 다음, 하위 소멸자를 전부 호출해서 상속받은 클래스를 한번에 소멸시키는 것이다.
 
 	virtual void OnCreate() = 0;		// 만들때 선언용 함수
+	virtual void OnDestroy() = 0;		// 삭제
 
 	virtual void BuildObjects() = 0;
 	virtual void Update(float fTimeElapsed) = 0;
-	virtual void Render(HDC hdc) = 0;
+	virtual void Render() = 0;
 
 protected:
 	SceneTag m_Tag;
