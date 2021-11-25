@@ -2,17 +2,18 @@
 
 SCENE_MAIN::SCENE_MAIN()
 {
-	
+
 }
 
 SCENE_MAIN::SCENE_MAIN(SceneTag tag, CFramework* pFramework) : CScene(tag, pFramework)
 {
 	this->OnCreate();
+	printf("asdf\n");
 }
 
 SCENE_MAIN::~SCENE_MAIN()
 {
-
+	this->OnDestroy();
 }
 
 void SCENE_MAIN::OnCreate()
@@ -22,7 +23,9 @@ void SCENE_MAIN::OnCreate()
 
 void SCENE_MAIN::OnDestroy()
 {
-
+	delete sun;
+	delete earth;
+	delete moon;
 }
 
 void SCENE_MAIN::BuildObjects()
@@ -81,9 +84,12 @@ void SCENE_MAIN::Update(float fTimeElapsed)
 void SCENE_MAIN::KeyboardMessage(unsigned char inputKey)
 {
 	switch (inputKey) {
+	case 't':
+	case 'T':
+		m_pFramework->ChangeScene(CScene::SceneTag::Main, new SCENE_MAIN(CScene::SceneTag::Main, m_pFramework));
+		break;
 	case 'r':
 	case 'R':
-
 		break;
 	case 'q':	// 프로그램 종료
 	case 'Q':
@@ -94,14 +100,14 @@ void SCENE_MAIN::KeyboardMessage(unsigned char inputKey)
 
 void SCENE_MAIN::CameraSetting()
 {
-	glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 7.0f); //--- 카메라 위치
-	glm::vec3 cameraDirection = glm::vec3(0.0f, 0.0f, 0.0f); //--- 카메라 바라보는 방향
-	glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f); //--- 카메라 위쪽 방향
+	glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 7.0f);				//--- 카메라 위치
+	glm::vec3 cameraDirection = glm::vec3(0.0f, 0.0f, 0.0f);		//--- 카메라 바라보는 방향
+	glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);				//--- 카메라 위쪽 방향
 	glm::mat4 view = glm::mat4(1.0f);
 	view = glm::lookAt(cameraPos, cameraDirection, cameraUp);
-	unsigned int viewLocation = glGetUniformLocation(s_program, "viewTransform"); //--- 뷰잉 변환 설정
+	unsigned int viewLocation = glGetUniformLocation(s_program, "viewTransform");		//--- 뷰잉 변환 설정
 	glUniformMatrix4fv(viewLocation, 1, GL_FALSE, &view[0][0]);
-	unsigned int viewPos = glGetUniformLocation(s_program, "viewPos"); //--- 바라보는 방향 프래그먼트 셰이더로 전달
+	unsigned int viewPos = glGetUniformLocation(s_program, "viewPos");					//--- 바라보는 방향 프래그먼트 셰이더로 전달
 	glUniform3f(viewPos, -2.0f, 2.0f, 2.0f);
 }
 
@@ -109,8 +115,8 @@ void SCENE_MAIN::ProjectionSetting()
 {
 	glm::mat4 projection = glm::mat4(1.0f);
 	projection = glm::perspective(glm::radians(60.0f), (float)700.0 / (float)700.0, 0.1f, 200.0f);
-	projection = glm::translate(projection, glm::vec3(0.0, 0.0, 0.2)); //--- 공간을 약간 뒤로 미뤄줌
-	unsigned int projectionLocation = glGetUniformLocation(s_program, "projectionTransform"); //--- 투영 변환 값 설정
+	projection = glm::translate(projection, glm::vec3(0.0, 0.0, 0.2));							//--- 공간을 약간 뒤로 밀어줌. 필요없으면 제거할 것
+	unsigned int projectionLocation = glGetUniformLocation(s_program, "projectionTransform");	//--- 투영 변환 값 설정
 	glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, &projection[0][0]);
 }
 

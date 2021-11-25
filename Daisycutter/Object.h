@@ -12,8 +12,8 @@ protected:
 	virtual void Update(float fTimeElapsed) = 0;
 	virtual void Render() = 0;
 
-	virtual void putFactor(glm::mat4 inputFactor) = 0;	// 이동 정보를 바꿉니다.
-	virtual glm::mat4 getFactor() = 0;					// 이동 정보를 반환합니다.
+	virtual void putFactor(glm::mat4 inputFactor) = 0;	// 이동 정보 변경. (초기값은 반드시 원점)
+	virtual glm::mat4 getFactor() = 0;					// 이동 정보 반환.
 
 	GLint s_program;
 };

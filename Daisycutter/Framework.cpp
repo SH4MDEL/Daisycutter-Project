@@ -21,12 +21,13 @@ bool CFramework::OnCreate(const RECT& rc)
 
 bool CFramework::OnDestroy()
 {
-	delete m_pCurrScene;
+	m_pCurrScene->~CScene();
 	return true;
 }
 
 void CFramework::InitBuffer(GLint s_program)
 {
+	this->s_program = s_program;
 	m_pCurrScene->InitBuffer(s_program);
 }
 
@@ -61,6 +62,7 @@ void CFramework::KeyboardMessage(unsigned char inputKey)
 
 void CFramework::ChangeScene(CScene::SceneTag tag, CScene* NowScene)
 {
-	m_pCurrScene->OnDestroy();
+	delete m_pCurrScene;
+	NowScene->InitBuffer(this->s_program);
 	m_pCurrScene = NowScene;
 }
