@@ -1,5 +1,5 @@
 #pragma once
-
+#include "Object.h"
 
 class CFramework;
 
@@ -24,11 +24,21 @@ public:
 	virtual void OnDestroy() = 0;		// 삭제
 
 	virtual void BuildObjects() = 0;
+	virtual void InitBuffer(GLint s_program) = 0;
+
 	virtual void Update(float fTimeElapsed) = 0;
 	virtual void Render() = 0;
+
+	virtual void KeyboardMessage(unsigned char inputKey) = 0;
+
+	virtual void CameraSetting() = 0;
+	virtual void ProjectionSetting() = 0;
+	virtual void LightSetting() = 0;
 
 protected:
 	SceneTag m_Tag;
 	CFramework* m_pFramework;	// 인자로 받아오는게 아니라 동적할당을 해온다.
+
+	GLint s_program;
 };
 

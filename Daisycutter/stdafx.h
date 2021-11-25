@@ -23,4 +23,6 @@
 #pragma comment(lib, "winmm.lib")		// 타이머를 추가하기 위한 헤더파일 include
 #include <Mmsystem.h>
 
+#define MAX_FPS 0.0
+#define M_PI 3.1415926535897932384626433832795
 

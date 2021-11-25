@@ -16,8 +16,13 @@ public:
 	bool OnCreate(const RECT &rc);
 	bool OnDestroy();
 
+	void InitBuffer(GLint s_program);
 	void Update(float fTimeElapsed);
 	void Render();
+
+	void FrameAdvance();
+
+	void KeyboardMessage(unsigned char inputKey);
 
 	//void curSceneCreate();
 	//void BuildScene(CScene::SceneTag tag);

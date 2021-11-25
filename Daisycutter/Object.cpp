@@ -9,10 +9,10 @@ CObject::~CObject()
 {
 }
 
-void CObject::Update(float fTimeElapsed)
-{
-}
+//void CObject::Update(float fTimeElapsed)
+//{
+//}
 
-void CObject::Render()
-{
-}
+//void CObject::Render()
+//{
+//}
