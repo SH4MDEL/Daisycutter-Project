@@ -1,16 +1,15 @@
 #pragma once
 #include "Scene.h"
 #include "Framework.h"
-#include "OBJECT_SUN.h"
-#include "OBJECT_EARTH.h"
-#include "OBJECT_MOON.h"
 
-class SCENE_MAIN : public CScene
+#include "OBJECT_PLAYER.h"
+
+class SCENE_TITLE : public CScene
 {
 public:
-	SCENE_MAIN();
-	SCENE_MAIN(SceneTag tag, CFramework* pFramework);
-	~SCENE_MAIN() override;
+	SCENE_TITLE();
+	SCENE_TITLE(SceneTag tag, CFramework* pFramework);
+	~SCENE_TITLE() override;
 
 	void OnCreate() override;
 	void OnDestroy() override;							// 생성한 오브젝트 파괴. 동적할당 해제 해주기
@@ -24,15 +23,15 @@ public:
 	void Update(float fTimeElapsed) override;			// m_pCurrScene->Update();
 
 	void KeyboardMessage(unsigned char inputKey) override;
+	void SpecialKeyboardMessage(int inputKey) override;
 
 	void CameraSetting() override;
 	void ProjectionSetting() override;
 	void LightSetting() override;
 private:
-	OBJECT_SUN* sun = NULL;
-	OBJECT_EARTH* earth = NULL;
-	OBJECT_MOON* moon = NULL;
+	OBJECT_PLAYER* player = NULL;
 
 	unsigned int modelLocation;
 };
+
 

@@ -1,10 +1,10 @@
 #include "Framework.h"
 
-#include "SCENE_MAIN.h"
+#include "SCENE_TITLE.h"
 
 CFramework::CFramework()
 {
-	m_pCurrScene = new SCENE_MAIN(CScene::SceneTag::Main, this);
+	m_pCurrScene = new SCENE_TITLE(CScene::SceneTag::Main, this);
 }
 
 CFramework::~CFramework()
@@ -58,6 +58,11 @@ void CFramework::FrameAdvance()
 void CFramework::KeyboardMessage(unsigned char inputKey)
 {
 	m_pCurrScene->KeyboardMessage(inputKey);
+}
+
+void CFramework::SpecialKeyboardMessage(int inputKey)
+{
+	m_pCurrScene->SpecialKeyboardMessage(inputKey);
 }
 
 void CFramework::ChangeScene(CScene::SceneTag tag, CScene* NowScene)

@@ -1,53 +1,46 @@
-#include "SCENE_MAIN.h"
+#include "SCENE_TITLE.h"
 
-SCENE_MAIN::SCENE_MAIN()
+SCENE_TITLE::SCENE_TITLE()
 {
 
 }
 
-SCENE_MAIN::SCENE_MAIN(SceneTag tag, CFramework* pFramework) : CScene(tag, pFramework)
+SCENE_TITLE::SCENE_TITLE(SceneTag tag, CFramework* pFramework) : CScene(tag, pFramework)
 {
 	this->OnCreate();
-	printf("asdf\n");
 }
 
-SCENE_MAIN::~SCENE_MAIN()
+SCENE_TITLE::~SCENE_TITLE()
 {
 	this->OnDestroy();
 }
 
-void SCENE_MAIN::OnCreate()
+void SCENE_TITLE::OnCreate()
 {
 	this->BuildObjects();
 }
 
-void SCENE_MAIN::OnDestroy()
+void SCENE_TITLE::OnDestroy()
 {
-	delete sun;
-	delete earth;
-	delete moon;
+	delete player;
 }
 
-void SCENE_MAIN::BuildObjects()
+void SCENE_TITLE::BuildObjects()
 {
-	sun = new OBJECT_SUN;
-	earth = new OBJECT_EARTH;
-	moon = new OBJECT_MOON;
+	player = new OBJECT_PLAYER;
 }
 
-void SCENE_MAIN::InitBuffer(GLint s_program)
+void SCENE_TITLE::InitBuffer(GLint s_program)
 {
 	this->s_program = s_program;
 
-	sun->initBuffer(this->s_program);
-	earth->initBuffer(this->s_program);
-	moon->initBuffer(this->s_program);
+	player->initBuffer(this->s_program);
 }
 
-void SCENE_MAIN::Render()
+void SCENE_TITLE::Render()
 {
 
-	glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
+	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glUseProgram(this->s_program);
@@ -59,46 +52,34 @@ void SCENE_MAIN::Render()
 
 	glEnable(GL_DEPTH_TEST);
 
-	sun->putFactor(glm::mat4(1.0f));
-	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(sun->getFactor()));
-	sun->Render();
-
-	earth->putFactor(glm::mat4(1.0f));
-	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(earth->getFactor()));
-	earth->Render();
-
-	moon->putFactor(glm::mat4(1.0f));
-	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(moon->getFactor()));
-	moon->Render();
+	player->putFactor(glm::mat4(1.0f));
+	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(player->getFactor()));
+	player->Render();
 
 	glDisable(GL_DEPTH_TEST);
 }
 
-void SCENE_MAIN::Update(float fTimeElapsed)
+void SCENE_TITLE::Update(float fTimeElapsed)
 {
-	sun->Update(fTimeElapsed);
-	earth->Update(fTimeElapsed);
-	moon->Update(fTimeElapsed);
+	player->Update(fTimeElapsed);
 }
 
-void SCENE_MAIN::KeyboardMessage(unsigned char inputKey)
+void SCENE_TITLE::KeyboardMessage(unsigned char inputKey)
 {
 	switch (inputKey) {
-	case 't':
-	case 'T':
-		m_pFramework->ChangeScene(CScene::SceneTag::Main, new SCENE_MAIN(CScene::SceneTag::Main, m_pFramework));
-		break;
-	case 'r':
-	case 'R':
-		break;
-	case 'q':	// 프로그램 종료
-	case 'Q':
+	
+	case 27:	// 'ESCAPE'
 		glutLeaveMainLoop();
 		break;
 	}
 }
 
-void SCENE_MAIN::CameraSetting()
+void SCENE_TITLE::SpecialKeyboardMessage(int inputKey)
+{
+
+}
+
+void SCENE_TITLE::CameraSetting()
 {
 	glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 7.0f);				//--- 카메라 위치
 	glm::vec3 cameraDirection = glm::vec3(0.0f, 0.0f, 0.0f);		//--- 카메라 바라보는 방향
@@ -111,7 +92,7 @@ void SCENE_MAIN::CameraSetting()
 	glUniform3f(viewPos, -2.0f, 2.0f, 2.0f);
 }
 
-void SCENE_MAIN::ProjectionSetting()
+void SCENE_TITLE::ProjectionSetting()
 {
 	glm::mat4 projection = glm::mat4(1.0f);
 	projection = glm::perspective(glm::radians(60.0f), (float)700.0 / (float)700.0, 0.1f, 200.0f);
@@ -120,7 +101,7 @@ void SCENE_MAIN::ProjectionSetting()
 	glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, &projection[0][0]);
 }
 
-void SCENE_MAIN::LightSetting()
+void SCENE_TITLE::LightSetting()
 {
 
 }

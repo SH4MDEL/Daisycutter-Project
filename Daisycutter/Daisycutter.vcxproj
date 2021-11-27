@@ -147,12 +147,10 @@
     <ClCompile Include="make_shaderProgram.cpp" />
     <ClCompile Include="make_vertexShaders.cpp" />
     <ClCompile Include="Object.cpp" />
-    <ClCompile Include="OBJECT_EARTH.cpp" />
-    <ClCompile Include="OBJECT_MOON.cpp" />
-    <ClCompile Include="OBJECT_SUN.cpp" />
+    <ClCompile Include="OBJECT_PLAYER.cpp" />
     <ClCompile Include="objRead.cpp" />
     <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="SCENE_MAIN.cpp" />
+    <ClCompile Include="SCENE_TITLE.cpp" />
     <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -163,12 +161,10 @@
     <ClInclude Include="make_shaderProgram.h" />
     <ClInclude Include="make_vertexShaders.h" />
     <ClInclude Include="Object.h" />
-    <ClInclude Include="OBJECT_EARTH.h" />
-    <ClInclude Include="OBJECT_MOON.h" />
-    <ClInclude Include="OBJECT_SUN.h" />
+    <ClInclude Include="OBJECT_PLAYER.h" />
     <ClInclude Include="objRead.h" />
     <ClInclude Include="Scene.h" />
-    <ClInclude Include="SCENE_MAIN.h" />
+    <ClInclude Include="SCENE_TITLE.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Timer.h" />
   </ItemGroup>

@@ -30,6 +30,7 @@ public:
 	virtual void Render() = 0;
 
 	virtual void KeyboardMessage(unsigned char inputKey) = 0;
+	virtual void SpecialKeyboardMessage(int inputKey) = 0;
 
 	virtual void CameraSetting() = 0;
 	virtual void ProjectionSetting() = 0;

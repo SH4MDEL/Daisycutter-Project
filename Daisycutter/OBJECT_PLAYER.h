@@ -2,19 +2,20 @@
 #include "Object.h"
 #include "objRead.h"
 
-class OBJECT_SUN : public CObject
+class OBJECT_PLAYER : public CObject
 {
 private:
-	GLuint vao[3], vbo[3][2];
+	GLuint vao, vbo[3];
 	int objColorLocation;
 	glm::mat4 myFactor;
 
+	GLfloat object_x, object_y, object_z;
 public:
 	static objRead objReader;
-	static GLint object;
+	static GLint ObjectMedel;
 
-	OBJECT_SUN();
-	~OBJECT_SUN();
+	OBJECT_PLAYER();
+	~OBJECT_PLAYER();
 
 	void OnCreate() override;
 	void initBuffer(GLint s_program) override;
@@ -24,4 +25,3 @@ public:
 	void putFactor(glm::mat4 inputFactor) override;
 	glm::mat4 getFactor() override;
 };
-

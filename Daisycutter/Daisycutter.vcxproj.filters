@@ -72,19 +72,13 @@
     <ClCompile Include="Object.cpp">
       <Filter>소스 파일\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="SCENE_MAIN.cpp">
-      <Filter>소스 파일\Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="OBJECT_SUN.cpp">
-      <Filter>소스 파일\Objects</Filter>
-    </ClCompile>
     <ClCompile Include="objRead.cpp">
       <Filter>소스 파일\Others</Filter>
     </ClCompile>
-    <ClCompile Include="OBJECT_EARTH.cpp">
-      <Filter>소스 파일\Objects</Filter>
+    <ClCompile Include="SCENE_TITLE.cpp">
+      <Filter>소스 파일\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="OBJECT_MOON.cpp">
+    <ClCompile Include="OBJECT_PLAYER.cpp">
       <Filter>소스 파일\Objects</Filter>
     </ClCompile>
   </ItemGroup>
@@ -119,19 +113,13 @@
     <ClInclude Include="Object.h">
       <Filter>헤더 파일\Objects</Filter>
     </ClInclude>
-    <ClInclude Include="SCENE_MAIN.h">
-      <Filter>헤더 파일\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="OBJECT_SUN.h">
-      <Filter>헤더 파일\Objects</Filter>
-    </ClInclude>
     <ClInclude Include="objRead.h">
       <Filter>헤더 파일\Others</Filter>
     </ClInclude>
-    <ClInclude Include="OBJECT_EARTH.h">
-      <Filter>헤더 파일\Objects</Filter>
+    <ClInclude Include="SCENE_TITLE.h">
+      <Filter>헤더 파일\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="OBJECT_MOON.h">
+    <ClInclude Include="OBJECT_PLAYER.h">
       <Filter>헤더 파일\Objects</Filter>
     </ClInclude>
   </ItemGroup>

@@ -6,12 +6,13 @@
 
 #include "Framework.h"
 
-#define CLIENT_WIDTH	1000
-#define CLIENT_HEIGHT	1000
+#define CLIENT_WIDTH	1920
+#define CLIENT_HEIGHT	1080
 
 
 GLvoid fc_drawScene();
 GLvoid fc_Keyboard(unsigned char inputKey, int x, int y);
+GLvoid fc_SpecialKeyboard(int key, int x, int y);
 GLvoid fc_Timer(int value);
 GLvoid fc_Reshape(int w, int h);
 
@@ -33,6 +34,12 @@ public:
 	GLvoid Keyboard(unsigned char inputKey, int x, int y)
 	{
 		myFramework.KeyboardMessage(inputKey);
+		glutPostRedisplay();
+	}
+
+	GLvoid SpecialKeyboard(int inputKey, int x, int y)
+	{
+		myFramework.SpecialKeyboardMessage(inputKey);
 		glutPostRedisplay();
 	}
 
@@ -80,6 +87,7 @@ int main(int argc, char** argv) //--- 윈도우 출력하고 콜백함수 설정
 
 	glutDisplayFunc(fc_drawScene);
 	glutKeyboardFunc(fc_Keyboard);
+	glutSpecialFunc(fc_SpecialKeyboard);
 	glutTimerFunc(10, fc_Timer, 0);
 	glutReshapeFunc(fc_Reshape);
 	glutMainLoop();
@@ -98,6 +106,11 @@ GLvoid fc_Reshape(int w, int h)        //--- 콜백 함수: 다시 그리기 콜백 함수
 GLvoid fc_Keyboard(unsigned char key, int x, int y)
 {
 	fcptr->Keyboard(key, x, y);
+}
+
+GLvoid fc_SpecialKeyboard(int key, int x, int y)
+{
+	fcptr->SpecialKeyboard(key, x, y);
 }
 
 void fc_Timer(int val)

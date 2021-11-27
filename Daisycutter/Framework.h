@@ -2,6 +2,7 @@
 #include "stdafx.h"
 #include "Scene.h"
 
+
 class CFramework
 {
 private:
@@ -23,6 +24,7 @@ public:
 	void FrameAdvance();
 
 	void KeyboardMessage(unsigned char inputKey);
+	void SpecialKeyboardMessage(int inputKey);
 
 	//void curSceneCreate();
 	//void BuildScene(CScene::SceneTag tag);
