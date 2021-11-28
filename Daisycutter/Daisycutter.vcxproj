@@ -147,6 +147,7 @@
     <ClCompile Include="make_shaderProgram.cpp" />
     <ClCompile Include="make_vertexShaders.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="OBJECT_FIELD.cpp" />
     <ClCompile Include="OBJECT_PLAYER.cpp" />
     <ClCompile Include="objRead.cpp" />
     <ClCompile Include="Scene.cpp" />
@@ -161,10 +162,12 @@
     <ClInclude Include="make_shaderProgram.h" />
     <ClInclude Include="make_vertexShaders.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="OBJECT_FIELD.h" />
     <ClInclude Include="OBJECT_PLAYER.h" />
     <ClInclude Include="objRead.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SCENE_TITLE.h" />
+    <ClInclude Include="stb_image.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Timer.h" />
   </ItemGroup>

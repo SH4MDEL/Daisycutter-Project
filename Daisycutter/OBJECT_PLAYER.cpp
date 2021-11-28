@@ -75,3 +75,18 @@ glm::mat4 OBJECT_PLAYER::getFactor()
 {
 	return myFactor;
 }
+
+GLfloat OBJECT_PLAYER::getOx()
+{
+	return object_x;
+}
+
+GLfloat OBJECT_PLAYER::getOy()
+{
+	return object_y;
+}
+
+GLfloat OBJECT_PLAYER::getOz()
+{
+	return object_z;
+}

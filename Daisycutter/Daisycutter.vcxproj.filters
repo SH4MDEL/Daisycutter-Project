@@ -72,14 +72,17 @@
     <ClCompile Include="Object.cpp">
       <Filter>소스 파일\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="objRead.cpp">
-      <Filter>소스 파일\Others</Filter>
-    </ClCompile>
     <ClCompile Include="SCENE_TITLE.cpp">
       <Filter>소스 파일\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="OBJECT_PLAYER.cpp">
       <Filter>소스 파일\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="OBJECT_FIELD.cpp">
+      <Filter>소스 파일\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="objRead.cpp">
+      <Filter>소스 파일\Others</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +124,12 @@
     </ClInclude>
     <ClInclude Include="OBJECT_PLAYER.h">
       <Filter>헤더 파일\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="OBJECT_FIELD.h">
+      <Filter>헤더 파일\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="stb_image.h">
+      <Filter>헤더 파일\Others</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

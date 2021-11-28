@@ -14,7 +14,7 @@ public:
 	CFramework();
 	~CFramework();
 
-	bool OnCreate(const RECT &rc);
+	bool OnCreate();
 	bool OnDestroy();
 
 	void InitBuffer(GLint s_program);

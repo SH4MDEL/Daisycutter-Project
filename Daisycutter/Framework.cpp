@@ -5,6 +5,7 @@
 CFramework::CFramework()
 {
 	m_pCurrScene = new SCENE_TITLE(CScene::SceneTag::Main, this);
+	OnCreate();
 }
 
 CFramework::~CFramework()
@@ -12,7 +13,7 @@ CFramework::~CFramework()
 	OnDestroy();
 }
 
-bool CFramework::OnCreate(const RECT& rc)
+bool CFramework::OnCreate()
 {
 	m_current_time = std::chrono::system_clock::now();
 	m_fps = 0;
