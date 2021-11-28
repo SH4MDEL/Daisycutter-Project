@@ -18,6 +18,7 @@ public:
 	bool OnDestroy();
 
 	void InitBuffer(GLint s_program);
+	void InitTexture(GLint s_program);
 	void Update(float fTimeElapsed);
 	void Render();
 

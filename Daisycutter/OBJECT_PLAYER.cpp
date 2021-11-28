@@ -52,6 +52,11 @@ void OBJECT_PLAYER::initBuffer(GLint s_program)
 	objColorLocation = glGetUniformLocation(this->s_program, "objectColor"); //--- object Color°ª Àü´Þ
 }
 
+void OBJECT_PLAYER::initTexture(GLint s_program)
+{
+
+}
+
 void OBJECT_PLAYER::Render()
 {
 	glUniform3f(objColorLocation, 1.0f, 1.0f, 1.0f);

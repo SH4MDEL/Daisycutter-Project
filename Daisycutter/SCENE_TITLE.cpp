@@ -58,8 +58,15 @@ void SCENE_TITLE::InitBuffer(GLint s_program)
 	this->s_program = s_program;
 
 	field->initBuffer(this->s_program);
-	field->initTexture(this->s_program);
 	player->initBuffer(this->s_program);
+}
+
+void SCENE_TITLE::InitTexture(GLint s_program)
+{
+	this->s_program = s_program;
+
+	field->initTexture(this->s_program);
+	player->initTexture(this->s_program);
 }
 
 void SCENE_TITLE::Render()

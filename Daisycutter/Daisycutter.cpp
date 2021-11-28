@@ -84,6 +84,7 @@ int main(int argc, char** argv) //--- 윈도우 출력하고 콜백함수 설정
 	make_fragmentShaders(fragmentSource, fragmentShader);
 	s_program = make_shaderProgram(vertexShader, fragmentShader);
 	myFramework.InitBuffer(s_program);
+	myFramework.InitTexture(s_program);
 
 	glutDisplayFunc(fc_drawScene);
 	glutKeyboardFunc(fc_Keyboard);

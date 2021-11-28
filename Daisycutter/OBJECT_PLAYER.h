@@ -7,6 +7,8 @@ class OBJECT_PLAYER : public CObject
 private:
 	GLuint vao, vbo[3];
 	int objColorLocation;
+	int tLocation;
+
 	glm::mat4 myFactor;
 
 	GLfloat object_x, object_y, object_z;
@@ -19,6 +21,7 @@ public:
 
 	void OnCreate() override;
 	void initBuffer(GLint s_program) override;
+	void initTexture(GLint s_program) override;			// 필요치 않을지라도 추가해 줘야 함
 	void Update(float fTimeElapsed) override;
 	void Render() override;
 

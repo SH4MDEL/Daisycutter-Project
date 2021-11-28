@@ -25,6 +25,7 @@ public:
 
 	virtual void BuildObjects() = 0;
 	virtual void InitBuffer(GLint s_program) = 0;
+	virtual void InitTexture(GLint s_program) = 0;
 
 	virtual void Update(float fTimeElapsed) = 0;
 	virtual void Render() = 0;

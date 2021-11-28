@@ -21,7 +21,7 @@ public:
 
 	void OnCreate() override;
 	void initBuffer(GLint s_program) override;
-	void initTexture(GLint s_program);
+	void initTexture(GLint s_program) override;
 	void Update(float fTimeElapsed) override;
 	void Render() override;
 

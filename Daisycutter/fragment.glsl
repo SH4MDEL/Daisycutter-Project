@@ -15,7 +15,7 @@ uniform sampler2D outTexture;
 void main()
 {
 	// ambient
-	vec3 ambientLight = vec3(0.5f);
+	vec3 ambientLight = vec3(0.9f);
 	vec3 ambient = ambientLight;
 
 	// diffuse

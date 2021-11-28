@@ -32,6 +32,12 @@ void CFramework::InitBuffer(GLint s_program)
 	m_pCurrScene->InitBuffer(s_program);
 }
 
+void CFramework::InitTexture(GLint s_program)
+{
+	this->s_program = s_program;
+	m_pCurrScene->InitTexture(s_program);
+}
+
 void CFramework::Update(float fTimeElapsed)
 {
 	m_pCurrScene->Update(fTimeElapsed);
@@ -70,5 +76,6 @@ void CFramework::ChangeScene(CScene::SceneTag tag, CScene* NowScene)
 {
 	delete m_pCurrScene;
 	NowScene->InitBuffer(this->s_program);
+	NowScene->InitTexture(this->s_program);
 	m_pCurrScene = NowScene;
 }
