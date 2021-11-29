@@ -44,6 +44,6 @@ protected:
 	SceneTag m_Tag;
 	CFramework* m_pFramework;	// 인자로 받아오는게 아니라 동적할당을 해온다.
 
-	ShaderManager SM;
+	static ShaderManager SM;
 };
 

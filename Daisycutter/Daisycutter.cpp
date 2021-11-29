@@ -1,14 +1,9 @@
 #pragma once
 #include "Daisycutter.h"
-#include "make_vertexShaders.h"
-#include "make_fragmentShaders.h"
-#include "make_shaderProgram.h"
-
 #include "Framework.h"
 
 #define CLIENT_WIDTH	1920
 #define CLIENT_HEIGHT	1080
-
 
 GLvoid fc_drawScene();
 GLvoid fc_Keyboard(unsigned char inputKey, int x, int y);
