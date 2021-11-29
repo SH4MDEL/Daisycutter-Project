@@ -26,16 +26,22 @@ bool CFramework::OnDestroy()
 	return true;
 }
 
-void CFramework::InitBuffer(GLint s_program)
+void CFramework::InitBuffer(GLint s_program[])
 {
-	this->s_program = s_program;
-	m_pCurrScene->InitBuffer(s_program);
+	for (int i = 0; i < 2; ++i)
+	{
+		this->s_program[i] = s_program[i];
+	}
+	m_pCurrScene->InitBuffer(this->s_program);
 }
 
-void CFramework::InitTexture(GLint s_program)
+void CFramework::InitTexture(GLint s_program[])
 {
-	this->s_program = s_program;
-	m_pCurrScene->InitTexture(s_program);
+	for (int i = 0; i < 2; ++i)
+	{
+		this->s_program[i] = s_program[i];
+	}
+	m_pCurrScene->InitTexture(this->s_program);
 }
 
 void CFramework::Update(float fTimeElapsed)

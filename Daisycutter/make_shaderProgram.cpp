@@ -2,8 +2,8 @@
 
 GLuint make_shaderProgram(GLuint& myvertexShader, GLuint& myfragmentShader)
 {
-	GLuint ShaderProgramID;
-	ShaderProgramID = glCreateProgram(); //--- 세이더 프로그램 만들기
+
+	GLuint ShaderProgramID = glCreateProgram(); //--- 세이더 프로그램 만들기
 
 	glAttachShader(ShaderProgramID, myvertexShader); //--- 세이더 프로그램에 버텍스 세이더 붙이기
 	glAttachShader(ShaderProgramID, myfragmentShader); //--- 세이더 프로그램에 프래그먼트 세이더 붙이기

@@ -1,8 +1,8 @@
 #include "make_vertexShaders.h"
 
-void make_vertexShaders(GLchar* myvertexSource, GLuint& myvertexShader)
+void make_vertexShaders(GLchar* myvertexSource, GLuint& myvertexShader, const char* shader_name)
 {
-	myvertexSource = filetobuf("vertex.glsl");
+	myvertexSource = filetobuf(shader_name);
 	//--- 버텍스 세이더 객체 만들기
 	myvertexShader = glCreateShader(GL_VERTEX_SHADER);
 	//--- 세이더 코드를 세이더 객체에 넣기

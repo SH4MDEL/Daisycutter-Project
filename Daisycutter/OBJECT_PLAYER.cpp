@@ -18,9 +18,9 @@ void OBJECT_PLAYER::OnCreate()
 	object_x = 0.0f, object_y = 0.0f, object_z = 0.0f;
 }
 
-void OBJECT_PLAYER::initBuffer(GLint s_program)
+void OBJECT_PLAYER::initBuffer(GLint s_program[])
 {
-	this->s_program = s_program;
+	this->s_program = s_program[0];
 	//// 5.1. VAO 객체 생성 및 바인딩
 	glGenVertexArrays(1, &vao);
 
@@ -52,7 +52,7 @@ void OBJECT_PLAYER::initBuffer(GLint s_program)
 	objColorLocation = glGetUniformLocation(this->s_program, "objectColor"); //--- object Color값 전달
 }
 
-void OBJECT_PLAYER::initTexture(GLint s_program)
+void OBJECT_PLAYER::initTexture(GLint s_program[])
 {
 
 }

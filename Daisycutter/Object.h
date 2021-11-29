@@ -8,8 +8,8 @@ protected:
 	~CObject();
 
 	virtual void OnCreate() = 0;
-	virtual void initBuffer(GLint s_program) = 0;
-	virtual void initTexture(GLint s_program) = 0;
+	virtual void initBuffer(GLint s_program[]) = 0;
+	virtual void initTexture(GLint s_program[]) = 0;
 	virtual void Update(float fTimeElapsed) = 0;
 	virtual void Render() = 0;
 

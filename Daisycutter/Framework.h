@@ -17,8 +17,8 @@ public:
 	bool OnCreate();
 	bool OnDestroy();
 
-	void InitBuffer(GLint s_program);
-	void InitTexture(GLint s_program);
+	void InitBuffer(GLint s_program[]);
+	void InitTexture(GLint s_program[]);
 	void Update(float fTimeElapsed);
 	void Render();
 
@@ -34,6 +34,6 @@ private:
 	//CScene* arrScene[CScene::SceneTag::Count];
 	CScene* m_pCurrScene;											// 현재 씬을 가리키고 있는 포인터.
 
-	GLint s_program;
+	GLint s_program[2];
 };
 

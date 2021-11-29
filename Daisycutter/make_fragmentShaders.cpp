@@ -2,9 +2,10 @@
 #include "make_fragmentShaders.h"
 #include "filetobuf.h"
 
-void make_fragmentShaders(GLchar* myfragmentSource, GLuint& myfragmentShader)
+void make_fragmentShaders(GLchar* myfragmentSource, GLuint& myfragmentShader, const char* shader_name)
 {
-	myfragmentSource = filetobuf("fragment.glsl");
+	//--- 외부에서 쉐이더의 이름을 받아 오도록 변경
+	myfragmentSource = filetobuf(shader_name);
 	//--- 프래그먼트 세이더 객체 만들기
 	myfragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 	//--- 세이더 코드를 세이더 객체에 넣기
@@ -18,7 +19,7 @@ void make_fragmentShaders(GLchar* myfragmentSource, GLuint& myfragmentShader)
 	if (!result)
 	{
 		glGetShaderInfoLog(myfragmentShader, 512, NULL, errorLog);
-		std::cerr << "ERROR: fragment shader 컴파일 실패\n" << errorLog << std::endl;
+		std::cerr << "ERROR: fragment shader 컴파일 실패\n" << shader_name << errorLog << std::endl;
 		return;
 	}
 }
