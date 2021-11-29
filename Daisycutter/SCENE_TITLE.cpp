@@ -53,25 +53,23 @@ void SCENE_TITLE::BuildObjects()
 	player = new OBJECT_PLAYER;
 }
 
-void SCENE_TITLE::InitBuffer(GLint s_program[])
+void SCENE_TITLE::BindShader()
 {
-	for (int i = 0; i < 2; ++i)
-	{
-		this->s_program[i] = s_program[i];
-	}
-	field->initBuffer(this->s_program);
-	player->initBuffer(this->s_program);
+	SM.BindShader();
+	InitBuffer();
+	InitTexture();
 }
 
-void SCENE_TITLE::InitTexture(GLint s_program[])
+void SCENE_TITLE::InitBuffer()
 {
-	for (int i = 0; i < 2; ++i)
-	{
-		this->s_program[i] = s_program[i];
-	}
+	field->initBuffer(SM.GetShader(ShaderManager::ShaderTag::BasicShader));
+	player->initBuffer(SM.GetShader(ShaderManager::ShaderTag::BasicShader));
+}
 
-	field->initTexture(this->s_program);
-	player->initTexture(this->s_program);
+void SCENE_TITLE::InitTexture()
+{
+	field->initTexture(SM.GetShader(ShaderManager::ShaderTag::BasicShader));
+	player->initTexture(SM.GetShader(ShaderManager::ShaderTag::BasicShader));
 }
 
 void SCENE_TITLE::Render()
@@ -80,12 +78,12 @@ void SCENE_TITLE::Render()
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	glUseProgram(this->s_program[0]);
+	glUseProgram(SM.GetShader(ShaderManager::ShaderTag::BasicShader));
 
 	CameraSetting();
 	ProjectionSetting();
 
-	modelLocation = glGetUniformLocation(s_program[0], "ModelTransform");
+	modelLocation = glGetUniformLocation(SM.GetShader(ShaderManager::ShaderTag::BasicShader), "ModelTransform");
 
 	glEnable(GL_DEPTH_TEST);
 
@@ -136,10 +134,10 @@ void SCENE_TITLE::CameraSetting()
 	glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 	glm::mat4 view = glm::mat4(1.0f);
 	view = glm::lookAt(cameraPos, cameraDirection, cameraUp);
-	unsigned int viewLocation = glGetUniformLocation(s_program[0], "viewTransform");
+	unsigned int viewLocation = glGetUniformLocation(SM.GetShader(ShaderManager::ShaderTag::BasicShader), "viewTransform");
 	glUniformMatrix4fv(viewLocation, 1, GL_FALSE, &view[0][0]);
 
-	unsigned int viewPos = glGetUniformLocation(s_program[0], "viewPos");
+	unsigned int viewPos = glGetUniformLocation(SM.GetShader(ShaderManager::ShaderTag::BasicShader), "viewPos");
 	glUniform3f(viewPos, fCameraPosArray[iCameraPosIndex][0], fCameraPosArray[iCameraPosIndex][1], fCameraPosArray[iCameraPosIndex][2]);
 }
 
@@ -149,7 +147,7 @@ void SCENE_TITLE::ProjectionSetting()
 	projection = glm::perspective(glm::radians(60.0f), (float)700.0 / (float)700.0, 0.1f, 3000.0f);
 	//projection = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f, 0.1f, 3000.0f);
 
-	unsigned int projectionLocation = glGetUniformLocation(s_program[0], "projectionTransform");	//--- 투영 변환 값 설정
+	unsigned int projectionLocation = glGetUniformLocation(SM.GetShader(ShaderManager::ShaderTag::BasicShader), "projectionTransform");	//--- 투영 변환 값 설정
 	glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, &projection[0][0]);
 }
 

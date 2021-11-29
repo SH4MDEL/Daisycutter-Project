@@ -196,8 +196,10 @@ void OBJECT_FIELD::OnCreate()
 	texture_data[5][1][2][0] = 0.0f, texture_data[5][1][2][1] = 1.0f;
 }
 
-void OBJECT_FIELD::initBuffer(GLint s_program[])
+void OBJECT_FIELD::initBuffer(GLint ShaderProgram)
 {
+	m_ShaderProgram = ShaderProgram;
+
 	glGenVertexArrays(6, vao);
 	for (int i = 0; i < 6; i++) {
 		glBindVertexArray(vao[i]);
@@ -219,12 +221,14 @@ void OBJECT_FIELD::initBuffer(GLint s_program[])
 		glEnableVertexAttribArray(2);
 	}
 
-	glUseProgram(s_program[0]);
-	objColorLocation = glGetUniformLocation(s_program[0], "objectColor"); //--- object Color값 전달
+	glUseProgram(m_ShaderProgram);
+	objColorLocation = glGetUniformLocation(m_ShaderProgram, "objectColor"); //--- object Color값 전달
 }
 
-void OBJECT_FIELD::initTexture(GLint s_program[])
+void OBJECT_FIELD::initTexture(GLint ShaderProgram)
 {
+	m_ShaderProgram = ShaderProgram;
+
 	glGenTextures(6, texture); //--- 텍스처 생성
 	for (int i = 0; i < 6; i++) {
 		char Text[100];
@@ -242,14 +246,15 @@ void OBJECT_FIELD::initTexture(GLint s_program[])
 		stbi_image_free(image[i]);
 	}
 
-	glUseProgram(s_program[0]);
-	tLocation = glGetUniformLocation(s_program[0], "outTexture"); //--- outTexture 유니폼 샘플러의 위치를 가져옴
+	glUseProgram(m_ShaderProgram);
+	tLocation = glGetUniformLocation(m_ShaderProgram, "outTexture"); //--- outTexture 유니폼 샘플러의 위치를 가져옴
 	glUniform1i(tLocation, 0);
 }
 
 void OBJECT_FIELD::Render()
 {
 	for (int i = 0; i < 6; i++) {
+		glUseProgram(m_ShaderProgram);
 		glUniform3f(objColorLocation, 1.0f, 1.0f, 1.0f);
 		glBindVertexArray(vao[i]);
 		glActiveTexture(GL_TEXTURE0);

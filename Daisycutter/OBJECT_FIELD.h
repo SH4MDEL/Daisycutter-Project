@@ -20,8 +20,8 @@ public:
 	~OBJECT_FIELD();
 
 	void OnCreate() override;
-	void initBuffer(GLint s_program[]) override;
-	void initTexture(GLint s_program[]) override;
+	void initBuffer(GLint ShaderProgram) override;
+	void initTexture(GLint ShaderProgram) override;
 	void Update(float fTimeElapsed) override;
 	void Render() override;
 

@@ -152,6 +152,7 @@
     <ClCompile Include="objRead.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SCENE_TITLE.cpp" />
+    <ClCompile Include="ShaderManager.cpp" />
     <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -167,6 +168,7 @@
     <ClInclude Include="objRead.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SCENE_TITLE.h" />
+    <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Timer.h" />

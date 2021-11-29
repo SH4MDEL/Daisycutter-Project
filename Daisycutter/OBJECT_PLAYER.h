@@ -20,8 +20,8 @@ public:
 	~OBJECT_PLAYER();
 
 	void OnCreate() override;
-	void initBuffer(GLint s_program[]) override;
-	void initTexture(GLint s_program[]) override;			// 필요치 않을지라도 추가해 줘야 함
+	void initBuffer(GLint ShaderProgram) override;
+	void initTexture(GLint ShaderProgram) override;			// 필요치 않을지라도 추가해 줘야 함
 	void Update(float fTimeElapsed) override;
 	void Render() override;
 

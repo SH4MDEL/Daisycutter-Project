@@ -4,7 +4,7 @@
 
 CFramework::CFramework()
 {
-	m_pCurrScene = new SCENE_TITLE(CScene::SceneTag::Main, this);
+	m_pCurrScene = new SCENE_TITLE(CScene::SceneTag::Title, this);
 	OnCreate();
 }
 
@@ -26,22 +26,9 @@ bool CFramework::OnDestroy()
 	return true;
 }
 
-void CFramework::InitBuffer(GLint s_program[])
+void CFramework::BindShader()
 {
-	for (int i = 0; i < 2; ++i)
-	{
-		this->s_program[i] = s_program[i];
-	}
-	m_pCurrScene->InitBuffer(this->s_program);
-}
-
-void CFramework::InitTexture(GLint s_program[])
-{
-	for (int i = 0; i < 2; ++i)
-	{
-		this->s_program[i] = s_program[i];
-	}
-	m_pCurrScene->InitTexture(this->s_program);
+	m_pCurrScene->BindShader();
 }
 
 void CFramework::Update(float fTimeElapsed)
@@ -81,7 +68,7 @@ void CFramework::SpecialKeyboardMessage(int inputKey)
 void CFramework::ChangeScene(CScene::SceneTag tag, CScene* NowScene)
 {
 	delete m_pCurrScene;
-	NowScene->InitBuffer(this->s_program);
-	NowScene->InitTexture(this->s_program);
+	NowScene->InitBuffer();
+	NowScene->InitTexture();
 	m_pCurrScene = NowScene;
 }

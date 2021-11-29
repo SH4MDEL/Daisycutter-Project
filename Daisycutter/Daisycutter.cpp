@@ -16,10 +16,6 @@ GLvoid fc_SpecialKeyboard(int key, int x, int y);
 GLvoid fc_Timer(int value);
 GLvoid fc_Reshape(int w, int h);
 
-GLchar* vertexSource, * fragmentSource; //--- 소스코드 저장 변수
-GLuint vertexShader, fragmentShader; //--- 세이더 객체
-GLint s_program[NUMBER_OF_SHADER];
-
 CFramework myFramework;
 
 class Framework_Client {
@@ -80,15 +76,8 @@ int main(int argc, char** argv) //--- 윈도우 출력하고 콜백함수 설정
 	fcptr = &FC_app;
 
 	glewInit();
-	for (int i = 0; i < NUMBER_OF_SHADER; ++i)
-	{
-		make_vertexShaders(vertexSource, vertexShader, vert_shader_name[i]);
-		make_fragmentShaders(fragmentSource, fragmentShader, frag_shader_name[i]);
-		s_program[i] = make_shaderProgram(vertexShader, fragmentShader);
-	}
 
-	myFramework.InitBuffer(s_program);
-	myFramework.InitTexture(s_program);
+	myFramework.BindShader();
 
 	glutDisplayFunc(fc_drawScene);
 	glutKeyboardFunc(fc_Keyboard);

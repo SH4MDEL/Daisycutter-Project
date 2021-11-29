@@ -1,5 +1,6 @@
 #pragma once
 #include "Object.h"
+#include "ShaderManager.h"
 
 class CFramework;
 
@@ -9,8 +10,9 @@ public:
 	// CScene::SceneTag:: 형식으로 불러서 외울 필요도 define할 필요도 없이 안의 내용물을 쓸 수 있다. 이 헤더파일만 include 하자.
 	enum SceneTag {
 		Title
-		, Main
+		, MusicSelect
 		, Ingame
+		, Result
 		, Count			// Scene의 개수를 나타내기 위한 임시 태그이다. 지우지 말자.
 	};
 public:
@@ -24,9 +26,10 @@ public:
 	virtual void OnDestroy() = 0;		// 삭제
 
 	virtual void BuildObjects() = 0;
-	virtual void InitBuffer(GLint s_program[]) = 0;
-	virtual void InitTexture(GLint s_program[]) = 0;
+	virtual void InitBuffer() = 0;
+	virtual void InitTexture() = 0;
 
+	virtual void BindShader() = 0;
 	virtual void Update(float fTimeElapsed) = 0;
 	virtual void Render() = 0;
 
@@ -41,6 +44,6 @@ protected:
 	SceneTag m_Tag;
 	CFramework* m_pFramework;	// 인자로 받아오는게 아니라 동적할당을 해온다.
 
-	GLint s_program[2] = { 0 };
+	ShaderManager SM;
 };
 
