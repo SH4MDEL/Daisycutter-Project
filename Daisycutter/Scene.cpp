@@ -1,6 +1,6 @@
 #include "Scene.h"
 
-//ShaderManager CScene::SM;
+ShaderManager CScene::SM;
 
 CScene::CScene()
 {

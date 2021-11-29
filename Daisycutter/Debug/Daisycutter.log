@@ -1,3 +1,2 @@
 ﻿  Scene.cpp
-SCENE_TITLE.obj : error LNK2001: 확인할 수 없는 외부 기호 "protected: static class ShaderManager CScene::SM" (?SM@CScene@@1VShaderManager@@A)
-C:\Users\Seungjun Lee\Desktop\Coding\Daisycutter-Project\Debug\Daisycutter.exe : fatal error LNK1120: 1개의 확인할 수 없는 외부 참조입니다.
+  Daisycutter.vcxproj -> C:\Users\Seungjun Lee\Desktop\Coding\Daisycutter-Project\Debug\Daisycutter.exe
