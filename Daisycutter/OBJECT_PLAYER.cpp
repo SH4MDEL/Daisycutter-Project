@@ -56,6 +56,8 @@ void OBJECT_PLAYER::initBuffer(GLint ShaderProgram)
 void OBJECT_PLAYER::initTexture(GLint ShaderProgram)
 {
 	m_ShaderProgram = ShaderProgram;
+
+
 }
 
 void OBJECT_PLAYER::Render()

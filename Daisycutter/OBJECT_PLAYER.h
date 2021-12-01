@@ -6,8 +6,12 @@ class OBJECT_PLAYER : public CObject
 {
 private:
 	GLuint vao, vbo[3];
+	unsigned int texture;
+	unsigned char* image;
 	int objColorLocation;
 	int tLocation;
+
+
 
 	glm::mat4 myFactor;
 
