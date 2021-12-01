@@ -16,6 +16,7 @@ OBJECT_PLAYER::~OBJECT_PLAYER()
 void OBJECT_PLAYER::OnCreate()
 {
 	object_x = 0.0f, object_y = 0.0f, object_z = 0.0f;
+	ObjectSpeed = 10.0f;
 }
 
 void OBJECT_PLAYER::initBuffer(GLint ShaderProgram)
@@ -60,7 +61,7 @@ void OBJECT_PLAYER::initTexture(GLint ShaderProgram)
 void OBJECT_PLAYER::Render()
 {
 	glUseProgram(m_ShaderProgram);
-	glUniform3f(objColorLocation, 1.0f, 1.0f, 1.0f);
+	glUniform3f(objColorLocation, 0.0f, 0.0f, 0.0f);
 	glBindVertexArray(vao);
 	glDrawArrays(GL_TRIANGLES, 0, ObjectMedel);
 }
@@ -95,4 +96,9 @@ GLfloat OBJECT_PLAYER::getOy()
 GLfloat OBJECT_PLAYER::getOz()
 {
 	return object_z;
+}
+
+GLfloat OBJECT_PLAYER::getObjectSpeed()
+{
+	return ObjectSpeed;
 }

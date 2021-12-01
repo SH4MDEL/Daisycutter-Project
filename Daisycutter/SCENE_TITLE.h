@@ -27,14 +27,18 @@ public:
 														// (어떻게 만들어야할지 모르겠다 ㅠㅠ)
 	void BindShader() override;
 	void Render() override;								// FrameAdvanced
+	void BitmapRender();
+	void NonBitmapRender();
+	void ManualRender();
+
 	void Update(float fTimeElapsed) override;			// m_pCurrScene->Update();
 
 	void KeyboardMessage(unsigned char inputKey) override;
 	void SpecialKeyboardMessage(int inputKey) override;
 
-	void CameraSetting() override;
-	void ProjectionSetting() override;
-	void LightSetting() override;
+	void CameraSetting(GLint ShaderProgram) override;
+	void ProjectionSetting(GLint ShaderProgram) override;
+	void LightSetting(GLint ShaderProgram) override;
 
 
 	void SetNextCameraPos();

@@ -8,14 +8,16 @@ class ShaderManager
 {
 public:
 	enum ShaderTag {
-		BasicShader
-		, PlayerShader
+		BitmapShader
+		, NonBitmapShader
+		, ManualShader
 		, Count
 	};
 private:
 	const char ShaderName[Count][2][32] = {
-		{"vertex.glsl", "fragment.glsl"},
-		{"player_vertex.glsl", "player_fragment.glsl"}
+		{"SHADER\\bitmap_vertex.glsl", "SHADER\\bitmap_fragment.glsl"},
+		{"SHADER\\nonbitmap_vertex.glsl", "SHADER\\nonbitmap_fragment.glsl"},
+		{"SHADER\\manual_vertex.glsl", "SHADER\\manual_fragment.glsl"}
 	};
 
 	GLchar* vertexSource, *fragmentSource; //--- 소스코드 저장 변수

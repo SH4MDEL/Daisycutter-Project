@@ -62,14 +62,14 @@ void SCENE_TITLE::BindShader()
 
 void SCENE_TITLE::InitBuffer()
 {
-	field->initBuffer(SM.GetShader(ShaderManager::ShaderTag::BasicShader));
-	player->initBuffer(SM.GetShader(ShaderManager::ShaderTag::BasicShader));
+	field->initBuffer(SM.GetShader(ShaderManager::ShaderTag::BitmapShader));
+	player->initBuffer(SM.GetShader(ShaderManager::ShaderTag::NonBitmapShader));
 }
 
 void SCENE_TITLE::InitTexture()
 {
-	field->initTexture(SM.GetShader(ShaderManager::ShaderTag::BasicShader));
-	player->initTexture(SM.GetShader(ShaderManager::ShaderTag::BasicShader));
+	field->initTexture(SM.GetShader(ShaderManager::ShaderTag::BitmapShader));
+	player->initTexture(SM.GetShader(ShaderManager::ShaderTag::NonBitmapShader));
 }
 
 void SCENE_TITLE::Render()
@@ -78,18 +78,50 @@ void SCENE_TITLE::Render()
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	glUseProgram(SM.GetShader(ShaderManager::ShaderTag::BasicShader));
+	BitmapRender();
+	NonBitmapRender();
+}
 
-	CameraSetting();
-	ProjectionSetting();
+void SCENE_TITLE::ManualRender()
+{
+	glUseProgram(SM.GetShader(ShaderManager::ShaderTag::BitmapShader));
+	CameraSetting(SM.GetShader(ShaderManager::ShaderTag::BitmapShader));
+	ProjectionSetting(SM.GetShader(ShaderManager::ShaderTag::BitmapShader));
 
-	modelLocation = glGetUniformLocation(SM.GetShader(ShaderManager::ShaderTag::BasicShader), "ModelTransform");
+	modelLocation = glGetUniformLocation(SM.GetShader(ShaderManager::ShaderTag::BitmapShader), "ModelTransform");
+
+	glEnable(GL_DEPTH_TEST);
+
+
+	glDisable(GL_DEPTH_TEST);
+}
+
+void SCENE_TITLE::BitmapRender()
+{
+	glUseProgram(SM.GetShader(ShaderManager::ShaderTag::BitmapShader));
+	CameraSetting(SM.GetShader(ShaderManager::ShaderTag::BitmapShader));
+	ProjectionSetting(SM.GetShader(ShaderManager::ShaderTag::BitmapShader));
+
+	modelLocation = glGetUniformLocation(SM.GetShader(ShaderManager::ShaderTag::BitmapShader), "ModelTransform");
 
 	glEnable(GL_DEPTH_TEST);
 
 	field->putFactor(glm::mat4(1.0f));
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(field->getFactor()));
 	field->Render();
+
+	glDisable(GL_DEPTH_TEST);
+}
+
+void SCENE_TITLE::NonBitmapRender()
+{
+	glUseProgram(SM.GetShader(ShaderManager::ShaderTag::NonBitmapShader));
+	CameraSetting(SM.GetShader(ShaderManager::ShaderTag::NonBitmapShader));
+	ProjectionSetting(SM.GetShader(ShaderManager::ShaderTag::NonBitmapShader));
+
+	modelLocation = glGetUniformLocation(SM.GetShader(ShaderManager::ShaderTag::NonBitmapShader), "ModelTransform");
+
+	glEnable(GL_DEPTH_TEST);
 
 	player->putFactor(glm::mat4(1.0f));
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(player->getFactor()));
@@ -127,31 +159,31 @@ void SCENE_TITLE::SpecialKeyboardMessage(int inputKey)
 
 }
 
-void SCENE_TITLE::CameraSetting()
+void SCENE_TITLE::CameraSetting(GLint ShaderProgram)
 {
 	glm::vec3 cameraPos = glm::vec3(fCameraPosArray[iCameraPosIndex][0], fCameraPosArray[iCameraPosIndex][1], fCameraPosArray[iCameraPosIndex][2]);
 	glm::vec3 cameraDirection = glm::vec3(player->getOx(), player->getOy(), player->getOz());
 	glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 	glm::mat4 view = glm::mat4(1.0f);
 	view = glm::lookAt(cameraPos, cameraDirection, cameraUp);
-	unsigned int viewLocation = glGetUniformLocation(SM.GetShader(ShaderManager::ShaderTag::BasicShader), "viewTransform");
+	unsigned int viewLocation = glGetUniformLocation(ShaderProgram, "viewTransform");
 	glUniformMatrix4fv(viewLocation, 1, GL_FALSE, &view[0][0]);
 
-	unsigned int viewPos = glGetUniformLocation(SM.GetShader(ShaderManager::ShaderTag::BasicShader), "viewPos");
+	unsigned int viewPos = glGetUniformLocation(ShaderProgram, "viewPos");
 	glUniform3f(viewPos, fCameraPosArray[iCameraPosIndex][0], fCameraPosArray[iCameraPosIndex][1], fCameraPosArray[iCameraPosIndex][2]);
 }
 
-void SCENE_TITLE::ProjectionSetting()
+void SCENE_TITLE::ProjectionSetting(GLint ShaderProgram)
 {
 	glm::mat4 projection = glm::mat4(1.0f);
 	projection = glm::perspective(glm::radians(60.0f), (float)700.0 / (float)700.0, 0.1f, 3000.0f);
 	//projection = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f, 0.1f, 3000.0f);
 
-	unsigned int projectionLocation = glGetUniformLocation(SM.GetShader(ShaderManager::ShaderTag::BasicShader), "projectionTransform");	//--- 투영 변환 값 설정
+	unsigned int projectionLocation = glGetUniformLocation(ShaderProgram, "projectionTransform");	//--- 투영 변환 값 설정
 	glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, &projection[0][0]);
 }
 
-void SCENE_TITLE::LightSetting()
+void SCENE_TITLE::LightSetting(GLint ShaderProgram)
 {
 
 }

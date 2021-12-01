@@ -139,22 +139,28 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="vertex.glsl">
-      <Filter>소스 파일\Shader</Filter>
-    </None>
-    <None Include="fragment.glsl">
-      <Filter>소스 파일\Shader</Filter>
-    </None>
-    <None Include="player_fragment.glsl">
-      <Filter>소스 파일\Shader</Filter>
-    </None>
-    <None Include="player_vertex.glsl">
-      <Filter>소스 파일\Shader</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <Text Include="readme.txt">
       <Filter>헤더 파일\Others</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SHADER\bitmap_fragment.glsl">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="SHADER\manual_fragment.glsl">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="SHADER\manual_vertex.glsl">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="SHADER\bitmap_vertex.glsl">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="SHADER\nonbitmap_fragment.glsl">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="SHADER\nonbitmap_vertex.glsl">
+      <Filter>리소스 파일</Filter>
+    </None>
   </ItemGroup>
 </Project>

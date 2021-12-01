@@ -174,13 +174,15 @@
     <ClInclude Include="Timer.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="fragment.glsl" />
-    <None Include="player_fragment.glsl" />
-    <None Include="player_vertex.glsl" />
-    <None Include="vertex.glsl" />
+    <Text Include="readme.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="readme.txt" />
+    <None Include="SHADER\bitmap_fragment.glsl" />
+    <None Include="SHADER\manual_fragment.glsl" />
+    <None Include="SHADER\manual_vertex.glsl" />
+    <None Include="SHADER\bitmap_vertex.glsl" />
+    <None Include="SHADER\nonbitmap_fragment.glsl" />
+    <None Include="SHADER\nonbitmap_vertex.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
