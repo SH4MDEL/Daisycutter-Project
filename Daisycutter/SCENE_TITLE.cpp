@@ -63,13 +63,13 @@ void SCENE_TITLE::BindShader()
 void SCENE_TITLE::InitBuffer()
 {
 	field->initBuffer(SM.GetShader(ShaderManager::ShaderTag::BitmapShader));
-	player->initBuffer(SM.GetShader(ShaderManager::ShaderTag::NonBitmapShader));
+	player->initBuffer(SM.GetShader(ShaderManager::ShaderTag::BitmapShader));
 }
 
 void SCENE_TITLE::InitTexture()
 {
 	field->initTexture(SM.GetShader(ShaderManager::ShaderTag::BitmapShader));
-	player->initTexture(SM.GetShader(ShaderManager::ShaderTag::NonBitmapShader));
+	player->initTexture(SM.GetShader(ShaderManager::ShaderTag::BitmapShader));
 }
 
 void SCENE_TITLE::Render()
@@ -111,6 +111,11 @@ void SCENE_TITLE::BitmapRender()
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(field->getFactor()));
 	field->Render();
 
+
+	player->putFactor(glm::mat4(1.0f));
+	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(player->getFactor()));
+	player->Render();
+
 	glDisable(GL_DEPTH_TEST);
 }
 
@@ -124,9 +129,6 @@ void SCENE_TITLE::NonBitmapRender()
 
 	glEnable(GL_DEPTH_TEST);
 
-	player->putFactor(glm::mat4(1.0f));
-	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(player->getFactor()));
-	player->Render();
 
 	glDisable(GL_DEPTH_TEST);
 }

@@ -8,12 +8,11 @@ private:
 	GLuint vao, vbo[3];
 	unsigned int texture;
 	unsigned char* image;
+	glm::mat4 myFactor;
+
 	int objColorLocation;
 	int tLocation;
 
-
-
-	glm::mat4 myFactor;
 
 	GLfloat object_x, object_y, object_z;
 	GLfloat ObjectSpeed;						// 플레이어는 가만히 있고 나머지 배경이 움직이기 때문에 
