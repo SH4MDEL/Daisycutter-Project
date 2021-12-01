@@ -43,6 +43,9 @@
     <Filter Include="헤더 파일\Framework">
       <UniqueIdentifier>{2a046c2e-af82-452e-92cc-57d1b0ee90ac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Shader\glsl">
+      <UniqueIdentifier>{1049505a-518a-42cb-9b8b-79eb3e126f62}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="filetobuf.cpp">
@@ -145,22 +148,22 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="SHADER\bitmap_fragment.glsl">
-      <Filter>리소스 파일</Filter>
+      <Filter>소스 파일\Shader\glsl</Filter>
     </None>
     <None Include="SHADER\manual_fragment.glsl">
-      <Filter>리소스 파일</Filter>
+      <Filter>소스 파일\Shader\glsl</Filter>
     </None>
     <None Include="SHADER\manual_vertex.glsl">
-      <Filter>리소스 파일</Filter>
+      <Filter>소스 파일\Shader\glsl</Filter>
     </None>
     <None Include="SHADER\bitmap_vertex.glsl">
-      <Filter>리소스 파일</Filter>
+      <Filter>소스 파일\Shader\glsl</Filter>
     </None>
     <None Include="SHADER\nonbitmap_fragment.glsl">
-      <Filter>리소스 파일</Filter>
+      <Filter>소스 파일\Shader\glsl</Filter>
     </None>
     <None Include="SHADER\nonbitmap_vertex.glsl">
-      <Filter>리소스 파일</Filter>
+      <Filter>소스 파일\Shader\glsl</Filter>
     </None>
   </ItemGroup>
 </Project>

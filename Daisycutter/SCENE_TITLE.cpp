@@ -78,17 +78,18 @@ void SCENE_TITLE::Render()
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	ManualRender();
 	BitmapRender();
 	NonBitmapRender();
 }
 
 void SCENE_TITLE::ManualRender()
 {
-	glUseProgram(SM.GetShader(ShaderManager::ShaderTag::BitmapShader));
-	CameraSetting(SM.GetShader(ShaderManager::ShaderTag::BitmapShader));
-	ProjectionSetting(SM.GetShader(ShaderManager::ShaderTag::BitmapShader));
+	glUseProgram(SM.GetShader(ShaderManager::ShaderTag::ManualShader));
+	CameraSetting(SM.GetShader(ShaderManager::ShaderTag::ManualShader));
+	ProjectionSetting(SM.GetShader(ShaderManager::ShaderTag::ManualShader));
 
-	modelLocation = glGetUniformLocation(SM.GetShader(ShaderManager::ShaderTag::BitmapShader), "ModelTransform");
+	modelLocation = glGetUniformLocation(SM.GetShader(ShaderManager::ShaderTag::ManualShader), "ModelTransform");
 
 	glEnable(GL_DEPTH_TEST);
 

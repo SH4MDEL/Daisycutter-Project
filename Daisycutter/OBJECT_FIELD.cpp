@@ -47,13 +47,13 @@ void OBJECT_FIELD::OnCreate()
 	data[0][1][1][2][0] = 0.0f, data[0][1][1][2][1] = 0.0f, data[0][1][1][2][2] = -1.0f;
 
 	// Àü¸é ÅØ½ºÃ³
-	texture_data[0][0][0][0] = 0.0f, texture_data[0][0][0][1] = 0.0f;
-	texture_data[0][0][1][0] = 1.0f, texture_data[0][0][1][1] = 0.0f;
-	texture_data[0][0][2][0] = 0.0f, texture_data[0][0][2][1] = 1.0f;
+	texture_data[0][0][0][0] = 1.0f, texture_data[0][0][0][1] = 0.0f;
+	texture_data[0][0][1][0] = 0.0f, texture_data[0][0][1][1] = 0.0f;
+	texture_data[0][0][2][0] = 1.0f, texture_data[0][0][2][1] = 1.0f;
 
-	texture_data[0][1][0][0] = 0.0f, texture_data[0][1][0][1] = 1.0f;
-	texture_data[0][1][1][0] = 1.0f, texture_data[0][1][1][1] = 0.0f;
-	texture_data[0][1][2][0] = 1.0f, texture_data[0][1][2][1] = 1.0f;
+	texture_data[0][1][0][0] = 1.0f, texture_data[0][1][0][1] = 1.0f;
+	texture_data[0][1][1][0] = 0.0f, texture_data[0][1][1][1] = 0.0f;
+	texture_data[0][1][2][0] = 0.0f, texture_data[0][1][2][1] = 1.0f;
 
 
 	// »ó´Ü ÁÂÇ¥
@@ -75,13 +75,13 @@ void OBJECT_FIELD::OnCreate()
 	data[1][1][1][2][0] = 0.0f, data[1][1][1][2][1] = -1.0f, data[1][1][1][2][2] = 0.0f;
 
 	// »ó´Ü ÅØ½ºÃ³
-	texture_data[1][0][0][0] = 1.0f, texture_data[1][0][0][1] = 0.0f;
-	texture_data[1][0][1][0] = 1.0f, texture_data[1][0][1][1] = 1.0f;
-	texture_data[1][0][2][0] = 0.0f, texture_data[1][0][2][1] = 0.0f;
+	texture_data[1][0][0][0] = 1.0f, texture_data[1][0][0][1] = 1.0f;
+	texture_data[1][0][1][0] = 1.0f, texture_data[1][0][1][1] = 0.0f;
+	texture_data[1][0][2][0] = 0.0f, texture_data[1][0][2][1] = 1.0f;
 
-	texture_data[1][1][0][0] = 0.0f, texture_data[1][1][0][1] = 0.0f;
-	texture_data[1][1][1][0] = 1.0f, texture_data[1][1][1][1] = 1.0f;
-	texture_data[1][1][2][0] = 0.0f, texture_data[1][1][2][1] = 1.0f;
+	texture_data[1][1][0][0] = 0.0f, texture_data[1][1][0][1] = 1.0f;
+	texture_data[1][1][1][0] = 1.0f, texture_data[1][1][1][1] = 0.0f;
+	texture_data[1][1][2][0] = 0.0f, texture_data[1][1][2][1] = 0.0f;
 
 
 	// ÁÂÃø ÁÂÇ¥
@@ -103,13 +103,13 @@ void OBJECT_FIELD::OnCreate()
 	data[2][1][1][2][0] = 1.0f, data[2][1][1][2][1] = 0.0f, data[2][1][1][2][2] = 0.0f;
 
 	// ÁÂÃø ÅØ½ºÃ³
-	texture_data[2][0][0][0] = 0.0f, texture_data[2][0][0][1] = 1.0f;
-	texture_data[2][0][1][0] = 0.0f, texture_data[2][0][1][1] = 0.0f;
-	texture_data[2][0][2][0] = 1.0f, texture_data[2][0][2][1] = 0.0f;
+	texture_data[2][0][0][0] = 1.0f, texture_data[2][0][0][1] = 1.0f;
+	texture_data[2][0][1][0] = 1.0f, texture_data[2][0][1][1] = 0.0f;
+	texture_data[2][0][2][0] = 0.0f, texture_data[2][0][2][1] = 0.0f;
 
-	texture_data[2][1][0][0] = 1.0f, texture_data[2][1][0][1] = 0.0f;
-	texture_data[2][1][1][0] = 1.0f, texture_data[2][1][1][1] = 1.0f;
-	texture_data[2][1][2][0] = 0.0f, texture_data[2][1][2][1] = 1.0f;
+	texture_data[2][1][0][0] = 0.0f, texture_data[2][1][0][1] = 0.0f;
+	texture_data[2][1][1][0] = 0.0f, texture_data[2][1][1][1] = 1.0f;
+	texture_data[2][1][2][0] = 1.0f, texture_data[2][1][2][1] = 1.0f;
 
 
 	// ÈÄ¸é ÁÂÇ¥
@@ -159,13 +159,13 @@ void OBJECT_FIELD::OnCreate()
 	data[4][1][1][2][0] = 0.0f, data[4][1][1][2][1] = 1.0f, data[4][1][1][2][2] = 0.0f;
 
 	// ÇÏ´Ü ÅØ½ºÃ³
-	texture_data[4][0][0][0] = 0.0f, texture_data[4][0][0][1] = 1.0f;
-	texture_data[4][0][1][0] = 0.0f, texture_data[4][0][1][1] = 0.0f;
-	texture_data[4][0][2][0] = 1.0f, texture_data[4][0][2][1] = 0.0f;
+	texture_data[4][0][0][0] = 1.0f, texture_data[4][0][0][1] = 1.0f;
+	texture_data[4][0][1][0] = 1.0f, texture_data[4][0][1][1] = 0.0f;
+	texture_data[4][0][2][0] = 0.0f, texture_data[4][0][2][1] = 0.0f;
 
-	texture_data[4][1][0][0] = 1.0f, texture_data[4][1][0][1] = 0.0f;
-	texture_data[4][1][1][0] = 1.0f, texture_data[4][1][1][1] = 1.0f;
-	texture_data[4][1][2][0] = 0.0f, texture_data[4][1][2][1] = 1.0f;
+	texture_data[4][1][0][0] = 0.0f, texture_data[4][1][0][1] = 0.0f;
+	texture_data[4][1][1][0] = 0.0f, texture_data[4][1][1][1] = 1.0f;
+	texture_data[4][1][2][0] = 1.0f, texture_data[4][1][2][1] = 1.0f;
 
 
 	// ¿ìÃø ÁÂÇ¥
@@ -187,13 +187,13 @@ void OBJECT_FIELD::OnCreate()
 	data[5][1][1][2][0] = -1.0f, data[5][1][1][2][1] = 0.0f, data[5][1][1][2][2] = 0.0f;
 
 	// ¿ìÃø ÅØ½ºÃ³
-	texture_data[5][0][0][0] = 1.0f, texture_data[5][0][0][1] = 0.0f;
-	texture_data[5][0][1][0] = 1.0f, texture_data[5][0][1][1] = 1.0f;
-	texture_data[5][0][2][0] = 0.0f, texture_data[5][0][2][1] = 0.0f;
+	texture_data[5][0][0][0] = 0.0f, texture_data[5][0][0][1] = 0.0f;
+	texture_data[5][0][1][0] = 0.0f, texture_data[5][0][1][1] = 1.0f;
+	texture_data[5][0][2][0] = 1.0f, texture_data[5][0][2][1] = 0.0f;
 
-	texture_data[5][1][0][0] = 0.0f, texture_data[5][1][0][1] = 0.0f;
-	texture_data[5][1][1][0] = 1.0f, texture_data[5][1][1][1] = 1.0f;
-	texture_data[5][1][2][0] = 0.0f, texture_data[5][1][2][1] = 1.0f;
+	texture_data[5][1][0][0] = 1.0f, texture_data[5][1][0][1] = 0.0f;
+	texture_data[5][1][1][0] = 0.0f, texture_data[5][1][1][1] = 1.0f;
+	texture_data[5][1][2][0] = 1.0f, texture_data[5][1][2][1] = 1.0f;
 }
 
 void OBJECT_FIELD::initBuffer(GLint ShaderProgram)
