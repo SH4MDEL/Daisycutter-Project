@@ -20,25 +20,25 @@ void SCENE_TITLE::OnCreate()
 	this->BuildObjects();
 
 	fCameraPosTimer = 0.0f;
-	fCameraPosArray[0][0] = 5.0f * (GLfloat)sin(2 * M_PI / 360 * 80) * (GLfloat)cos(2 * M_PI / 360 * 90);
-	fCameraPosArray[0][1] = 5.0f * (GLfloat)sin(2 * M_PI / 360 * 80) * (GLfloat)sin(2 * M_PI / 360 * 90);
-	fCameraPosArray[0][2] = 5.0f * (GLfloat)cos(2 * M_PI / 360 * 80);
+	fCameraPosArray[0][0] = 10.0f * (GLfloat)sin(2 * M_PI / 360 * 80) * (GLfloat)cos(2 * M_PI / 360 * 90);
+	fCameraPosArray[0][1] = 10.0f * (GLfloat)sin(2 * M_PI / 360 * 80) * (GLfloat)sin(2 * M_PI / 360 * 90);
+	fCameraPosArray[0][2] = 10.0f * (GLfloat)cos(2 * M_PI / 360 * 80);
 
-	fCameraPosArray[1][0] = 5.0f * (GLfloat)sin(2 * M_PI / 360 * 60) * (GLfloat)cos(2 * M_PI / 360 * 165);
-	fCameraPosArray[1][1] = 5.0f * (GLfloat)sin(2 * M_PI / 360 * 60) * (GLfloat)sin(2 * M_PI / 360 * 165);
-	fCameraPosArray[1][2] = 5.0f * (GLfloat)cos(2 * M_PI / 360 * 60);
+	fCameraPosArray[1][0] = 10.0f * (GLfloat)sin(2 * M_PI / 360 * 60) * (GLfloat)cos(2 * M_PI / 360 * 165);
+	fCameraPosArray[1][1] = 10.0f * (GLfloat)sin(2 * M_PI / 360 * 60) * (GLfloat)sin(2 * M_PI / 360 * 165);
+	fCameraPosArray[1][2] = 10.0f * (GLfloat)cos(2 * M_PI / 360 * 60);
 
-	fCameraPosArray[2][0] = 5.0f * (GLfloat)sin(2 * M_PI / 360 * 120) * (GLfloat)cos(2 * M_PI / 360 * 225);
-	fCameraPosArray[2][1] = 5.0f * (GLfloat)sin(2 * M_PI / 360 * 120) * (GLfloat)sin(2 * M_PI / 360 * 225);
-	fCameraPosArray[2][2] = 5.0f * (GLfloat)cos(2 * M_PI / 360 * 120);
+	fCameraPosArray[2][0] = 10.0f * (GLfloat)sin(2 * M_PI / 360 * 120) * (GLfloat)cos(2 * M_PI / 360 * 225);
+	fCameraPosArray[2][1] = 10.0f * (GLfloat)sin(2 * M_PI / 360 * 120) * (GLfloat)sin(2 * M_PI / 360 * 225);
+	fCameraPosArray[2][2] = 10.0f * (GLfloat)cos(2 * M_PI / 360 * 120);
 
-	fCameraPosArray[3][0] = 5.0f * (GLfloat)sin(2 * M_PI / 360 * 80) * (GLfloat)cos(2 * M_PI / 360 * 300);
-	fCameraPosArray[3][1] = 5.0f * (GLfloat)sin(2 * M_PI / 360 * 80) * (GLfloat)sin(2 * M_PI / 360 * 300);
-	fCameraPosArray[3][2] = 5.0f * (GLfloat)cos(2 * M_PI / 360 * 80);
+	fCameraPosArray[3][0] = 10.0f * (GLfloat)sin(2 * M_PI / 360 * 80) * (GLfloat)cos(2 * M_PI / 360 * 300);
+	fCameraPosArray[3][1] = 10.0f * (GLfloat)sin(2 * M_PI / 360 * 80) * (GLfloat)sin(2 * M_PI / 360 * 300);
+	fCameraPosArray[3][2] = 10.0f * (GLfloat)cos(2 * M_PI / 360 * 80);
 
-	fCameraPosArray[4][0] = 5.0f * (GLfloat)sin(2 * M_PI / 360 * 150) * (GLfloat)cos(2 * M_PI / 360 * 30);
-	fCameraPosArray[4][1] = 5.0f * (GLfloat)sin(2 * M_PI / 360 * 150) * (GLfloat)sin(2 * M_PI / 360 * 30);
-	fCameraPosArray[4][2] = 5.0f * (GLfloat)cos(2 * M_PI / 360 * 150);
+	fCameraPosArray[4][0] = 10.0f * (GLfloat)sin(2 * M_PI / 360 * 150) * (GLfloat)cos(2 * M_PI / 360 * 30);
+	fCameraPosArray[4][1] = 10.0f * (GLfloat)sin(2 * M_PI / 360 * 150) * (GLfloat)sin(2 * M_PI / 360 * 30);
+	fCameraPosArray[4][2] = 10.0f * (GLfloat)cos(2 * M_PI / 360 * 150);
 }
 
 void SCENE_TITLE::OnDestroy()
@@ -179,7 +179,7 @@ void SCENE_TITLE::CameraSetting(GLint ShaderProgram)
 void SCENE_TITLE::ProjectionSetting(GLint ShaderProgram)
 {
 	glm::mat4 projection = glm::mat4(1.0f);
-	projection = glm::perspective(glm::radians(60.0f), (float)700.0 / (float)700.0, 0.1f, 3000.0f);
+	projection = glm::perspective(glm::radians(60.0f), (float)1080.0 / (float)1920.0, 0.1f, 3000.0f);
 	//projection = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f, 0.1f, 3000.0f);
 
 	unsigned int projectionLocation = glGetUniformLocation(ShaderProgram, "projectionTransform");	//--- 투영 변환 값 설정
