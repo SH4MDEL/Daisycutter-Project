@@ -82,6 +82,7 @@ void SCENE_TITLE::Render()
 
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	
 
 	BitmapRender();
 	NonBitmapRender();
@@ -115,13 +116,13 @@ void SCENE_TITLE::ManualRender()
 
 	modelLocation = glGetUniformLocation(SM.GetShader(ShaderManager::ShaderTag::ManualShader), "ModelTransform");
 
-	glEnable(GL_DEPTH_TEST);
+	//glEnable(GL_DEPTH_TEST);   //--- 은면 제거로 인해 문제가 발생 했었음.
 
 	manual->putFactor(glm::mat4(1.0f));
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(manual->getFactor()));
 	manual->Render();
 
-	glDisable(GL_DEPTH_TEST);
+	//glDisable(GL_DEPTH_TEST);
 }
 
 void SCENE_TITLE::BitmapRender()
