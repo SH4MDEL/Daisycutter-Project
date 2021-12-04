@@ -36,10 +36,6 @@ public:
 	virtual void KeyboardMessage(unsigned char inputKey) = 0;
 	virtual void SpecialKeyboardMessage(int inputKey) = 0;
 
-	virtual void CameraSetting(GLint ShaderProgram) = 0;
-	virtual void ProjectionSetting(GLint ShaderProgram) = 0;
-	virtual void LightSetting(GLint ShaderProgram) = 0;
-
 protected:
 	SceneTag m_Tag;
 	CFramework* m_pFramework;	// 인자로 받아오는게 아니라 동적할당을 해온다.

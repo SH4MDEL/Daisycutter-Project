@@ -90,6 +90,12 @@
     <ClCompile Include="ShaderManager.cpp">
       <Filter>소스 파일\Shader</Filter>
     </ClCompile>
+    <ClCompile Include="SCENE_MUSICSELECT.cpp">
+      <Filter>소스 파일\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="OBJECT_MANUAL.cpp">
+      <Filter>소스 파일\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="filetobuf.h">
@@ -139,6 +145,12 @@
     </ClInclude>
     <ClInclude Include="ShaderManager.h">
       <Filter>헤더 파일\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="SCENE_MUSICSELECT.h">
+      <Filter>헤더 파일\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="OBJECT_MANUAL.h">
+      <Filter>헤더 파일\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

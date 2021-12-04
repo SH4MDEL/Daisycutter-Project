@@ -23,14 +23,14 @@
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{5d82b4bf-bb4c-4deb-a71f-bb8d43dc3210}</ProjectGuid>
     <RootNamespace>Daisycutter</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -148,9 +148,11 @@
     <ClCompile Include="make_vertexShaders.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="OBJECT_FIELD.cpp" />
+    <ClCompile Include="OBJECT_MANUAL.cpp" />
     <ClCompile Include="OBJECT_PLAYER.cpp" />
     <ClCompile Include="objRead.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SCENE_MUSICSELECT.cpp" />
     <ClCompile Include="SCENE_TITLE.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
     <ClCompile Include="Timer.cpp" />
@@ -164,9 +166,11 @@
     <ClInclude Include="make_vertexShaders.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="OBJECT_FIELD.h" />
+    <ClInclude Include="OBJECT_MANUAL.h" />
     <ClInclude Include="OBJECT_PLAYER.h" />
     <ClInclude Include="objRead.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="SCENE_MUSICSELECT.h" />
     <ClInclude Include="SCENE_TITLE.h" />
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="stb_image.h" />

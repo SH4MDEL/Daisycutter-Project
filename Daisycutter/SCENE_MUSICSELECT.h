@@ -4,9 +4,8 @@
 
 #include "OBJECT_FIELD.h"
 #include "OBJECT_PLAYER.h"
-#include "OBJECT_MANUAL.h"
 
-class SCENE_TITLE : public CScene
+class SCENE_MUSICSELECT : public CScene
 {
 private:
 	GLfloat fCameraPosTimer;
@@ -15,9 +14,9 @@ private:
 	GLint iCameraPosIndex;
 
 public:
-	SCENE_TITLE();
-	SCENE_TITLE(SceneTag tag, CFramework* pFramework);
-	~SCENE_TITLE() override;
+	SCENE_MUSICSELECT();
+	SCENE_MUSICSELECT(SceneTag tag, CFramework* pFramework);
+	~SCENE_MUSICSELECT() override;
 
 	void OnCreate() override;
 	void OnDestroy() override;							// 생성한 오브젝트 파괴. 동적할당 해제 해주기
@@ -41,9 +40,7 @@ public:
 private:
 	OBJECT_FIELD* field = NULL;
 	OBJECT_PLAYER* player = NULL;
-	OBJECT_MANUAL* manual = NULL;
 
 	unsigned int modelLocation;
 };
-
 
