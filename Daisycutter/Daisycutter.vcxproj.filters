@@ -46,6 +46,12 @@
     <Filter Include="소스 파일\Shader\glsl">
       <UniqueIdentifier>{1049505a-518a-42cb-9b8b-79eb3e126f62}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Sounds">
+      <UniqueIdentifier>{05e995c0-c802-4749-8231-c85863b45631}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Sounds">
+      <UniqueIdentifier>{8c2e1afc-4623-412a-9bd7-dc44e8e80fa7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="filetobuf.cpp">
@@ -95,6 +101,15 @@
     </ClCompile>
     <ClCompile Include="OBJECT_MANUAL.cpp">
       <Filter>소스 파일\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>소스 파일\Sounds</Filter>
+    </ClCompile>
+    <ClCompile Include="SOUND_EFFECTSOUND.cpp">
+      <Filter>소스 파일\Sounds</Filter>
+    </ClCompile>
+    <ClCompile Include="SOUND_MUSICSOUND.cpp">
+      <Filter>소스 파일\Sounds</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +166,15 @@
     </ClInclude>
     <ClInclude Include="OBJECT_MANUAL.h">
       <Filter>헤더 파일\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>헤더 파일\Sounds</Filter>
+    </ClInclude>
+    <ClInclude Include="SOUND_EFFECTSOUND.h">
+      <Filter>헤더 파일\Sounds</Filter>
+    </ClInclude>
+    <ClInclude Include="SOUND_MUSICSOUND.h">
+      <Filter>헤더 파일\Sounds</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

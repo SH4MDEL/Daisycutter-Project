@@ -2,6 +2,9 @@
 #include "Object.h"
 #include "ShaderManager.h"
 
+#include "SOUND_MUSICSOUND.h"
+#include "SOUND_EFFECTSOUND.h"
+
 class CFramework;
 
 class CScene
@@ -41,5 +44,8 @@ protected:
 	CFramework* m_pFramework;	// 인자로 받아오는게 아니라 동적할당을 해온다.
 
 	static ShaderManager SM;
+
+	SOUND_MUSICSOUND* m_pMusicSound;
+	SOUND_EFFECTSOUND* m_pEffectSound;
 };
 

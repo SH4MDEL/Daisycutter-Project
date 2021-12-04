@@ -40,12 +40,28 @@ void SCENE_MUSICSELECT::OnCreate()
 	fCameraPosArray[4][0] = 10.0f * (GLfloat)sin(2 * M_PI / 360 * 150) * (GLfloat)cos(2 * M_PI / 360 * 30);
 	fCameraPosArray[4][1] = 10.0f * (GLfloat)sin(2 * M_PI / 360 * 150) * (GLfloat)sin(2 * M_PI / 360 * 30);
 	fCameraPosArray[4][2] = 10.0f * (GLfloat)cos(2 * M_PI / 360 * 150);
+
+	m_pMusicSound = new SOUND_MUSICSOUND;
+	m_pMusicSound->init();
+	m_pMusicSound->loading();
+	m_pMusicSound->play(SOUND_MUSICSOUND::SoundTag::Background);
+
+	m_pEffectSound = new SOUND_EFFECTSOUND;
+	m_pEffectSound->init();
+	m_pEffectSound->loading();
 }
 
 void SCENE_MUSICSELECT::OnDestroy()
 {
 	delete field;
 	delete player;
+
+	m_pMusicSound->stop(SOUND_MUSICSOUND::SoundTag::Background);
+	m_pMusicSound->Release();
+	delete m_pMusicSound;
+
+	m_pEffectSound->Release();
+	delete m_pEffectSound;
 }
 
 void SCENE_MUSICSELECT::BuildObjects()
@@ -148,8 +164,10 @@ void SCENE_MUSICSELECT::KeyboardMessage(unsigned char inputKey)
 {
 	switch (inputKey) {
 	case 32:	// 'SPACE'
+		m_pEffectSound->play(SOUND_EFFECTSOUND::SoundTag::SelectSound);
 		break;
 	case 27:	// 'ESCAPE'
+		m_pEffectSound->play(SOUND_EFFECTSOUND::SoundTag::SelectSound);
 		m_pFramework->ChangeScene(CScene::SceneTag::Title, new SCENE_TITLE(CScene::SceneTag::Title, m_pFramework));
 		break;
 	}
