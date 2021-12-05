@@ -30,7 +30,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -155,7 +155,7 @@
     <ClCompile Include="OBJECT_PLAYER.cpp" />
     <ClCompile Include="objRead.cpp" />
     <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="SCENE_MUSICSELECT.cpp" />
+    <ClCompile Include="SCENE_INGAME.cpp" />
     <ClCompile Include="SCENE_TITLE.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
     <ClCompile Include="Sound.cpp" />
@@ -176,7 +176,7 @@
     <ClInclude Include="OBJECT_PLAYER.h" />
     <ClInclude Include="objRead.h" />
     <ClInclude Include="Scene.h" />
-    <ClInclude Include="SCENE_MUSICSELECT.h" />
+    <ClInclude Include="SCENE_INGAME.h" />
     <ClInclude Include="SCENE_TITLE.h" />
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="Sound.h" />

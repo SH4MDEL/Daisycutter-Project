@@ -6,6 +6,8 @@ class SOUND_MUSICSOUND : public CSound
 public:
 	enum SoundTag {
 		Background
+		, Music1
+		, Music2
 		, Count			// Sound의 개수를 나타내기 위한 임시 태그이다. 지우지 말자.
 	};
 	SOUND_MUSICSOUND();

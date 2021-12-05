@@ -13,7 +13,6 @@ public:
 	// CScene::SceneTag:: 형식으로 불러서 외울 필요도 define할 필요도 없이 안의 내용물을 쓸 수 있다. 이 헤더파일만 include 하자.
 	enum SceneTag {
 		Title
-		, MusicSelect
 		, Ingame
 		, Result
 		, Count			// Scene의 개수를 나타내기 위한 임시 태그이다. 지우지 말자.

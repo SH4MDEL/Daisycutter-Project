@@ -1,5 +1,5 @@
 #include "SCENE_TITLE.h"
-#include "SCENE_MUSICSELECT.h"
+#include "SCENE_INGAME.h"
 
 SCENE_TITLE::SCENE_TITLE()
 {
@@ -49,6 +49,8 @@ void SCENE_TITLE::OnCreate()
 	m_pEffectSound = new SOUND_EFFECTSOUND;
 	m_pEffectSound->Init();
 	m_pEffectSound->Loading();
+
+	iPhaseIndex = TitlePhase;
 }
 
 void SCENE_TITLE::OnDestroy()
@@ -133,9 +135,11 @@ void SCENE_TITLE::ManualRender()
 
 	//glEnable(GL_DEPTH_TEST);   //--- 은면 제거로 인해 문제가 발생 했었음.
 
-	manual->putFactor(glm::mat4(1.0f));
-	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(manual->getFactor()));
-	manual->Render();
+	if (iPhaseIndex == TitlePhase) {
+		manual->putFactor(glm::mat4(1.0f));
+		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(manual->getFactor()));
+		manual->Render();
+	}
 
 	//glDisable(GL_DEPTH_TEST);
 }
@@ -255,18 +259,66 @@ void SCENE_TITLE::KeyboardMessage(unsigned char inputKey)
 		break;
 	case 32:	// 'SPACE'
 		m_pEffectSound->Play(SOUND_EFFECTSOUND::SoundTag::SelectSound);
-		m_pFramework->ChangeScene(CScene::SceneTag::MusicSelect, new SCENE_MUSICSELECT(CScene::SceneTag::MusicSelect, m_pFramework));
+
+		if (iPhaseIndex == TitlePhase) {
+			m_pMusicSound->Stop();
+			iPhaseIndex = Music1Phase;
+			m_pMusicSound->Play(SOUND_MUSICSOUND::SoundTag::Music1);
+		}
+		else if (iPhaseIndex == Music1Phase) {
+			m_pFramework->ChangeScene(CScene::SceneTag::Ingame, new SCENE_INGAME(CScene::SceneTag::Ingame, m_pFramework));
+		}
+		else if (iPhaseIndex == Music2Phase) {
+			m_pFramework->ChangeScene(CScene::SceneTag::Ingame, new SCENE_INGAME(CScene::SceneTag::Ingame, m_pFramework));
+		}
 		break;
 	case 27:	// 'ESCAPE'
 		m_pEffectSound->Play(SOUND_EFFECTSOUND::SoundTag::SelectSound);
-		glutLeaveMainLoop();
+		if (iPhaseIndex == TitlePhase) {
+			glutLeaveMainLoop();
+		}
+		else if (iPhaseIndex == Music1Phase) {
+			m_pMusicSound->Stop();
+			iPhaseIndex = TitlePhase;
+			m_pMusicSound->Play(SOUND_MUSICSOUND::SoundTag::Background);
+		}
+		else if (iPhaseIndex == Music2Phase) {
+			m_pMusicSound->Stop();
+			iPhaseIndex = TitlePhase;
+			m_pMusicSound->Play(SOUND_MUSICSOUND::SoundTag::Background);
+		}
 		break;
 	}
 }
 
 void SCENE_TITLE::SpecialKeyboardMessage(int inputKey)
 {
-
+	if (inputKey == GLUT_KEY_LEFT) {
+		m_pEffectSound->Play(SOUND_EFFECTSOUND::SoundTag::SelectSound);
+		if (iPhaseIndex == Music1Phase) {
+			m_pMusicSound->Stop();
+			iPhaseIndex = Music2Phase;
+			m_pMusicSound->Play(SOUND_MUSICSOUND::SoundTag::Music2);
+		}
+		else if (iPhaseIndex == Music2Phase) {
+			m_pMusicSound->Stop();
+			iPhaseIndex = Music1Phase;
+			m_pMusicSound->Play(SOUND_MUSICSOUND::SoundTag::Music1);
+		}
+	}
+	else if (inputKey == GLUT_KEY_RIGHT) {
+		m_pEffectSound->Play(SOUND_EFFECTSOUND::SoundTag::SelectSound);
+		if (iPhaseIndex == Music1Phase) {
+			m_pMusicSound->Stop();
+			iPhaseIndex = Music2Phase;
+			m_pMusicSound->Play(SOUND_MUSICSOUND::SoundTag::Music2);
+		}
+		else if (iPhaseIndex == Music2Phase) {
+			m_pMusicSound->Stop();
+			iPhaseIndex = Music1Phase;
+			m_pMusicSound->Play(SOUND_MUSICSOUND::SoundTag::Music1);
+		}
+	}
 }
 
 void SCENE_TITLE::SetNextCameraPos()

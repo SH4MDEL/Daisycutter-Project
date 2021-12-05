@@ -96,9 +96,6 @@
     <ClCompile Include="ShaderManager.cpp">
       <Filter>소스 파일\Shader</Filter>
     </ClCompile>
-    <ClCompile Include="SCENE_MUSICSELECT.cpp">
-      <Filter>소스 파일\Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="OBJECT_MANUAL.cpp">
       <Filter>소스 파일\Objects</Filter>
     </ClCompile>
@@ -110,6 +107,9 @@
     </ClCompile>
     <ClCompile Include="SOUND_MUSICSOUND.cpp">
       <Filter>소스 파일\Sounds</Filter>
+    </ClCompile>
+    <ClCompile Include="SCENE_INGAME.cpp">
+      <Filter>소스 파일\Scenes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -161,9 +161,6 @@
     <ClInclude Include="ShaderManager.h">
       <Filter>헤더 파일\Shader</Filter>
     </ClInclude>
-    <ClInclude Include="SCENE_MUSICSELECT.h">
-      <Filter>헤더 파일\Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="OBJECT_MANUAL.h">
       <Filter>헤더 파일\Objects</Filter>
     </ClInclude>
@@ -175,6 +172,9 @@
     </ClInclude>
     <ClInclude Include="SOUND_MUSICSOUND.h">
       <Filter>헤더 파일\Sounds</Filter>
+    </ClInclude>
+    <ClInclude Include="SCENE_INGAME.h">
+      <Filter>헤더 파일\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

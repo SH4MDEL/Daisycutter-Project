@@ -20,6 +20,8 @@ void SOUND_MUSICSOUND::Loading()
 {
 	// FMOD_LOOP_NORMAL : 계속 반복 재생	// FMOD_LOOP_OFF : 한번만 재생
 	r = FMOD_System_CreateSound(pFmod, "SOUND\\MUSICSOUND\\BACKGROUND.mp3", FMOD_LOOP_NORMAL, NULL, &pSound[Background]);
+	r = FMOD_System_CreateSound(pFmod, "SOUND\\MUSICSOUND\\MUSIC1.mp3", FMOD_LOOP_OFF, NULL, &pSound[Music1]);
+	r = FMOD_System_CreateSound(pFmod, "SOUND\\MUSICSOUND\\MUSIC2.mp3", FMOD_LOOP_OFF, NULL, &pSound[Music2]);
 }
 
 void SOUND_MUSICSOUND::Play(int type)

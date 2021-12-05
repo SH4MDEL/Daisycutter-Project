@@ -14,7 +14,15 @@ private:
 	GLfloat fCameraPosArray[5][3];
 	GLint iCameraPosIndex;
 
+	GLint iPhaseIndex;
 public:
+	enum PhaseTag {
+		TitlePhase
+		, Music1Phase
+		, Music2Phase
+		, Count
+	};
+
 	SCENE_TITLE();
 	SCENE_TITLE(SceneTag tag, CFramework* pFramework);
 	~SCENE_TITLE() override;
