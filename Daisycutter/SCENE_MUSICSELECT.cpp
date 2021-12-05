@@ -44,7 +44,7 @@ void SCENE_MUSICSELECT::OnCreate()
 	m_pMusicSound = new SOUND_MUSICSOUND;
 	m_pMusicSound->Init();
 	m_pMusicSound->Loading();
-	m_pMusicSound->Play(SOUND_MUSICSOUND::SoundTag::Background);
+	// m_pMusicSound->Play(SOUND_MUSICSOUND::SoundTag::Background); 선택된 음악 출력해야 하니까 일단 배경음악은 출력 x
 
 	m_pEffectSound = new SOUND_EFFECTSOUND;
 	m_pEffectSound->Init();

@@ -258,6 +258,7 @@ void SCENE_TITLE::KeyboardMessage(unsigned char inputKey)
 		m_pFramework->ChangeScene(CScene::SceneTag::MusicSelect, new SCENE_MUSICSELECT(CScene::SceneTag::MusicSelect, m_pFramework));
 		break;
 	case 27:	// 'ESCAPE'
+		m_pEffectSound->Play(SOUND_EFFECTSOUND::SoundTag::SelectSound);
 		glutLeaveMainLoop();
 		break;
 	}
