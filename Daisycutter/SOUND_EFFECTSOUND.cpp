@@ -2,6 +2,7 @@
 
 SOUND_EFFECTSOUND::SOUND_EFFECTSOUND()
 {
+	fVolume = EFFECTSOUND_DEFAULT;
 }
 
 
@@ -9,42 +10,57 @@ SOUND_EFFECTSOUND::~SOUND_EFFECTSOUND()
 {
 }
 
-void SOUND_EFFECTSOUND::init()
+void SOUND_EFFECTSOUND::Init()
 {
-	r = FMOD::System_Create(&pFmod);
-	r = pFmod->init(100, FMOD_INIT_NORMAL, NULL);
+	r = FMOD_System_Create(&pFmod);
+	r = FMOD_System_Init(pFmod, 16, FMOD_INIT_NORMAL, NULL);
 }
 
-void SOUND_EFFECTSOUND::loading()
+void SOUND_EFFECTSOUND::Loading()
 {
 	// FMOD_LOOP_NORMAL : 계속 반복 재생	// FMOD_LOOP_OFF : 한번만 재생
-	r = pFmod->createSound("SOUND\\EFFECTSOUND\\SELECT.mp3", FMOD_LOOP_OFF, NULL, &Music[SelectSound]);
-	r = pFmod->createSound("SOUND\\EFFECTSOUND\\ATTACK.mp3", FMOD_LOOP_OFF, NULL, &Music[AttackSound]);
-	r = pFmod->createSound("Sound\\EFFECTSOUND\\HIT.mp3", FMOD_LOOP_OFF, NULL, &Music[HitSound]);
+	r = FMOD_System_CreateSound(pFmod, "SOUND\\EFFECTSOUND\\SELECT.mp3", FMOD_LOOP_OFF, NULL, &pSound[SelectSound]);
+	r = FMOD_System_CreateSound(pFmod, "SOUND\\EFFECTSOUND\\ATTACK.mp3", FMOD_LOOP_OFF, NULL, &pSound[AttackSound]);
+	r = FMOD_System_CreateSound(pFmod, "SOUND\\EFFECTSOUND\\HIT.mp3", FMOD_LOOP_OFF, NULL, &pSound[HitSound]);
 }
 
-void SOUND_EFFECTSOUND::play(int _type)
+void SOUND_EFFECTSOUND::Play(int type)
 {
-	r = pFmod->playSound(Music[_type], chGroup[_type], false, &ch[_type]);		// 노래가 안나오고있으면 시작
+	r = FMOD_System_PlaySound(pFmod, pSound[type], pChannelGroup, false, &pChannel);		// 노래가 안나오고있으면 시작
+	FMOD_Channel_SetVolume(pChannel, fVolume);
 }
 
-void SOUND_EFFECTSOUND::stop(int _chNum)
+void SOUND_EFFECTSOUND::Stop()
 {
-	ch[_chNum]->stop();
+	FMOD_Channel_Stop(pChannel);
 }
 
 void SOUND_EFFECTSOUND::Release()
 {
-	Music[SelectSound]->release();			// 사운드 해제
-	Music[AttackSound]->release();
-	Music[HitSound]->release();
-	pFmod->close();									// 사운드 시스템 해제
-	pFmod->release();
+	for (int i = 0; i < Count; i++) {
+		FMOD_Sound_Release(pSound[i]);
+	}
+	FMOD_System_Close(pFmod);
+	FMOD_System_Release(pFmod);
 }
 
-void SOUND_EFFECTSOUND::update(int _chNum)						// 출력중인지 검사하고 출력중이면 시스템을 업데이트함
+void SOUND_EFFECTSOUND::Update()						// 출력중인지 검사하고 출력중이면 시스템을 업데이트함
 {
-	chGroup[_chNum]->isPlaying(&isPlaying);
-	if (isPlaying)
-		pFmod->update();
+	FMOD_System_Update(pFmod);
+}
+
+void SOUND_EFFECTSOUND::VolumeUp()
+{
+	if (fVolume < SOUND_MAX) {
+		fVolume += SOUND_WEIGHT;
+		FMOD_Channel_SetVolume(pChannel, fVolume);
+	}
+}
+
+void SOUND_EFFECTSOUND::VolumeDown()
+{
+	if (fVolume > SOUND_MIN) {
+		fVolume -= SOUND_WEIGHT;
+		FMOD_Channel_SetVolume(pChannel, fVolume);
+	}
 }

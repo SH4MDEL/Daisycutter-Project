@@ -11,20 +11,23 @@ public:
 	SOUND_MUSICSOUND();
 	~SOUND_MUSICSOUND();
 
-	void init() override;
-	void loading() override;
-	void play(int _type) override;
-	void stop(int _chNum) override;
+	void Init() override;
+	void Loading() override;
+	void Play(int type) override;
+	void Stop() override;
 	void Release() override;
-	void update(int _chNum) override;
+	void Update() override;
+
+	void VolumeUp() override;
+	void VolumeDown() override;
 
 private:
-	FMOD::System* pFmod;					 // 사운드 시스템 변수
-	FMOD::Sound* Music[Count];            // 사운드 변수
-	FMOD::Channel* ch[Count];				 // 채널에 담긴 변수를 통째로 컨트롤한다.
-	FMOD::ChannelGroup* chGroup[Count];
+	FMOD_SYSTEM* pFmod;					 // 사운드 시스템 변수
+	FMOD_SOUND* pSound[Count];            // 사운드 변수
+	FMOD_CHANNEL* pChannel;				 // 채널에 담긴 변수를 통째로 컨트롤한다.
+	FMOD_CHANNELGROUP* pChannelGroup;
 	FMOD_RESULT			r;
 
-	bool isPlaying;
+	GLfloat fVolume;
 };
 

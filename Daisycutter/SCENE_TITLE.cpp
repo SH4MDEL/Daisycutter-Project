@@ -42,13 +42,13 @@ void SCENE_TITLE::OnCreate()
 	fCameraPosArray[4][2] = 10.0f * (GLfloat)cos(2 * M_PI / 360 * 150);
 
 	m_pMusicSound = new SOUND_MUSICSOUND;
-	m_pMusicSound->init();
-	m_pMusicSound->loading();
-	m_pMusicSound->play(SOUND_MUSICSOUND::SoundTag::Background);
+	m_pMusicSound->Init();
+	m_pMusicSound->Loading();
+	m_pMusicSound->Play(SOUND_MUSICSOUND::SoundTag::Background);
 
 	m_pEffectSound = new SOUND_EFFECTSOUND;
-	m_pEffectSound->init();
-	m_pEffectSound->loading();
+	m_pEffectSound->Init();
+	m_pEffectSound->Loading();
 }
 
 void SCENE_TITLE::OnDestroy()
@@ -57,7 +57,7 @@ void SCENE_TITLE::OnDestroy()
 	delete player;
 	delete manual;
 
-	m_pMusicSound->stop(SOUND_MUSICSOUND::SoundTag::Background);
+	m_pMusicSound->Stop();
 	m_pMusicSound->Release();
 	delete m_pMusicSound;
 
@@ -220,6 +220,8 @@ void SCENE_TITLE::Update(float fTimeElapsed)
 	player->Update(fTimeElapsed);
 	manual->Update(fTimeElapsed);
 
+	m_pMusicSound->Update();
+
 	fCameraPosTimer += fTimeElapsed;
 	if (fCameraPosTimer >= 3.0f) {
 		fCameraPosTimer -= 3.0f;	// 초기화하지 말고 값을 빼줄것
@@ -231,8 +233,28 @@ void SCENE_TITLE::Update(float fTimeElapsed)
 void SCENE_TITLE::KeyboardMessage(unsigned char inputKey)
 {
 	switch (inputKey) {
+	case '+':
+	case '=':
+		m_pEffectSound->Play(SOUND_EFFECTSOUND::SoundTag::SelectSound);
+		m_pMusicSound->VolumeUp();
+		break;
+	case '-':
+	case '_':
+		m_pEffectSound->Play(SOUND_EFFECTSOUND::SoundTag::SelectSound);
+		m_pMusicSound->VolumeDown();
+		break;
+	case '}':
+	case ']':
+		m_pEffectSound->Play(SOUND_EFFECTSOUND::SoundTag::SelectSound);
+		m_pEffectSound->VolumeUp();
+		break;
+	case '{':
+	case '[':
+		m_pEffectSound->Play(SOUND_EFFECTSOUND::SoundTag::SelectSound);
+		m_pEffectSound->VolumeDown();
+		break;
 	case 32:	// 'SPACE'
-		m_pEffectSound->play(SOUND_EFFECTSOUND::SoundTag::SelectSound);
+		m_pEffectSound->Play(SOUND_EFFECTSOUND::SoundTag::SelectSound);
 		m_pFramework->ChangeScene(CScene::SceneTag::MusicSelect, new SCENE_MUSICSELECT(CScene::SceneTag::MusicSelect, m_pFramework));
 		break;
 	case 27:	// 'ESCAPE'

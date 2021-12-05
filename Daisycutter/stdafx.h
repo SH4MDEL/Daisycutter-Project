@@ -26,6 +26,12 @@
 #pragma comment (lib,"fmod64_vc.lib")	// 음악 추가하기 위한 헤더파일 include
 #include "fmod.hpp"	
 
+#define SOUND_MAX 1.0f
+#define SOUND_MIN 0.0f
+#define MUSICSOUND_DEFAULT 0.5f
+#define EFFECTSOUND_DEFAULT 0.5f
+#define SOUND_WEIGHT 0.1f
+
 #define MAX_FPS 0.0
 #define M_PI 3.1415926535897932384626433832795
 
