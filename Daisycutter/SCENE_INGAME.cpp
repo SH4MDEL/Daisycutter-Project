@@ -134,11 +134,7 @@ void SCENE_INGAME::ManualRender()
 
 	//glEnable(GL_DEPTH_TEST);   //--- 은면 제거로 인해 문제가 발생 했었음.
 
-	if (iPhaseIndex == TitlePhase) {
-		manual->putFactor(glm::mat4(1.0f));
-		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(manual->getFactor()));
-		manual->Render();
-	}
+
 
 	//glDisable(GL_DEPTH_TEST);
 }
@@ -236,50 +232,9 @@ void SCENE_INGAME::Update(float fTimeElapsed)
 void SCENE_INGAME::KeyboardMessage(unsigned char inputKey)
 {
 	switch (inputKey) {
-	case '+':
-	case '=':
-		m_pEffectSound->Play(SOUND_EFFECTSOUND::SoundTag::SelectSound);
-		m_pMusicSound->VolumeUp();
-		break;
-	case '-':
-	case '_':
-		m_pEffectSound->Play(SOUND_EFFECTSOUND::SoundTag::SelectSound);
-		m_pMusicSound->VolumeDown();
-		break;
-	case '}':
-	case ']':
-		m_pEffectSound->Play(SOUND_EFFECTSOUND::SoundTag::SelectSound);
-		m_pEffectSound->VolumeUp();
-		break;
-	case '{':
-	case '[':
-		m_pEffectSound->Play(SOUND_EFFECTSOUND::SoundTag::SelectSound);
-		m_pEffectSound->VolumeDown();
-		break;
-	case 32:	// 'SPACE'
-		m_pEffectSound->Play(SOUND_EFFECTSOUND::SoundTag::SelectSound);
-
-		if (iPhaseIndex == TitlePhase) {
-			iPhaseIndex = Music1Phase;
-		}
-		else if (iPhaseIndex == Music1Phase) {
-			m_pFramework->ChangeScene(CScene::SceneTag::Ingame, new SCENE_INGAME(CScene::SceneTag::Ingame, m_pFramework));
-		}
-		else if (iPhaseIndex == Music2Phase) {
-			m_pFramework->ChangeScene(CScene::SceneTag::Ingame, new SCENE_INGAME(CScene::SceneTag::Ingame, m_pFramework));
-		}
-		break;
 	case 27:	// 'ESCAPE'
 		m_pEffectSound->Play(SOUND_EFFECTSOUND::SoundTag::SelectSound);
-		if (iPhaseIndex == TitlePhase) {
-			glutLeaveMainLoop();
-		}
-		else if (iPhaseIndex == Music1Phase) {
-			iPhaseIndex = TitlePhase;
-		}
-		else if (iPhaseIndex == Music2Phase) {
-			iPhaseIndex = TitlePhase;
-		}
+		m_pFramework->ChangeScene(CScene::SceneTag::Title, new SCENE_INGAME(CScene::SceneTag::Title, m_pFramework));
 		break;
 	}
 }

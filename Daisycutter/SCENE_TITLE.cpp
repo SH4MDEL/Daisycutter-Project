@@ -23,6 +23,7 @@ void SCENE_TITLE::OnCreate()
 	this->BuildObjects();
 
 	fCameraPosTimer = 0.0f;
+	fSetGameTimer = 0.0f;
 	fCameraPosArray[0][0] = 10.0f * (GLfloat)sin(2 * M_PI / 360 * 70) * (GLfloat)cos(2 * M_PI / 360 * 90);
 	fCameraPosArray[0][1] = 10.0f * (GLfloat)sin(2 * M_PI / 360 * 70) * (GLfloat)sin(2 * M_PI / 360 * 90);
 	fCameraPosArray[0][2] = 10.0f * (GLfloat)cos(2 * M_PI / 360 * 70);
@@ -42,6 +43,10 @@ void SCENE_TITLE::OnCreate()
 	fCameraPosArray[4][0] = 10.0f * (GLfloat)sin(2 * M_PI / 360 * 150) * (GLfloat)cos(2 * M_PI / 360 * 30);
 	fCameraPosArray[4][1] = 10.0f * (GLfloat)sin(2 * M_PI / 360 * 150) * (GLfloat)sin(2 * M_PI / 360 * 30);
 	fCameraPosArray[4][2] = 10.0f * (GLfloat)cos(2 * M_PI / 360 * 150);
+
+	fCameraPosArray[5][0] = 8.0f * (GLfloat)sin(2 * M_PI / 360 * 20) * (GLfloat)cos(2 * M_PI / 360 * 90);
+	fCameraPosArray[5][1] = 8.0f * (GLfloat)sin(2 * M_PI / 360 * 20) * (GLfloat)sin(2 * M_PI / 360 * 90);
+	fCameraPosArray[5][2] = 8.0f * (GLfloat)cos(2 * M_PI / 360 * 20);
 
 	m_pMusicSound = new SOUND_MUSICSOUND;
 	m_pMusicSound->Init();
@@ -142,6 +147,9 @@ void SCENE_TITLE::ManualRender()
 		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(manual->getFactor()));
 		manual->Render(OBJECT_MANUAL::ManualTag::MainTitle);
 	}
+	else if (iPhaseIndex == GameSetPhase) {
+
+	}
 	else {
 		manual->putFactor(glm::mat4(1.0f));
 		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(manual->getFactor()));
@@ -235,9 +243,16 @@ void SCENE_TITLE::Update(float fTimeElapsed)
 	fCameraPosTimer += fTimeElapsed;
 	if (fCameraPosTimer >= 3.0f) {
 		fCameraPosTimer -= 3.0f;	// 초기화하지 말고 값을 빼줄것
-		SetNextCameraPos();
-	}
+		if (iPhaseIndex == GameSetPhase) {
 
+		}
+		else {
+			SetNextCameraPos();
+		}
+	}
+	if (iPhaseIndex == GameSetPhase) {
+		SetGameSetCameraPos(fTimeElapsed);
+	}
 }
 
 void SCENE_TITLE::KeyboardMessage(unsigned char inputKey)
@@ -272,10 +287,13 @@ void SCENE_TITLE::KeyboardMessage(unsigned char inputKey)
 			m_pMusicSound->Play(SOUND_MUSICSOUND::SoundTag::Music1);
 		}
 		else if (iPhaseIndex == Music1Phase) {
-			m_pFramework->ChangeScene(CScene::SceneTag::Ingame, new SCENE_INGAME(CScene::SceneTag::Ingame, m_pFramework));
+			m_pFramework->PutSelectMusic(SOUND_MUSICSOUND::SoundTag::Music1);
+			iPhaseIndex = GameSetPhase;
+			
 		}
 		else if (iPhaseIndex == Music2Phase) {
-			m_pFramework->ChangeScene(CScene::SceneTag::Ingame, new SCENE_INGAME(CScene::SceneTag::Ingame, m_pFramework));
+			m_pFramework->PutSelectMusic(SOUND_MUSICSOUND::SoundTag::Music2);
+			iPhaseIndex = GameSetPhase;
 		}
 		break;
 	case 27:	// 'ESCAPE'
@@ -334,5 +352,30 @@ void SCENE_TITLE::SetNextCameraPos()
 	}
 	else {
 		iCameraPosIndex++;
+	}
+}
+
+void SCENE_TITLE::SetGameSetCameraPos(float fTimeElapsed)
+{
+	if (fSetGameTimer == 0.0f) {
+		iCameraPosForGameSet = iCameraPosIndex;
+		fCameraPosArray[6][0] = fCameraPosArray[iCameraPosForGameSet][0];
+		fCameraPosArray[6][1] = fCameraPosArray[iCameraPosForGameSet][1];
+		fCameraPosArray[6][2] = fCameraPosArray[iCameraPosForGameSet][2];
+		iCameraPosIndex = 6;
+		fSetGameTimer += fTimeElapsed;
+	}
+	else if (fSetGameTimer >= 3.0f) {
+		iCameraPosIndex = 5;
+		m_pFramework->ChangeScene(CScene::SceneTag::Ingame, new SCENE_INGAME(CScene::SceneTag::Ingame, m_pFramework));
+	}
+	else if (fSetGameTimer > 0.0f && fSetGameTimer < 1.0) {
+		fSetGameTimer += fTimeElapsed;
+	}
+	else {
+		fSetGameTimer += fTimeElapsed;
+		fCameraPosArray[6][0] = fCameraPosArray[iCameraPosForGameSet][0] + (fCameraPosArray[5][0] - fCameraPosArray[iCameraPosForGameSet][0]) / 2 * (fSetGameTimer - 1.0f);
+		fCameraPosArray[6][1] = fCameraPosArray[iCameraPosForGameSet][1] + (fCameraPosArray[5][1] - fCameraPosArray[iCameraPosForGameSet][1]) / 2 * (fSetGameTimer - 1.0f);
+		fCameraPosArray[6][2] = fCameraPosArray[iCameraPosForGameSet][2] + (fCameraPosArray[5][2] - fCameraPosArray[iCameraPosForGameSet][2]) / 2 * (fSetGameTimer - 1.0f);
 	}
 }
