@@ -1,6 +1,8 @@
 #include "SCENE_TITLE.h"
 #include "SCENE_INGAME.h"
 
+#include "OBJECT_MANUAL.h"
+
 SCENE_TITLE::SCENE_TITLE()
 {
 
@@ -133,14 +135,18 @@ void SCENE_TITLE::ManualRender()
 
 	modelLocation = glGetUniformLocation(SM.GetShader(ShaderManager::ShaderTag::ManualShader), "ModelTransform");
 
-	//glEnable(GL_DEPTH_TEST);   //--- 은면 제거로 인해 문제가 발생 했었음.
+	//glEnable(GL_DEPTH_TEST);
 
 	if (iPhaseIndex == TitlePhase) {
 		manual->putFactor(glm::mat4(1.0f));
 		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(manual->getFactor()));
-		manual->Render();
+		manual->Render(OBJECT_MANUAL::ManualTag::MainTitle);
 	}
-
+	else {
+		manual->putFactor(glm::mat4(1.0f));
+		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(manual->getFactor()));
+		manual->Render(OBJECT_MANUAL::ManualTag::MusicSelect);
+	}
 	//glDisable(GL_DEPTH_TEST);
 }
 

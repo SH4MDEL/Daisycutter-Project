@@ -72,3 +72,13 @@ void CFramework::ChangeScene(CScene::SceneTag tag, CScene* NowScene)
 	NowScene->InitTexture();
 	m_pCurrScene = NowScene;
 }
+
+void CFramework::PutSelectMusic(GLint SelectedMusic)
+{
+	m_iSelectedMusic = SelectedMusic;
+}
+
+GLint CFramework::GetSelectMusic()
+{
+	return m_iSelectedMusic;
+}

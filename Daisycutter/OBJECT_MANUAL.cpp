@@ -83,20 +83,30 @@ void OBJECT_MANUAL::initTexture(GLint ShaderProgram)
 {
 	m_ShaderProgram = ShaderProgram;
 
-	glGenTextures(1, &texture); //--- 텍스처 생성
+	glGenTextures(Count, texture); //--- 텍스처 생성
 	char Text[100];
 	int widthImage, heightImage, numberOfChannel;
 	stbi_set_flip_vertically_on_load(true);
-	glBindTexture(GL_TEXTURE_2D, texture); //--- 텍스처 바인딩
+
+	glBindTexture(GL_TEXTURE_2D, texture[MainTitle]); //--- 텍스처 바인딩
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT); //--- 현재 바인딩된 텍스처의 파라미터 설정하기
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	sprintf(Text, "GRAPHIC\\UI\\MAINTITLE.png");
-	image = stbi_load(Text, &widthImage, &heightImage, &numberOfChannel, 0); //--- 텍스처로 사용할 비트맵 이미지 로드하기
-	glTexImage2D(GL_TEXTURE_2D, 0, 4, widthImage, heightImage, 0, GL_RGBA, GL_UNSIGNED_BYTE, image); //---텍스처 이미지 정의
+	image[MainTitle] = stbi_load(Text, &widthImage, &heightImage, &numberOfChannel, 0); //--- 텍스처로 사용할 비트맵 이미지 로드하기
+	glTexImage2D(GL_TEXTURE_2D, 0, 4, widthImage, heightImage, 0, GL_RGBA, GL_UNSIGNED_BYTE, image[MainTitle]); //---텍스처 이미지 정의
+	stbi_image_free(image[MainTitle]);
 
-	stbi_image_free(image);
+	glBindTexture(GL_TEXTURE_2D, texture[MusicSelect]); //--- 텍스처 바인딩
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT); //--- 현재 바인딩된 텍스처의 파라미터 설정하기
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	sprintf(Text, "GRAPHIC\\UI\\MUSICSELECT.png");
+	image[MusicSelect] = stbi_load(Text, &widthImage, &heightImage, &numberOfChannel, 0); //--- 텍스처로 사용할 비트맵 이미지 로드하기
+	glTexImage2D(GL_TEXTURE_2D, 0, 4, widthImage, heightImage, 0, GL_RGBA, GL_UNSIGNED_BYTE, image[MusicSelect]); //---텍스처 이미지 정의
+	stbi_image_free(image[MusicSelect]);
 	
 	glUseProgram(m_ShaderProgram);
 	tLocation = glGetUniformLocation(m_ShaderProgram, "outTexture"); //--- outTexture 유니폼 샘플러의 위치를 가져옴
@@ -111,7 +121,20 @@ void OBJECT_MANUAL::Render()
 	glUniform3f(objColorLocation, 1.0f, 1.0f, 1.0f);
 	glBindVertexArray(vao);
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, texture);
+	glBindTexture(GL_TEXTURE_2D, texture[0]);
+	glDrawArrays(GL_TRIANGLES, 0, 6);
+	glDisable(GL_BLEND);
+}
+
+void OBJECT_MANUAL::Render(GLint type)
+{
+	glUseProgram(m_ShaderProgram);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glUniform3f(objColorLocation, 1.0f, 1.0f, 1.0f);
+	glBindVertexArray(vao);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, texture[type]);
 	glDrawArrays(GL_TRIANGLES, 0, 6);
 	glDisable(GL_BLEND);
 }

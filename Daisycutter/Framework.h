@@ -26,11 +26,15 @@ public:
 	void KeyboardMessage(unsigned char inputKey);
 	void SpecialKeyboardMessage(int inputKey);
 
+	void PutSelectMusic(GLint SelectedMusic);
+	GLint GetSelectMusic();
+
 	//void curSceneCreate();
 	//void BuildScene(CScene::SceneTag tag);
 	void ChangeScene(CScene::SceneTag tag, CScene* NowScene);		// 새로운 씬으로 전환. 현재 씬을 파괴하고 입력한 씬을 m_pCurrScene에 등록합니다.
 private:
 	//CScene* arrScene[CScene::SceneTag::Count];
 	CScene* m_pCurrScene;											// 현재 씬을 가리키고 있는 포인터.
+	GLint m_iSelectedMusic;
 };
 
