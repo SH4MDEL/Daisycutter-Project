@@ -15,8 +15,8 @@ void SOUND_MUSICSOUND::Init()
 	r = FMOD_System_Create(&pFmod);
 	r = FMOD_System_Init(pFmod, 16, FMOD_INIT_NORMAL, NULL);
 
-	fBPM[Music1] = 100.0f;
-	fBPM[Music2] = 100.0f;
+	dBPM[Music1] = 149.0;
+	dBPM[Music2] = 225.0;
 }
 
 void SOUND_MUSICSOUND::Loading()
@@ -68,7 +68,7 @@ void SOUND_MUSICSOUND::VolumeDown()
 	}
 }
 
-GLfloat SOUND_MUSICSOUND::Get_BPM(int type)
+GLdouble SOUND_MUSICSOUND::Get_BPM(int type)
 {
-	return fBPM[type];
+	return dBPM[type];
 }

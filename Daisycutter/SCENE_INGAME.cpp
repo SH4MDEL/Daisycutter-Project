@@ -33,7 +33,6 @@ void SCENE_INGAME::OnCreate()
 		}
 	}
 	EnemyObjectDataFile.close();
-	printf("%s", cEnemyObjectData);
 
 	fCameraPosArray[0] = 8.0f * (GLfloat)sin(2 * M_PI / 360 * 20) * (GLfloat)cos(2 * M_PI / 360 * 90);
 	fCameraPosArray[1] = 8.0f * (GLfloat)sin(2 * M_PI / 360 * 20) * (GLfloat)sin(2 * M_PI / 360 * 90);
@@ -49,6 +48,8 @@ void SCENE_INGAME::OnCreate()
 
 	iPhaseIndex = ReadyPhase, iManualIndex = -1;
 	fPhaseTimer = 0.0f;
+	dNextNoteReadTimer = 0.0;
+	iNoteReadPoint = 0;
 }
 
 void SCENE_INGAME::OnDestroy()
@@ -229,27 +230,35 @@ void SCENE_INGAME::Update(float fTimeElapsed)
 	if (iPhaseIndex == ReadyPhase) {
 		fPhaseTimer += fTimeElapsed;
 
-		if (fPhaseTimer >= 1.0f && fPhaseTimer < 2.0f) {
+		if (fPhaseTimer >= 2.0f && fPhaseTimer < 3.0f) {
 			iManualIndex = OBJECT_MANUAL::ManualTag::NUMBER3;
 		}
-		else if (fPhaseTimer >= 2.0f && fPhaseTimer < 3.0f) {
+		else if (fPhaseTimer >= 3.0f && fPhaseTimer < 4.0f) {
 			iManualIndex = OBJECT_MANUAL::ManualTag::NUMBER2;
 		}
-		else if (fPhaseTimer >= 3.0f && fPhaseTimer < 4.0f) {
+		else if (fPhaseTimer >= 4.0f && fPhaseTimer < 5.0f) {
 			iManualIndex = OBJECT_MANUAL::ManualTag::NUMBER1;
 		}
-		else if (fPhaseTimer >= 4.0f && fPhaseTimer < 5.0f) {
+		else if (fPhaseTimer >= 5.0f && fPhaseTimer < 6.0f) {
 			iManualIndex = OBJECT_MANUAL::ManualTag::OPERATION_START;
 		}
-		else if (fPhaseTimer >= 5.0f) {
+		else if (fPhaseTimer >= 6.0f) {
 			iManualIndex = OBJECT_MANUAL::ManualTag::HP_BAR;
-			fPhaseTimer -= 5.0f;
+			fPhaseTimer -= 6.0f;
 			iPhaseIndex = GamePhase;
 			m_pMusicSound->Play(m_pFramework->GetSelectMusic());
 		}
 	}
 	else if (iPhaseIndex == GamePhase) {
 		fPhaseTimer += fTimeElapsed;
+		dNextNoteReadTimer += fTimeElapsed;
+
+		if (dNextNoteReadTimer >= 1.0 / (m_pMusicSound->Get_BPM(m_pFramework->GetSelectMusic()) / 60.0 * 4.0)) {
+			dNextNoteReadTimer -= 1.0 / (m_pMusicSound->Get_BPM(m_pFramework->GetSelectMusic()) / 60.0 * 4.0);
+			printf("%c", cEnemyObjectData[iNoteReadPoint]);
+
+			iNoteReadPoint++;
+		}
 	}
 }
 

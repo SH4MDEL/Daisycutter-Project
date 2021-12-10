@@ -15,6 +15,9 @@ private:
 
 	GLint iEnemyObjectNum;
 	GLchar cEnemyObjectData[5000];
+	GLint iNoteReadPoint;
+
+	GLdouble dNextNoteReadTimer;
 public:
 	enum PhaseTag {
 		ReadyPhase
