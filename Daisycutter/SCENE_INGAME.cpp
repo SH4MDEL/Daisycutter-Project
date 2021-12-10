@@ -21,6 +21,20 @@ void SCENE_INGAME::OnCreate()
 {
 	this->BuildObjects();
 
+	char Text[100];
+	std::fstream EnemyObjectDataFile;
+	iEnemyObjectNum = 0;
+	sprintf(Text, "DATA\\MUSIC%d.txt", m_pFramework->GetSelectMusic() + 1);
+	EnemyObjectDataFile.open(Text);
+	if (EnemyObjectDataFile.is_open()) {
+		while (!EnemyObjectDataFile.eof()) {
+			EnemyObjectDataFile.get(cEnemyObjectData[iEnemyObjectNum]);
+			iEnemyObjectNum++;
+		}
+	}
+	EnemyObjectDataFile.close();
+	printf("%s", cEnemyObjectData);
+
 	fCameraPosArray[0] = 8.0f * (GLfloat)sin(2 * M_PI / 360 * 20) * (GLfloat)cos(2 * M_PI / 360 * 90);
 	fCameraPosArray[1] = 8.0f * (GLfloat)sin(2 * M_PI / 360 * 20) * (GLfloat)sin(2 * M_PI / 360 * 90);
 	fCameraPosArray[2] = 8.0f * (GLfloat)cos(2 * M_PI / 360 * 20);

@@ -1,8 +1,2 @@
-﻿  Daisycutter.cpp
-  Framework.cpp
-  Scene.cpp
-  SCENE_INGAME.cpp
-  SCENE_TITLE.cpp
-  SOUND_MUSICSOUND.cpp
-  코드를 생성하고 있습니다...
+﻿  SCENE_INGAME.cpp
   Daisycutter.vcxproj -> C:\Users\Seungjun Lee\Desktop\Coding\Daisycutter-Project\Debug\Daisycutter.exe

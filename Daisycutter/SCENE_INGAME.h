@@ -12,6 +12,9 @@ private:
 	GLfloat fCameraPosArray[3];
 	GLfloat fPhaseTimer;
 	GLint iPhaseIndex, iManualIndex;
+
+	GLint iEnemyObjectNum;
+	GLchar cEnemyObjectData[5000];
 public:
 	enum PhaseTag {
 		ReadyPhase
