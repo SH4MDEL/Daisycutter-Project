@@ -23,6 +23,8 @@ public:
 	void VolumeUp() override;
 	void VolumeDown() override;
 
+	GLfloat Get_BPM(int type);
+
 private:
 	FMOD_SYSTEM* pFmod;					 // 사운드 시스템 변수
 	FMOD_SOUND* pSound[Count];            // 사운드 변수
@@ -31,5 +33,6 @@ private:
 	FMOD_RESULT			r;
 
 	GLfloat fVolume;
+	GLfloat fBPM[Count];
 };
 

@@ -9,17 +9,14 @@
 class SCENE_INGAME : public CScene
 {
 private:
-	GLfloat fCameraPosTimer;
-
-	GLfloat fCameraPosArray[5][3];
-	GLint iCameraPosIndex;
-
-	GLint iPhaseIndex;
+	GLfloat fCameraPosArray[3];
+	GLfloat fPhaseTimer;
+	GLint iPhaseIndex, iManualIndex;
 public:
 	enum PhaseTag {
-		TitlePhase
-		, Music1Phase
-		, Music2Phase
+		ReadyPhase
+		, GamePhase
+		, EndPhase
 		, Count
 	};
 
@@ -45,7 +42,6 @@ public:
 	void KeyboardMessage(unsigned char inputKey) override;
 	void SpecialKeyboardMessage(int inputKey) override;
 
-	void SetNextCameraPos();
 private:
 	OBJECT_FIELD* field = NULL;
 	OBJECT_PLAYER* player = NULL;

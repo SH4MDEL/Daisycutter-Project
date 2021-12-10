@@ -7,6 +7,13 @@ public:
 	enum ManualTag {
 		MainTitle
 		, MusicSelect
+		, MusicJacket1
+		, MusicJacket2
+		, OPERATION_START
+		, NUMBER1
+		, NUMBER2
+		, NUMBER3
+		, HP_BAR
 		, Count			// Sound의 개수를 나타내기 위한 임시 태그이다. 지우지 말자.
 	};
 private:

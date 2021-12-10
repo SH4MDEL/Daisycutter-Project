@@ -104,7 +104,6 @@ void SCENE_TITLE::InitTexture()
 
 void SCENE_TITLE::Render()
 {
-
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
@@ -287,11 +286,13 @@ void SCENE_TITLE::KeyboardMessage(unsigned char inputKey)
 			m_pMusicSound->Play(SOUND_MUSICSOUND::SoundTag::Music1);
 		}
 		else if (iPhaseIndex == Music1Phase) {
+			m_pMusicSound->Stop();
 			m_pFramework->PutSelectMusic(SOUND_MUSICSOUND::SoundTag::Music1);
 			iPhaseIndex = GameSetPhase;
 			
 		}
 		else if (iPhaseIndex == Music2Phase) {
+			m_pMusicSound->Stop();
 			m_pFramework->PutSelectMusic(SOUND_MUSICSOUND::SoundTag::Music2);
 			iPhaseIndex = GameSetPhase;
 		}
