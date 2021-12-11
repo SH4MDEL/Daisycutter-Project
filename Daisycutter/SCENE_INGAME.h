@@ -4,6 +4,7 @@
 
 #include "OBJECT_FIELD.h"
 #include "OBJECT_PLAYER.h"
+#include "OBJECT_ENEMY.h"
 #include "OBJECT_MANUAL.h"
 
 class SCENE_INGAME : public CScene
@@ -51,6 +52,7 @@ public:
 private:
 	OBJECT_FIELD* field = NULL;
 	OBJECT_PLAYER* player = NULL;
+	OBJECT_ENEMY* enemy = NULL;
 	OBJECT_MANUAL* manual = NULL;
 
 	unsigned int modelLocation;

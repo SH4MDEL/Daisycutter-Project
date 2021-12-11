@@ -111,6 +111,9 @@
     <ClCompile Include="SCENE_INGAME.cpp">
       <Filter>소스 파일\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="OBJECT_ENEMY.cpp">
+      <Filter>소스 파일\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="filetobuf.h">
@@ -175,6 +178,9 @@
     </ClInclude>
     <ClInclude Include="SCENE_INGAME.h">
       <Filter>헤더 파일\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="OBJECT_ENEMY.h">
+      <Filter>헤더 파일\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

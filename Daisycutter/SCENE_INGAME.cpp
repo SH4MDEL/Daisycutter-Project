@@ -19,8 +19,6 @@ SCENE_INGAME::~SCENE_INGAME()
 
 void SCENE_INGAME::OnCreate()
 {
-	this->BuildObjects();
-
 	char Text[100];
 	std::fstream EnemyObjectDataFile;
 	iEnemyObjectNum = 0;
@@ -34,9 +32,9 @@ void SCENE_INGAME::OnCreate()
 	}
 	EnemyObjectDataFile.close();
 
-	fCameraPosArray[0] = 8.0f * (GLfloat)sin(2 * M_PI / 360 * 20) * (GLfloat)cos(2 * M_PI / 360 * 90);
-	fCameraPosArray[1] = 8.0f * (GLfloat)sin(2 * M_PI / 360 * 20) * (GLfloat)sin(2 * M_PI / 360 * 90);
-	fCameraPosArray[2] = 8.0f * (GLfloat)cos(2 * M_PI / 360 * 20);
+	fCameraPosArray[0] = 8.0f * (GLfloat)sin(2 * M_PI / 360 * 0) * (GLfloat)cos(2 * M_PI / 360 * 90);
+	fCameraPosArray[1] = 8.0f * (GLfloat)sin(2 * M_PI / 360 * 0) * (GLfloat)sin(2 * M_PI / 360 * 90);
+	fCameraPosArray[2] = 8.0f * (GLfloat)cos(2 * M_PI / 360 * 0);
 
 	m_pMusicSound = new SOUND_MUSICSOUND;
 	m_pMusicSound->Init();
@@ -50,6 +48,8 @@ void SCENE_INGAME::OnCreate()
 	fPhaseTimer = 0.0f;
 	dNextNoteReadTimer = 0.0;
 	iNoteReadPoint = 0;
+
+	this->BuildObjects();
 }
 
 void SCENE_INGAME::OnDestroy()
@@ -70,6 +70,7 @@ void SCENE_INGAME::BuildObjects()
 {
 	field = new OBJECT_FIELD;
 	player = new OBJECT_PLAYER;
+	enemy = new OBJECT_ENEMY(m_pMusicSound->Get_BPM(m_pFramework->GetSelectMusic()));
 	manual = new OBJECT_MANUAL;
 }
 
@@ -84,6 +85,7 @@ void SCENE_INGAME::InitBuffer()
 {
 	field->initBuffer(SM.GetShader(ShaderManager::ShaderTag::BitmapShader));
 	player->initBuffer(SM.GetShader(ShaderManager::ShaderTag::BitmapShader));
+	enemy->initBuffer(SM.GetShader(ShaderManager::ShaderTag::BitmapShader));
 	manual->initBuffer(SM.GetShader(ShaderManager::ShaderTag::ManualShader));
 }
 
@@ -91,6 +93,7 @@ void SCENE_INGAME::InitTexture()
 {
 	field->initTexture(SM.GetShader(ShaderManager::ShaderTag::BitmapShader));
 	player->initTexture(SM.GetShader(ShaderManager::ShaderTag::BitmapShader));
+	enemy->initTexture(SM.GetShader(ShaderManager::ShaderTag::BitmapShader));
 	manual->initTexture(SM.GetShader(ShaderManager::ShaderTag::ManualShader));
 }
 
@@ -133,7 +136,11 @@ void SCENE_INGAME::ManualRender()
 
 	//glEnable(GL_DEPTH_TEST);
 
-
+	if (iManualIndex != -1) {
+		manual->putFactor(glm::mat4(1.0f));
+		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(manual->getFactor()));
+		manual->Render(iManualIndex);
+	}
 
 	//glDisable(GL_DEPTH_TEST);
 }
@@ -170,17 +177,11 @@ void SCENE_INGAME::BitmapRender()
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(field->getFactor()));
 	field->Render();
 
-	if (iPhaseIndex == ReadyPhase) {
-		if (iManualIndex != -1) {
-			manual->putFactor(glm::mat4(1.0f));
-			glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(manual->getFactor()));
-			manual->Render(iManualIndex);
-		}
-	}
-
 	player->putFactor(glm::mat4(1.0f));
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(player->getFactor()));
 	player->Render();
+
+	enemy->Render(modelLocation);
 
 	glDisable(GL_DEPTH_TEST);
 }
@@ -223,6 +224,7 @@ void SCENE_INGAME::Update(float fTimeElapsed)
 {
 	field->Update(fTimeElapsed);
 	player->Update(fTimeElapsed);
+	enemy->Update(fTimeElapsed);
 	manual->Update(fTimeElapsed);
 
 	m_pMusicSound->Update();
@@ -253,10 +255,11 @@ void SCENE_INGAME::Update(float fTimeElapsed)
 		fPhaseTimer += fTimeElapsed;
 		dNextNoteReadTimer += fTimeElapsed;
 
-		if (dNextNoteReadTimer >= 1.0 / (m_pMusicSound->Get_BPM(m_pFramework->GetSelectMusic()) / 60.0 * 4.0)) {
-			dNextNoteReadTimer -= 1.0 / (m_pMusicSound->Get_BPM(m_pFramework->GetSelectMusic()) / 60.0 * 4.0);
-			printf("%c", cEnemyObjectData[iNoteReadPoint]);
-
+		if (dNextNoteReadTimer >= 1.0 / (m_pMusicSound->Get_BPM(m_pFramework->GetSelectMusic()) / SECOND_PER_MINITE * 4.0)) {
+			dNextNoteReadTimer -= 1.0 / (m_pMusicSound->Get_BPM(m_pFramework->GetSelectMusic()) / SECOND_PER_MINITE * 4.0);
+			if (cEnemyObjectData[iNoteReadPoint] >= 49 && cEnemyObjectData[iNoteReadPoint] <= 57) {
+				enemy->EnemyCreate(cEnemyObjectData[iNoteReadPoint] - 48);
+			}
 			iNoteReadPoint++;
 		}
 	}
