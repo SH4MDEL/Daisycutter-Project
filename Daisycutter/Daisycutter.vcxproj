@@ -30,7 +30,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -150,6 +150,7 @@
     <ClCompile Include="make_shaderProgram.cpp" />
     <ClCompile Include="make_vertexShaders.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="OBJECT_ENEMY.cpp" />
     <ClCompile Include="OBJECT_FIELD.cpp" />
     <ClCompile Include="OBJECT_MANUAL.cpp" />
     <ClCompile Include="OBJECT_PLAYER.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="make_shaderProgram.h" />
     <ClInclude Include="make_vertexShaders.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="OBJECT_ENEMY.h" />
     <ClInclude Include="OBJECT_FIELD.h" />
     <ClInclude Include="OBJECT_MANUAL.h" />
     <ClInclude Include="OBJECT_PLAYER.h" />
