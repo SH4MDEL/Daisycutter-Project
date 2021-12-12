@@ -21,7 +21,7 @@ private:
 	EnemyData* pData;
 
 	GLdouble m_dBPM;
-	GLint iStartIndex, iEndIndex, iNowIndex;
+	GLint iNowIndex;
 public:
 	enum EnemyStatusTag {
 		NullState
@@ -45,6 +45,9 @@ public:
 	void Render(unsigned int modelLocation);
 
 	void EnemyCreate(GLint Location);
+	void EnemyAttacked();
+	void EnemyRemove(GLint index);
+	GLfloat getOz(GLint index);
 
 	void putFactor(glm::mat4 inputFactor) override;
 	glm::mat4 getFactor() override;

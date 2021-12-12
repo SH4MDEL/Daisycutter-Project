@@ -94,6 +94,11 @@ void OBJECT_PLAYER::Update(float fTimeElapsed)
 
 }
 
+void OBJECT_PLAYER::PlayerAttacked()
+{
+	printf("Player Attacked\n");
+}
+
 void OBJECT_PLAYER::putFactor(glm::mat4 inputFactor)
 {
 	myFactor = inputFactor;

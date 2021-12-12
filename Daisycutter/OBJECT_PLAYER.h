@@ -33,6 +33,7 @@ public:
 	void putFactor(glm::mat4 inputFactor) override;
 	glm::mat4 getFactor() override;
 
+	void PlayerAttacked();
 
 	GLfloat getOx();
 	GLfloat getOy();

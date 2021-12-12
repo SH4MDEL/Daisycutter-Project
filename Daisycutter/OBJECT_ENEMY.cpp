@@ -31,71 +31,62 @@ void OBJECT_ENEMY::OnCreate()
 		pData[i].iObjectStatus = NullState;
 		pData[i].Factor = glm::mat4(1.0f);
 	}
-	iStartIndex = 0;
-	iEndIndex = 0;
 	iNowIndex = 0;
 }
 
 void OBJECT_ENEMY::EnemyCreate(GLint Location)
 {
-	GLfloat weight = 2.5f;
-	pData[iNowIndex].iObjectStatus = ActiveState;
-	if (Location == 1) {
-		pData[iNowIndex].fObject_x = -weight;
-		pData[iNowIndex].fObject_y = weight;
-		pData[iNowIndex].fObject_z = -100.0f;
-	}
-	else if (Location == 2) {
-		pData[iNowIndex].fObject_x = weight;
-		pData[iNowIndex].fObject_y = weight;
-		pData[iNowIndex].fObject_z = -100.0f;
-	}
-	else if (Location == 3) {
-		pData[iNowIndex].fObject_x = -weight;
-		pData[iNowIndex].fObject_y = -weight;
-		pData[iNowIndex].fObject_z = -100.0f;
-	}
-	else if (Location == 4) {
-		pData[iNowIndex].fObject_x = weight;
-		pData[iNowIndex].fObject_y = -weight;
-		pData[iNowIndex].fObject_z = -100.0f;
-	}
-	else if (Location == 5) {
-		pData[iNowIndex].fObject_x = 0.0f;
-		pData[iNowIndex].fObject_y = 0.0f;
-		pData[iNowIndex].fObject_z = -100.0f;
-	}
-	else if (Location == 6) {
-		pData[iNowIndex].fObject_x = 0.0f;
-		pData[iNowIndex].fObject_y = 2.0f * weight;
-		pData[iNowIndex].fObject_z = -100.0f;
-	}
-	else if (Location == 7) {
-		pData[iNowIndex].fObject_x = -2.0f * weight;
-		pData[iNowIndex].fObject_y = 0.0f;
-		pData[iNowIndex].fObject_z = -100.0f;
-	}
-	else if (Location == 8) {
-		pData[iNowIndex].fObject_x = 2.0f * weight;
-		pData[iNowIndex].fObject_y = 0.0f;
-		pData[iNowIndex].fObject_z = -100.0f;
-	}
-	else if (Location == 9) {
-		pData[iNowIndex].fObject_x = 0.0f;
-		pData[iNowIndex].fObject_y = -2.0f * weight;
-		pData[iNowIndex].fObject_z = -100.0f;
-	}
-	if (iNowIndex == MAX_ENEMY_CREATE - 1) {
-		iNowIndex = 0;
-	}
-	else {
-		iNowIndex++;
-	}
-	if (iEndIndex == MAX_ENEMY_CREATE - 1) {
-		iEndIndex = 0;
-	}
-	else {
-		iEndIndex++;
+	GLfloat weight = 1.0f;
+	for (int i = 0; i < MAX_ENEMY_CREATE; i++) {
+		if (pData[i].iObjectStatus == NullState) {
+			pData[i].iObjectStatus = ActiveState;
+			if (Location == 1) {
+				pData[i].fObject_x = -1.0f;
+				pData[i].fObject_y = 1.0f;
+				pData[i].fObject_z = -150.0f;
+			}
+			else if (Location == 2) {
+				pData[i].fObject_x = 1.0f;
+				pData[i].fObject_y = 1.0f;
+				pData[i].fObject_z = -150.0f;
+			}
+			else if (Location == 3) {
+				pData[i].fObject_x = -1.0f;
+				pData[i].fObject_y = -1.0f;
+				pData[i].fObject_z = -150.0f;
+			}
+			else if (Location == 4) {
+				pData[i].fObject_x = 1.0f;
+				pData[i].fObject_y = -1.0f;
+				pData[i].fObject_z = -150.0f;
+			}
+			else if (Location == 5) {
+				pData[i].fObject_x = 0.0f;
+				pData[i].fObject_y = 0.0f;
+				pData[i].fObject_z = -150.0f;
+			}
+			else if (Location == 6) {
+				pData[i].fObject_x = 0.0f;
+				pData[i].fObject_y = 2.0f;
+				pData[i].fObject_z = -150.0f;
+			}
+			else if (Location == 7) {
+				pData[i].fObject_x = -2.0f;
+				pData[i].fObject_y = 0.0f;
+				pData[i].fObject_z = -150.0f;
+			}
+			else if (Location == 8) {
+				pData[i].fObject_x = 2.0f;
+				pData[i].fObject_y = 0.0f;
+				pData[i].fObject_z = -150.0f;
+			}
+			else if (Location == 9) {
+				pData[i].fObject_x = 0.0f;
+				pData[i].fObject_y = -2.0f;
+				pData[i].fObject_z = -150.0f;
+			}
+			break;
+		}
 	}
 }
 
@@ -173,6 +164,7 @@ void OBJECT_ENEMY::Render(unsigned int modelLocation)
 		if (pData[i].iObjectStatus == ActiveState || pData[i].iObjectStatus == InvincibleState) {
 			pData[i].Factor = glm::mat4(1.0f);
 			pData[i].Factor = glm::translate(pData[i].Factor, glm::vec3(pData[i].fObject_x, pData[i].fObject_y, pData[i].fObject_z));
+			pData[i].Factor = glm::scale(pData[i].Factor, glm::vec3(0.2, 0.2, 1.0));
 			glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(pData[i].Factor));
 			glUseProgram(m_ShaderProgram);
 			glUniform3f(objColorLocation, 1.0f, 1.0f, 1.0f);
@@ -188,13 +180,26 @@ void OBJECT_ENEMY::Update(float fTimeElapsed)
 {
 	for (int i = 0; i < MAX_ENEMY_CREATE; i++) {
 		if (pData[i].iObjectStatus == ActiveState) {
-			if (pData[i].fObject_z >= -10.0f) {
+			if (pData[i].fObject_z >= 0.0f) {
 				pData[i].iObjectStatus = InvincibleState;
-				continue;
 			}
-			pData[i].fObject_z += (GLfloat)m_dBPM / SECOND_PER_MINITE * 5.0f * 4.0f * fTimeElapsed;
+			pData[i].fObject_z += (m_dBPM / SECOND_PER_MINITE) * 150.0f / 4.0f * fTimeElapsed;
+		}
+		else if (pData[i].iObjectStatus == InvincibleState) {
+			pData[i].fObject_z += (GLfloat)((m_dBPM / SECOND_PER_MINITE) * 150.0f / 4.0f * fTimeElapsed);
 		}
 	}
+}
+
+void OBJECT_ENEMY::EnemyAttacked()
+{
+
+}
+
+void OBJECT_ENEMY::EnemyRemove(GLint index)
+{
+	pData[index].fObject_z = -150.0f;
+	pData[index].iObjectStatus = NullState;
 }
 
 void OBJECT_ENEMY::putFactor(glm::mat4 inputFactor)
@@ -205,4 +210,9 @@ void OBJECT_ENEMY::putFactor(glm::mat4 inputFactor)
 glm::mat4 OBJECT_ENEMY::getFactor()
 {
 	return glm::mat4(1.0f);
+}
+
+GLfloat OBJECT_ENEMY::getOz(GLint index)
+{
+	return pData[index].fObject_z;
 }

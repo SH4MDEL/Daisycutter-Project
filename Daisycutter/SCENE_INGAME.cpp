@@ -32,9 +32,9 @@ void SCENE_INGAME::OnCreate()
 	}
 	EnemyObjectDataFile.close();
 
-	fCameraPosArray[0] = 8.0f * (GLfloat)sin(2 * M_PI / 360 * 0) * (GLfloat)cos(2 * M_PI / 360 * 90);
-	fCameraPosArray[1] = 8.0f * (GLfloat)sin(2 * M_PI / 360 * 0) * (GLfloat)sin(2 * M_PI / 360 * 90);
-	fCameraPosArray[2] = 8.0f * (GLfloat)cos(2 * M_PI / 360 * 0);
+	fCameraPosArray[0] = 8.0f * (GLfloat)sin(2 * M_PI / 360 * 20) * (GLfloat)cos(2 * M_PI / 360 * 90);
+	fCameraPosArray[1] = 8.0f * (GLfloat)sin(2 * M_PI / 360 * 20) * (GLfloat)sin(2 * M_PI / 360 * 90);
+	fCameraPosArray[2] = 8.0f * (GLfloat)cos(2 * M_PI / 360 * 20);
 
 	m_pMusicSound = new SOUND_MUSICSOUND;
 	m_pMusicSound->Init();
@@ -262,12 +262,24 @@ void SCENE_INGAME::Update(float fTimeElapsed)
 			}
 			iNoteReadPoint++;
 		}
+
+		for (int i = 0; i < MAX_ENEMY_CREATE; i++) {
+			if (enemy->getOz(i) >= 10.0f) {
+				m_pEffectSound->Play(SOUND_EFFECTSOUND::SoundTag::HitSound);
+				enemy->EnemyRemove(i);
+				player->PlayerAttacked();
+			}
+		}
 	}
 }
 
 void SCENE_INGAME::KeyboardMessage(unsigned char inputKey)
 {
 	switch (inputKey) {
+	case 32:	// 'SPACE'
+		m_pEffectSound->Play(SOUND_EFFECTSOUND::SoundTag::AttackSound);
+		enemy->EnemyAttacked();
+		break;
 	case 27:	// 'ESCAPE'
 		m_pEffectSound->Play(SOUND_EFFECTSOUND::SoundTag::SelectSound);
 		m_pFramework->ChangeScene(CScene::SceneTag::Title, new SCENE_TITLE(CScene::SceneTag::Title, m_pFramework));
