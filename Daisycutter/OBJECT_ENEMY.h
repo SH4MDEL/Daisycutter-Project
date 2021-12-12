@@ -45,7 +45,7 @@ public:
 	void Render(unsigned int modelLocation);
 
 	void EnemyCreate(GLint Location);
-	void EnemyAttacked();
+	bool EnemyAttacked();
 	void EnemyRemove(GLint index);
 	GLfloat getOz(GLint index);
 

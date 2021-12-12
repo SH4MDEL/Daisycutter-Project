@@ -277,8 +277,12 @@ void SCENE_INGAME::KeyboardMessage(unsigned char inputKey)
 {
 	switch (inputKey) {
 	case 32:	// 'SPACE'
-		m_pEffectSound->Play(SOUND_EFFECTSOUND::SoundTag::AttackSound);
-		enemy->EnemyAttacked();
+		if (enemy->EnemyAttacked()) {
+			m_pEffectSound->Play(SOUND_EFFECTSOUND::SoundTag::AttackSound);
+		}
+		else {
+			m_pEffectSound->Play(SOUND_EFFECTSOUND::SoundTag::SelectSound);
+		}
 		break;
 	case 27:	// 'ESCAPE'
 		m_pEffectSound->Play(SOUND_EFFECTSOUND::SoundTag::SelectSound);

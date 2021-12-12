@@ -180,7 +180,7 @@ void OBJECT_ENEMY::Update(float fTimeElapsed)
 {
 	for (int i = 0; i < MAX_ENEMY_CREATE; i++) {
 		if (pData[i].iObjectStatus == ActiveState) {
-			if (pData[i].fObject_z >= 0.0f) {
+			if (pData[i].fObject_z >= 10.0f) {
 				pData[i].iObjectStatus = InvincibleState;
 			}
 			pData[i].fObject_z += (m_dBPM / SECOND_PER_MINITE) * 150.0f / 4.0f * fTimeElapsed;
@@ -191,9 +191,24 @@ void OBJECT_ENEMY::Update(float fTimeElapsed)
 	}
 }
 
-void OBJECT_ENEMY::EnemyAttacked()
+bool OBJECT_ENEMY::EnemyAttacked()
 {
-
+	GLfloat MaxZ = -10.0f;
+	GLint index = -1;
+	for (int i = 0; i < MAX_ENEMY_CREATE; i++) {
+		if (pData[i].iObjectStatus == ActiveState && pData[i].fObject_z > MaxZ) {
+			MaxZ = pData[i].fObject_z;
+			index = i;
+		}
+	}
+	if (index == -1) {
+		return false;
+	}
+	else {
+		printf("%f\n", pData[index].fObject_z);
+		EnemyRemove(index);
+		return true;
+	}
 }
 
 void OBJECT_ENEMY::EnemyRemove(GLint index)
