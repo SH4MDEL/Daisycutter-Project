@@ -153,6 +153,12 @@ void SCENE_TITLE::ManualRender()
 		manual->putFactor(glm::mat4(1.0f));
 		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(manual->getFactor()));
 		manual->Render(OBJECT_MANUAL::ManualTag::MusicSelect);
+		if (iPhaseIndex == Music1Phase) {
+			
+		}
+		else if (iPhaseIndex == Music2Phase) {
+			
+		}
 	}
 	//glDisable(GL_DEPTH_TEST);
 }

@@ -108,6 +108,26 @@ void OBJECT_MANUAL::initTexture(GLint ShaderProgram)
 	glTexImage2D(GL_TEXTURE_2D, 0, 4, widthImage, heightImage, 0, GL_RGBA, GL_UNSIGNED_BYTE, image[MusicSelect]); //---텍스처 이미지 정의
 	stbi_image_free(image[MusicSelect]);
 
+	//glBindTexture(GL_TEXTURE_2D, texture[MusicJacket1]); //--- 텍스처 바인딩
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT); //--- 현재 바인딩된 텍스처의 파라미터 설정하기
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	//sprintf(Text, "GRAPHIC\\UI\\MUSICJACKET1.png");
+	//image[MusicJacket1] = stbi_load(Text, &widthImage, &heightImage, &numberOfChannel, 0); //--- 텍스처로 사용할 비트맵 이미지 로드하기
+	//glTexImage2D(GL_TEXTURE_2D, 0, 4, widthImage, heightImage, 0, GL_RGBA, GL_UNSIGNED_BYTE, image[MusicJacket1]); //---텍스처 이미지 정의
+	//stbi_image_free(image[MusicJacket1]);
+
+	//glBindTexture(GL_TEXTURE_2D, texture[MusicJacket2]); //--- 텍스처 바인딩
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT); //--- 현재 바인딩된 텍스처의 파라미터 설정하기
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	//sprintf(Text, "GRAPHIC\\UI\\MUSICJACKET2.png");
+	//image[MusicJacket2] = stbi_load(Text, &widthImage, &heightImage, &numberOfChannel, 0); //--- 텍스처로 사용할 비트맵 이미지 로드하기
+	//glTexImage2D(GL_TEXTURE_2D, 0, 4, widthImage, heightImage, 0, GL_RGBA, GL_UNSIGNED_BYTE, image[MusicJacket2]); //---텍스처 이미지 정의
+	//stbi_image_free(image[MusicJacket2]);
+
 	glBindTexture(GL_TEXTURE_2D, texture[OPERATION_START]); //--- 텍스처 바인딩
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT); //--- 현재 바인딩된 텍스처의 파라미터 설정하기
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
