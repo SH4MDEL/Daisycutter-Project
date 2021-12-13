@@ -28,8 +28,10 @@ void OBJECT_ENEMY::OnCreate()
 		pData[i].fObject_x = 0.0f;
 		pData[i].fObject_y = 0.0f;
 		pData[i].fObject_z = 0.0f;
+		pData[i].DieStateTimer = 0.0f;
 		pData[i].iObjectStatus = NullState;
 		pData[i].Factor = glm::mat4(1.0f);
+		pData[i].particle = NULL;
 	}
 	iNowIndex = 0;
 }
@@ -176,6 +178,22 @@ void OBJECT_ENEMY::Render(unsigned int modelLocation)
 	}
 }
 
+void OBJECT_ENEMY::ParticleRender(unsigned int modelLocation)
+{
+	for (int i = 0; i < MAX_ENEMY_CREATE; i++) {
+		if (pData[i].iObjectStatus == DieState) {
+			for (int j = 0; j < MAX_PARTICLE_CREATE; j++) {
+				pData[i].particle[j].Render(modelLocation);
+			}
+		}
+	}
+}
+
+void OBJECT_ENEMY::putParticleShader(GLint ShaderProgram)
+{
+	m_ParticleShaderProgram = ShaderProgram;
+}
+
 void OBJECT_ENEMY::Update(float fTimeElapsed)
 {
 	for (int i = 0; i < MAX_ENEMY_CREATE; i++) {
@@ -183,10 +201,20 @@ void OBJECT_ENEMY::Update(float fTimeElapsed)
 			if (pData[i].fObject_z >= 10.0f) {
 				pData[i].iObjectStatus = InvincibleState;
 			}
-			pData[i].fObject_z += (m_dBPM / SECOND_PER_MINITE) * 150.0f / 4.0f * fTimeElapsed;
+			pData[i].fObject_z += (GLfloat)((m_dBPM / SECOND_PER_MINITE) * 150.0f / 4.0f * fTimeElapsed);
 		}
 		else if (pData[i].iObjectStatus == InvincibleState) {
 			pData[i].fObject_z += (GLfloat)((m_dBPM / SECOND_PER_MINITE) * 150.0f / 4.0f * fTimeElapsed);
+		}
+		else if (pData[i].iObjectStatus == DieState) {
+			pData[i].DieStateTimer += fTimeElapsed;
+			for (int j = 0; j < MAX_PARTICLE_CREATE; j++) {
+				pData[i].particle[j].Update(fTimeElapsed);
+			}
+			if (pData[i].DieStateTimer >= 3.0f) {
+				pData[i].DieStateTimer = 0.0f;
+				EnemyRemove(i);
+			}
 		}
 	}
 }
@@ -205,14 +233,28 @@ bool OBJECT_ENEMY::EnemyAttacked()
 		return false;
 	}
 	else {
-		printf("%f\n", pData[index].fObject_z);
-		EnemyRemove(index);
+		EnemyDie(index);
 		return true;
 	}
 }
 
+void OBJECT_ENEMY::EnemyDie(GLint index)
+{
+	pData[index].particle = new OBJECT_PARTICLE[MAX_PARTICLE_CREATE];
+	for (int i = 0; i < MAX_PARTICLE_CREATE; i++) {
+		pData[index].particle[i].PutData(pData[index].fObject_x, pData[index].fObject_y, pData[index].fObject_z);
+		pData[index].particle[i].initBuffer(m_ParticleShaderProgram);
+		pData[index].particle[i].initTexture(m_ParticleShaderProgram);
+	}
+	pData[index].fObject_z = -150.0f;
+	pData[index].iObjectStatus = DieState;
+}
+
 void OBJECT_ENEMY::EnemyRemove(GLint index)
 {
+	if (pData[index].particle != NULL) {
+		delete[] pData[index].particle;
+	}
 	pData[index].fObject_z = -150.0f;
 	pData[index].iObjectStatus = NullState;
 }

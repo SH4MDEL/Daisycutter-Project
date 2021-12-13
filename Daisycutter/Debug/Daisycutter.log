@@ -1,3 +1,2 @@
 ﻿  OBJECT_ENEMY.cpp
-C:\Users\Seungjun Lee\Desktop\Coding\Daisycutter-Project\Daisycutter\OBJECT_ENEMY.cpp(186,85): warning C4244: '+=': 'GLdouble'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Daisycutter.vcxproj -> C:\Users\Seungjun Lee\Desktop\Coding\Daisycutter-Project\Debug\Daisycutter.exe

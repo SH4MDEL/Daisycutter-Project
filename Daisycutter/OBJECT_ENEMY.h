@@ -2,6 +2,8 @@
 #include "Object.h"
 #include "objRead.h"
 
+#include "OBJECT_PARTICLE.h"
+
 class OBJECT_ENEMY : public CObject
 {
 private:
@@ -16,12 +18,16 @@ private:
 	public:
 		GLint iObjectStatus;
 		GLfloat fObject_x, fObject_y, fObject_z;
+		GLfloat DieStateTimer;
 		glm::mat4 Factor;
+		OBJECT_PARTICLE* particle;
 	};
 	EnemyData* pData;
 
 	GLdouble m_dBPM;
 	GLint iNowIndex;
+
+	GLint m_ParticleShaderProgram;
 public:
 	enum EnemyStatusTag {
 		NullState
@@ -39,13 +45,16 @@ public:
 
 	void OnCreate() override;
 	void initBuffer(GLint ShaderProgram) override;
-	void initTexture(GLint ShaderProgram) override;			// 필요치 않을지라도 추가해 줘야 함
+	void initTexture(GLint ShaderProgram) override;	
 	void Update(float fTimeElapsed) override;
 	void Render() override;
 	void Render(unsigned int modelLocation);
+	void ParticleRender(unsigned int modelLocation);
+	void putParticleShader(GLint ShaderProgram);
 
 	void EnemyCreate(GLint Location);
 	bool EnemyAttacked();
+	void EnemyDie(GLint index);
 	void EnemyRemove(GLint index);
 	GLfloat getOz(GLint index);
 

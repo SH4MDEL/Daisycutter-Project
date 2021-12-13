@@ -86,6 +86,7 @@ void SCENE_INGAME::InitBuffer()
 	field->initBuffer(SM.GetShader(ShaderManager::ShaderTag::BitmapShader));
 	player->initBuffer(SM.GetShader(ShaderManager::ShaderTag::BitmapShader));
 	enemy->initBuffer(SM.GetShader(ShaderManager::ShaderTag::BitmapShader));
+	enemy->putParticleShader(SM.GetShader(ShaderManager::ShaderTag::NonBitmapShader));
 	manual->initBuffer(SM.GetShader(ShaderManager::ShaderTag::ManualShader));
 }
 
@@ -215,7 +216,7 @@ void SCENE_INGAME::NonBitmapRender()
 
 	glEnable(GL_DEPTH_TEST);
 
-
+	enemy->ParticleRender(modelLocation);
 
 	glDisable(GL_DEPTH_TEST);
 }
