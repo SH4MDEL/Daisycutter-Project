@@ -254,6 +254,7 @@ void OBJECT_ENEMY::EnemyRemove(GLint index)
 {
 	if (pData[index].particle != NULL) {
 		delete[] pData[index].particle;
+		pData[index].particle = NULL;
 	}
 	pData[index].fObject_z = -150.0f;
 	pData[index].iObjectStatus = NullState;

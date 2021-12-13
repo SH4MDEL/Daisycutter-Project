@@ -6,20 +6,31 @@ class OBJECT_MANUAL : public CObject
 public:
 	enum ManualTag {
 		MainTitle
-		, MusicSelect
 		, MusicJacket1
 		, MusicJacket2
 		, OPERATION_START
 		, NUMBER1
 		, NUMBER2
 		, NUMBER3
-		, HP_BAR
+		, HP_BAR0
+		, HP_BAR1
+		, HP_BAR2
+		, HP_BAR3
+		, HP_BAR4
+		, HP_BAR5
+		, HP_BAR6
+		, HP_BAR7
+		, HP_BAR8
+		, HP_BAR9
+		, HP_BAR10
+		, GAME_CLEAR
+		, GAME_OVER
 		, Count			// Sound의 개수를 나타내기 위한 임시 태그이다. 지우지 말자.
 	};
 private:
 	GLuint vao, vbo[3];			// 한 면의 크기와 색상 정보가 vao에 바인딩됩니다.
-	unsigned int texture[Count];
-	unsigned char* image[Count];
+	static unsigned int texture[Count];
+	static unsigned char* image[Count];
 	glm::mat4 myFactor;
 
 	int objColorLocation;

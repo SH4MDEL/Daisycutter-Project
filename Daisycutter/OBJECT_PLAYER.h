@@ -17,6 +17,7 @@ private:
 	GLfloat object_x, object_y, object_z;
 	GLfloat ObjectSpeed;						// 플레이어는 가만히 있고 나머지 배경이 움직이기 때문에 
 												// 플레이어의 속도를 받아 나머지 객체의 이동 속도를 결정한다.
+	GLint m_iHP;
 public:
 	static objRead objReader;
 	static GLint ObjectMedel;
@@ -38,5 +39,6 @@ public:
 	GLfloat getOx();
 	GLfloat getOy();
 	GLfloat getOz();
+	GLint getHP();
 	GLfloat getObjectSpeed();
 };

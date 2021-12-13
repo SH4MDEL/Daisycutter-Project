@@ -10,9 +10,9 @@
 class SCENE_INGAME : public CScene
 {
 private:
-	GLfloat fCameraPosArray[3];
+	GLfloat fCameraPosArray[3][3];
 	GLfloat fPhaseTimer;
-	GLint iPhaseIndex, iManualIndex;
+	GLint iCameraPosIndex, iPhaseIndex, iManualIndex;
 
 	GLint iEnemyObjectNum;
 	GLchar cEnemyObjectData[5000];
@@ -23,7 +23,8 @@ public:
 	enum PhaseTag {
 		ReadyPhase
 		, GamePhase
-		, EndPhase
+		, ClearPhase
+		, DiePhase
 		, Count
 	};
 

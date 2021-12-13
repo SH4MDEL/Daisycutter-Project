@@ -149,16 +149,15 @@ void SCENE_TITLE::ManualRender()
 	else if (iPhaseIndex == GameSetPhase) {
 
 	}
-	else {
+	else if (iPhaseIndex == Music1Phase) {
 		manual->putFactor(glm::mat4(1.0f));
 		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(manual->getFactor()));
-		manual->Render(OBJECT_MANUAL::ManualTag::MusicSelect);
-		if (iPhaseIndex == Music1Phase) {
-			
-		}
-		else if (iPhaseIndex == Music2Phase) {
-			
-		}
+		manual->Render(OBJECT_MANUAL::ManualTag::MusicJacket1);
+	}
+	else if (iPhaseIndex == Music2Phase) {
+		manual->putFactor(glm::mat4(1.0f));
+		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(manual->getFactor()));
+		manual->Render(OBJECT_MANUAL::ManualTag::MusicJacket2);
 	}
 	//glDisable(GL_DEPTH_TEST);
 }

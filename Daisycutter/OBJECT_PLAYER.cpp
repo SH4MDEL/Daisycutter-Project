@@ -19,6 +19,7 @@ void OBJECT_PLAYER::OnCreate()
 {
 	object_x = 0.0f, object_y = 0.0f, object_z = 0.0f;
 	ObjectSpeed = 10.0f;
+	m_iHP = 10;
 }
 
 void OBJECT_PLAYER::initBuffer(GLint ShaderProgram)
@@ -96,7 +97,7 @@ void OBJECT_PLAYER::Update(float fTimeElapsed)
 
 void OBJECT_PLAYER::PlayerAttacked()
 {
-	printf("Player Attacked\n");
+	m_iHP--;
 }
 
 void OBJECT_PLAYER::putFactor(glm::mat4 inputFactor)
@@ -124,6 +125,11 @@ GLfloat OBJECT_PLAYER::getOy()
 GLfloat OBJECT_PLAYER::getOz()
 {
 	return object_z;
+}
+
+GLint OBJECT_PLAYER::getHP()
+{
+	return m_iHP;
 }
 
 GLfloat OBJECT_PLAYER::getObjectSpeed()

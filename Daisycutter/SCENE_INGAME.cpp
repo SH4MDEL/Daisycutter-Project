@@ -32,9 +32,13 @@ void SCENE_INGAME::OnCreate()
 	}
 	EnemyObjectDataFile.close();
 
-	fCameraPosArray[0] = 8.0f * (GLfloat)sin(2 * M_PI / 360 * 20) * (GLfloat)cos(2 * M_PI / 360 * 90);
-	fCameraPosArray[1] = 8.0f * (GLfloat)sin(2 * M_PI / 360 * 20) * (GLfloat)sin(2 * M_PI / 360 * 90);
-	fCameraPosArray[2] = 8.0f * (GLfloat)cos(2 * M_PI / 360 * 20);
+	fCameraPosArray[0][0] = 8.0f * (GLfloat)sin(2 * M_PI / 360 * 20) * (GLfloat)cos(2 * M_PI / 360 * 90);
+	fCameraPosArray[0][1] = 8.0f * (GLfloat)sin(2 * M_PI / 360 * 20) * (GLfloat)sin(2 * M_PI / 360 * 90);
+	fCameraPosArray[0][2] = 8.0f * (GLfloat)cos(2 * M_PI / 360 * 20);
+
+	fCameraPosArray[1][0] = 15.0f * (GLfloat)sin(2 * M_PI / 360 * 150) * (GLfloat)cos(2 * M_PI / 360 * 30);
+	fCameraPosArray[1][1] = 15.0f * (GLfloat)sin(2 * M_PI / 360 * 150) * (GLfloat)sin(2 * M_PI / 360 * 30);
+	fCameraPosArray[1][2] = 15.0f * (GLfloat)cos(2 * M_PI / 360 * 150);
 
 	m_pMusicSound = new SOUND_MUSICSOUND;
 	m_pMusicSound->Init();
@@ -44,7 +48,7 @@ void SCENE_INGAME::OnCreate()
 	m_pEffectSound->Init();
 	m_pEffectSound->Loading();
 
-	iPhaseIndex = ReadyPhase, iManualIndex = -1;
+	iCameraPosIndex = 0, iPhaseIndex = ReadyPhase, iManualIndex = -1;
 	fPhaseTimer = 0.0f;
 	dNextNoteReadTimer = 0.0;
 	iNoteReadPoint = 0;
@@ -112,7 +116,6 @@ void SCENE_INGAME::ManualRender()
 {
 	glUseProgram(SM.GetShader(ShaderManager::ShaderTag::ManualShader));
 
-
 	glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 50.0f);
 	glm::vec3 cameraDirection = glm::vec3(0.0f, 0.0f, 0.0f);
 	glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
@@ -122,7 +125,7 @@ void SCENE_INGAME::ManualRender()
 	glUniformMatrix4fv(viewLocation, 1, GL_FALSE, &view[0][0]);
 
 	unsigned int viewPos = glGetUniformLocation(SM.GetShader(ShaderManager::ShaderTag::ManualShader), "viewPos");
-	glUniform3f(viewPos, fCameraPosArray[0], fCameraPosArray[1], fCameraPosArray[2]);
+	glUniform3f(viewPos, fCameraPosArray[iCameraPosIndex][0], fCameraPosArray[iCameraPosIndex][1], fCameraPosArray[iCameraPosIndex][2]);
 
 
 	glm::mat4 projection = glm::mat4(1.0f);
@@ -150,7 +153,7 @@ void SCENE_INGAME::BitmapRender()
 {
 	glUseProgram(SM.GetShader(ShaderManager::ShaderTag::BitmapShader));
 
-	glm::vec3 cameraPos = glm::vec3(fCameraPosArray[0], fCameraPosArray[1], fCameraPosArray[2]);
+	glm::vec3 cameraPos = glm::vec3(fCameraPosArray[iCameraPosIndex][0], fCameraPosArray[iCameraPosIndex][1], fCameraPosArray[iCameraPosIndex][2]);
 	glm::vec3 cameraDirection = glm::vec3(player->getOx(), player->getOy(), player->getOz());
 	glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 	glm::mat4 view = glm::mat4(1.0f);
@@ -159,7 +162,7 @@ void SCENE_INGAME::BitmapRender()
 	glUniformMatrix4fv(viewLocation, 1, GL_FALSE, &view[0][0]);
 
 	unsigned int viewPos = glGetUniformLocation(SM.GetShader(ShaderManager::ShaderTag::BitmapShader), "viewPos");
-	glUniform3f(viewPos, fCameraPosArray[0], fCameraPosArray[1], fCameraPosArray[2]);
+	glUniform3f(viewPos, fCameraPosArray[iCameraPosIndex][0], fCameraPosArray[iCameraPosIndex][1], fCameraPosArray[iCameraPosIndex][2]);
 
 
 	glm::mat4 projection = glm::mat4(1.0f);
@@ -192,7 +195,7 @@ void SCENE_INGAME::NonBitmapRender()
 	glUseProgram(SM.GetShader(ShaderManager::ShaderTag::NonBitmapShader));
 
 
-	glm::vec3 cameraPos = glm::vec3(fCameraPosArray[0], fCameraPosArray[1], fCameraPosArray[2]);
+	glm::vec3 cameraPos = glm::vec3(fCameraPosArray[iCameraPosIndex][0], fCameraPosArray[iCameraPosIndex][1], fCameraPosArray[iCameraPosIndex][2]);
 	glm::vec3 cameraDirection = glm::vec3(player->getOx(), player->getOy(), player->getOz());
 	glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 	glm::mat4 view = glm::mat4(1.0f);
@@ -201,7 +204,7 @@ void SCENE_INGAME::NonBitmapRender()
 	glUniformMatrix4fv(viewLocation, 1, GL_FALSE, &view[0][0]);
 
 	unsigned int viewPos = glGetUniformLocation(SM.GetShader(ShaderManager::ShaderTag::NonBitmapShader), "viewPos");
-	glUniform3f(viewPos, fCameraPosArray[0], fCameraPosArray[1], fCameraPosArray[2]);
+	glUniform3f(viewPos, fCameraPosArray[iCameraPosIndex][0], fCameraPosArray[iCameraPosIndex][1], fCameraPosArray[iCameraPosIndex][2]);
 
 
 	glm::mat4 projection = glm::mat4(1.0f);
@@ -246,13 +249,14 @@ void SCENE_INGAME::Update(float fTimeElapsed)
 			iManualIndex = OBJECT_MANUAL::ManualTag::OPERATION_START;
 		}
 		else if (fPhaseTimer >= 6.0f) {
-			iManualIndex = OBJECT_MANUAL::ManualTag::HP_BAR;
+			iManualIndex = player->getHP() + OBJECT_MANUAL::ManualTag::HP_BAR0;
 			fPhaseTimer -= 6.0f;
 			iPhaseIndex = GamePhase;
 			m_pMusicSound->Play(m_pFramework->GetSelectMusic());
 		}
 	}
 	else if (iPhaseIndex == GamePhase) {
+		iManualIndex = player->getHP() + OBJECT_MANUAL::ManualTag::HP_BAR0;
 		fPhaseTimer += fTimeElapsed;
 		dNextNoteReadTimer += fTimeElapsed;
 
@@ -269,7 +273,27 @@ void SCENE_INGAME::Update(float fTimeElapsed)
 				m_pEffectSound->Play(SOUND_EFFECTSOUND::SoundTag::HitSound);
 				enemy->EnemyRemove(i);
 				player->PlayerAttacked();
+				if (player->getHP() == 0) {
+					iManualIndex = player->getHP() + OBJECT_MANUAL::ManualTag::HP_BAR0;
+					fPhaseTimer = 0.0f;
+					iPhaseIndex = DiePhase;
+					iCameraPosIndex = 2;
+					m_pMusicSound->Stop();
+				}
 			}
+		}
+	}
+	else if (iPhaseIndex == DiePhase) {
+		fPhaseTimer += fTimeElapsed;
+
+		if (fPhaseTimer >= 1.0f && fPhaseTimer < 4.0f) {
+			fCameraPosArray[2][0] = fCameraPosArray[0][0] + (fCameraPosArray[1][0] - fCameraPosArray[0][0]) / 2 * (fPhaseTimer - 1.0f);
+			fCameraPosArray[2][1] = fCameraPosArray[0][1] + (fCameraPosArray[1][1] - fCameraPosArray[0][1]) / 2 * (fPhaseTimer - 1.0f);
+			fCameraPosArray[2][2] = fCameraPosArray[0][2] + (fCameraPosArray[1][2] - fCameraPosArray[0][2]) / 2 * (fPhaseTimer - 1.0f);
+		}
+		else if (fPhaseTimer >= 4.0f) {
+			iCameraPosIndex = 1;
+			iManualIndex = OBJECT_MANUAL::ManualTag::GAME_OVER;
 		}
 	}
 }
@@ -278,11 +302,17 @@ void SCENE_INGAME::KeyboardMessage(unsigned char inputKey)
 {
 	switch (inputKey) {
 	case 32:	// 'SPACE'
-		if (enemy->EnemyAttacked()) {
+		if (iPhaseIndex == GamePhase && enemy->EnemyAttacked()) {
 			m_pEffectSound->Play(SOUND_EFFECTSOUND::SoundTag::AttackSound);
 		}
 		else {
 			m_pEffectSound->Play(SOUND_EFFECTSOUND::SoundTag::SelectSound);
+		}
+		if (iPhaseIndex == DiePhase && fPhaseTimer >= 4.0f) {
+			m_pFramework->ChangeScene(CScene::SceneTag::Title, new SCENE_TITLE(CScene::SceneTag::Title, m_pFramework));
+		}
+		else if (iPhaseIndex == ClearPhase && fPhaseTimer >= 4.0f) {
+			m_pFramework->ChangeScene(CScene::SceneTag::Title, new SCENE_TITLE(CScene::SceneTag::Title, m_pFramework));
 		}
 		break;
 	case 27:	// 'ESCAPE'
