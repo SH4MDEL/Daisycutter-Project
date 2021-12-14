@@ -3,6 +3,7 @@
 #include "Framework.h"
 
 #include "OBJECT_FIELD.h"
+#include "OBJECT_CLOUD.h"
 #include "OBJECT_PLAYER.h"
 #include "OBJECT_MANUAL.h"
 
@@ -53,6 +54,7 @@ public:
 	void SetGameSetCameraPos(float fTimeElapsed);
 private:
 	OBJECT_FIELD* field = NULL;
+	OBJECT_CLOUD* cloud = NULL;
 	OBJECT_PLAYER* player = NULL;
 	OBJECT_MANUAL* manual = NULL;
 

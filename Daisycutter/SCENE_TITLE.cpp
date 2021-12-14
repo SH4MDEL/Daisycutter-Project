@@ -63,6 +63,7 @@ void SCENE_TITLE::OnCreate()
 void SCENE_TITLE::OnDestroy()
 {
 	delete field;
+	delete[] cloud;
 	delete player;
 	delete manual;
 
@@ -77,6 +78,7 @@ void SCENE_TITLE::OnDestroy()
 void SCENE_TITLE::BuildObjects()
 {
 	field = new OBJECT_FIELD;
+	cloud = new OBJECT_CLOUD[MAX_CLOUD_CREATE];
 	player = new OBJECT_PLAYER;
 	manual = new OBJECT_MANUAL;
 }
@@ -91,6 +93,9 @@ void SCENE_TITLE::BindShader()
 void SCENE_TITLE::InitBuffer()
 {
 	field->initBuffer(SM.GetShader(ShaderManager::ShaderTag::BitmapShader));
+	for (int i = 0; i < MAX_CLOUD_CREATE; i++) {
+		cloud[i].initBuffer(SM.GetShader(ShaderManager::ShaderTag::BitmapShader));
+	}
 	player->initBuffer(SM.GetShader(ShaderManager::ShaderTag::BitmapShader));
 	manual->initBuffer(SM.GetShader(ShaderManager::ShaderTag::ManualShader));
 }
@@ -98,6 +103,9 @@ void SCENE_TITLE::InitBuffer()
 void SCENE_TITLE::InitTexture()
 {
 	field->initTexture(SM.GetShader(ShaderManager::ShaderTag::BitmapShader));
+	for (int i = 0; i < MAX_CLOUD_CREATE; i++) {
+		cloud[i].initTexture(SM.GetShader(ShaderManager::ShaderTag::BitmapShader));
+	}
 	player->initTexture(SM.GetShader(ShaderManager::ShaderTag::BitmapShader));
 	manual->initTexture(SM.GetShader(ShaderManager::ShaderTag::ManualShader));
 }
@@ -194,6 +202,11 @@ void SCENE_TITLE::BitmapRender()
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(field->getFactor()));
 	field->Render();
 
+	for (int i = 0; i < MAX_CLOUD_CREATE; i++) {
+		cloud[i].putFactor(glm::mat4(1.0f));
+		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(cloud[i].getFactor()));
+		cloud[i].Render();
+	}
 
 	player->putFactor(glm::mat4(1.0f));
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(player->getFactor()));
@@ -239,6 +252,9 @@ void SCENE_TITLE::NonBitmapRender()
 void SCENE_TITLE::Update(float fTimeElapsed)
 {
 	field->Update(fTimeElapsed);
+	for (int i = 0; i < MAX_CLOUD_CREATE; i++) {
+		cloud[i].Update(fTimeElapsed);
+	}
 	player->Update(fTimeElapsed);
 	manual->Update(fTimeElapsed);
 

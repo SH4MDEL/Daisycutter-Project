@@ -30,12 +30,12 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -154,6 +154,7 @@
     <ClCompile Include="make_shaderProgram.cpp" />
     <ClCompile Include="make_vertexShaders.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="OBJECT_CLOUD.cpp" />
     <ClCompile Include="OBJECT_ENEMY.cpp" />
     <ClCompile Include="OBJECT_FIELD.cpp" />
     <ClCompile Include="OBJECT_MANUAL.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="make_shaderProgram.h" />
     <ClInclude Include="make_vertexShaders.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="OBJECT_CLOUD.h" />
     <ClInclude Include="OBJECT_ENEMY.h" />
     <ClInclude Include="OBJECT_FIELD.h" />
     <ClInclude Include="OBJECT_MANUAL.h" />

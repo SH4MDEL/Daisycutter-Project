@@ -117,6 +117,9 @@
     <ClCompile Include="OBJECT_PARTICLE.cpp">
       <Filter>소스 파일\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="OBJECT_CLOUD.cpp">
+      <Filter>소스 파일\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="filetobuf.h">
@@ -186,6 +189,9 @@
       <Filter>헤더 파일\Objects</Filter>
     </ClInclude>
     <ClInclude Include="OBJECT_PARTICLE.h">
+      <Filter>헤더 파일\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="OBJECT_CLOUD.h">
       <Filter>헤더 파일\Objects</Filter>
     </ClInclude>
   </ItemGroup>
