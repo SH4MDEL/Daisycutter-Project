@@ -101,6 +101,7 @@ void SCENE_INGAME::InitBuffer()
 	cloud->initBuffer(SM.GetShader(ShaderManager::ShaderTag::NonBitmapShader));
 	player->initBuffer(SM.GetShader(ShaderManager::ShaderTag::BitmapShader));
 	enemy->initBuffer(SM.GetShader(ShaderManager::ShaderTag::BitmapShader));
+	enemy->initSubShader(SM.GetShader(ShaderManager::ShaderTag::NonBitmapShader));
 	enemy->putParticleShader(SM.GetShader(ShaderManager::ShaderTag::NonBitmapShader));
 	manual->initBuffer(SM.GetShader(ShaderManager::ShaderTag::ManualShader));
 }
@@ -250,21 +251,21 @@ void SCENE_INGAME::Update(float fTimeElapsed)
 	if (iPhaseIndex == ReadyPhase) {
 		fPhaseTimer += fTimeElapsed;
 
-		if (fPhaseTimer >= 2.0f && fPhaseTimer < 3.0f) {
+		if (fPhaseTimer >= 3.0f && fPhaseTimer < 4.0f) {
 			iManualIndex = OBJECT_MANUAL::ManualTag::NUMBER3;
 		}
-		else if (fPhaseTimer >= 3.0f && fPhaseTimer < 4.0f) {
+		else if (fPhaseTimer >= 4.0f && fPhaseTimer < 5.0f) {
 			iManualIndex = OBJECT_MANUAL::ManualTag::NUMBER2;
 		}
-		else if (fPhaseTimer >= 4.0f && fPhaseTimer < 5.0f) {
+		else if (fPhaseTimer >= 5.0f && fPhaseTimer < 6.0f) {
 			iManualIndex = OBJECT_MANUAL::ManualTag::NUMBER1;
 		}
-		else if (fPhaseTimer >= 5.0f && fPhaseTimer < 6.0f) {
+		else if (fPhaseTimer >= 6.0f && fPhaseTimer < 7.0f) {
 			iManualIndex = OBJECT_MANUAL::ManualTag::OPERATION_START;
 		}
-		else if (fPhaseTimer >= 6.0f) {
+		else if (fPhaseTimer >= 7.0f) {
 			iManualIndex = player->getHP() + OBJECT_MANUAL::ManualTag::HP_BAR0;
-			fPhaseTimer -= 6.0f;
+			fPhaseTimer -= 7.0f;
 			iPhaseIndex = GamePhase;
 			m_pMusicSound->Play(m_pFramework->GetSelectMusic());
 		}
@@ -309,9 +310,9 @@ void SCENE_INGAME::Update(float fTimeElapsed)
 		fPhaseTimer += fTimeElapsed;
 
 		if (fPhaseTimer >= 1.0f && fPhaseTimer < 4.0f) {
-			fCameraPosArray[1][0] = fCameraPosArray[0][0] + (fCameraPosArray[2][0] - fCameraPosArray[0][0]) / 2 * (fPhaseTimer - 1.0f);
-			fCameraPosArray[1][1] = fCameraPosArray[0][1] + (fCameraPosArray[2][1] - fCameraPosArray[0][1]) / 2 * (fPhaseTimer - 1.0f);
-			fCameraPosArray[1][2] = fCameraPosArray[0][2] + (fCameraPosArray[2][2] - fCameraPosArray[0][2]) / 2 * (fPhaseTimer - 1.0f);
+			fCameraPosArray[1][0] = fCameraPosArray[0][0] + (fCameraPosArray[2][0] - fCameraPosArray[0][0]) / 3 * (fPhaseTimer - 1.0f);
+			fCameraPosArray[1][1] = fCameraPosArray[0][1] + (fCameraPosArray[2][1] - fCameraPosArray[0][1]) / 3 * (fPhaseTimer - 1.0f);
+			fCameraPosArray[1][2] = fCameraPosArray[0][2] + (fCameraPosArray[2][2] - fCameraPosArray[0][2]) / 3 * (fPhaseTimer - 1.0f);
 		}
 		else if (fPhaseTimer >= 4.0f) {
 			iCameraPosIndex = 2;
@@ -336,6 +337,18 @@ void SCENE_INGAME::Update(float fTimeElapsed)
 void SCENE_INGAME::KeyboardMessage(unsigned char inputKey)
 {
 	switch (inputKey) {
+	case 'a':
+	case 'A':
+	case 's':
+	case 'S':
+	case 'd':
+	case 'D':
+	case 'l':
+	case 'L':
+	case ';':
+	case ':':
+	case '\'':
+	case '"':
 	case 32:	// 'SPACE'
 		if (iPhaseIndex == GamePhase && enemy->EnemyAttacked()) {
 			m_pEffectSound->Play(SOUND_EFFECTSOUND::SoundTag::AttackSound);

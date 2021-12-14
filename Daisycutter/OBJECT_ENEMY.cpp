@@ -123,6 +123,8 @@ void OBJECT_ENEMY::initBuffer(GLint ShaderProgram)
 	glVertexAttribPointer(tAttribute, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
 	glEnableVertexAttribArray(tAttribute);
 
+	lightPosLocation[0] = glGetUniformLocation(ShaderProgram, "lightPos"); //--- lightPos 값 전달
+	lightColorLocation[0] = glGetUniformLocation(ShaderProgram, "lightColor"); //--- lightColor 값 전달
 	objColorLocation = glGetUniformLocation(m_ShaderProgram, "objectColor"); //--- object Color값 전달
 }
 
@@ -148,6 +150,12 @@ void OBJECT_ENEMY::initTexture(GLint ShaderProgram)
 	glUseProgram(m_ShaderProgram);
 	tLocation = glGetUniformLocation(m_ShaderProgram, "outTexture"); //--- outTexture 유니폼 샘플러의 위치를 가져옴
 	glUniform1i(tLocation, 0);
+}
+
+void OBJECT_ENEMY::initSubShader(GLint ShaderProgram)
+{
+	lightPosLocation[1] = glGetUniformLocation(ShaderProgram, "lightPos"); //--- lightPos 값 전달
+	lightColorLocation[1] = glGetUniformLocation(ShaderProgram, "lightColor"); //--- lightColor 값 전달
 }
 
 void OBJECT_ENEMY::Render()

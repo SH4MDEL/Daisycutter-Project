@@ -19,7 +19,7 @@ void OBJECT_CLOUD::OnCreate()
 	std::default_random_engine dre(rd());
 	std::uniform_int_distribution<int> status(0, 1);
 	std::uniform_real_distribution<float> coordinate(-10.0f, 10.0f);
-	std::uniform_real_distribution<float> zcoordinate(-150.0f, 0.0f);
+	std::uniform_real_distribution<float> zcoordinate(-150.0f, 10.0f);
 	std::uniform_real_distribution<float> speed(5.0f, 6.0f);
 	std::uniform_real_distribution<float> color(0.7f, 0.9f);
 
@@ -114,7 +114,7 @@ void OBJECT_CLOUD::Update(float fTimeElapsed)
 {
 	for (int i = 0; i < MAX_CLOUD_CREATE; i++) {
 		pData[i].fObject_z += pData[i].ObjectSpeed * fTimeElapsed;
-		if (pData[i].fObject_z >= 10.0f) {
+		if (pData[i].fObject_z >= 30.0f) {
 			CoordiSet(i);
 		}
 	}

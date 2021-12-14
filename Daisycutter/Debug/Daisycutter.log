@@ -1,2 +1,26 @@
-﻿  SCENE_INGAME.cpp
+﻿  Daisycutter.cpp
+  filetobuf.cpp
+  Framework.cpp
+  make_fragmentShaders.cpp
+  make_shaderProgram.cpp
+  make_vertexShaders.cpp
+  Object.cpp
+  OBJECT_CLOUD.cpp
+  OBJECT_ENEMY.cpp
+  OBJECT_FIELD.cpp
+  OBJECT_MANUAL.cpp
+  OBJECT_PARTICLE.cpp
+  OBJECT_PLAYER.cpp
+  objRead.cpp
+  Scene.cpp
+  SCENE_INGAME.cpp
+  SCENE_TITLE.cpp
+  ShaderManager.cpp
+  Sound.cpp
+  SOUND_EFFECTSOUND.cpp
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  SOUND_MUSICSOUND.cpp
+  Timer.cpp
+  코드를 생성하고 있습니다...
   Daisycutter.vcxproj -> C:\Users\Seungjun Lee\Desktop\Coding\Daisycutter-Project\Debug\Daisycutter.exe

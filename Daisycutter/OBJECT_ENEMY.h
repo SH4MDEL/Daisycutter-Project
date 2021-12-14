@@ -11,6 +11,8 @@ private:
 	unsigned int texture;
 	unsigned char* image;
 
+	int lightPosLocation[2];
+	int lightColorLocation[2];
 	int objColorLocation;
 	int tLocation;
 
@@ -45,6 +47,7 @@ public:
 
 	void OnCreate() override;
 	void initBuffer(GLint ShaderProgram) override;
+	void initSubShader(GLint ShaderProgram);
 	void initTexture(GLint ShaderProgram) override;	
 	void Update(float fTimeElapsed) override;
 	void Render() override;
