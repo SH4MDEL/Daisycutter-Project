@@ -36,9 +36,17 @@ void SCENE_INGAME::OnCreate()
 	fCameraPosArray[0][1] = 8.0f * (GLfloat)sin(2 * M_PI / 360 * 20) * (GLfloat)sin(2 * M_PI / 360 * 90);
 	fCameraPosArray[0][2] = 8.0f * (GLfloat)cos(2 * M_PI / 360 * 20);
 
-	fCameraPosArray[1][0] = 15.0f * (GLfloat)sin(2 * M_PI / 360 * 150) * (GLfloat)cos(2 * M_PI / 360 * 30);
-	fCameraPosArray[1][1] = 15.0f * (GLfloat)sin(2 * M_PI / 360 * 150) * (GLfloat)sin(2 * M_PI / 360 * 30);
-	fCameraPosArray[1][2] = 15.0f * (GLfloat)cos(2 * M_PI / 360 * 150);
+	fCameraPosArray[1][0] = 8.0f * (GLfloat)sin(2 * M_PI / 360 * 20) * (GLfloat)cos(2 * M_PI / 360 * 90);
+	fCameraPosArray[1][1] = 8.0f * (GLfloat)sin(2 * M_PI / 360 * 20) * (GLfloat)sin(2 * M_PI / 360 * 90);
+	fCameraPosArray[1][2] = 8.0f * (GLfloat)cos(2 * M_PI / 360 * 20);
+
+	fCameraPosArray[2][0] = 15.0f * (GLfloat)sin(2 * M_PI / 360 * 150) * (GLfloat)cos(2 * M_PI / 360 * 30);
+	fCameraPosArray[2][1] = 15.0f * (GLfloat)sin(2 * M_PI / 360 * 150) * (GLfloat)sin(2 * M_PI / 360 * 30);
+	fCameraPosArray[2][2] = 15.0f * (GLfloat)cos(2 * M_PI / 360 * 150);
+
+	fCameraPosArray[3][0] = 20.0f * (GLfloat)sin(2 * M_PI / 360 * 20) * (GLfloat)cos(2 * M_PI / 360 * 90);
+	fCameraPosArray[3][1] = 20.0f * (GLfloat)sin(2 * M_PI / 360 * 20) * (GLfloat)sin(2 * M_PI / 360 * 90);
+	fCameraPosArray[3][2] = 20.0f * (GLfloat)cos(2 * M_PI / 360 * 20);
 
 	m_pMusicSound = new SOUND_MUSICSOUND;
 	m_pMusicSound->Init();
@@ -59,6 +67,7 @@ void SCENE_INGAME::OnCreate()
 void SCENE_INGAME::OnDestroy()
 {
 	delete field;
+	delete cloud;
 	delete player;
 	delete manual;
 
@@ -73,6 +82,7 @@ void SCENE_INGAME::OnDestroy()
 void SCENE_INGAME::BuildObjects()
 {
 	field = new OBJECT_FIELD;
+	cloud = new OBJECT_CLOUD;
 	player = new OBJECT_PLAYER;
 	enemy = new OBJECT_ENEMY(m_pMusicSound->Get_BPM(m_pFramework->GetSelectMusic()));
 	manual = new OBJECT_MANUAL;
@@ -88,6 +98,7 @@ void SCENE_INGAME::BindShader()
 void SCENE_INGAME::InitBuffer()
 {
 	field->initBuffer(SM.GetShader(ShaderManager::ShaderTag::BitmapShader));
+	cloud->initBuffer(SM.GetShader(ShaderManager::ShaderTag::NonBitmapShader));
 	player->initBuffer(SM.GetShader(ShaderManager::ShaderTag::BitmapShader));
 	enemy->initBuffer(SM.GetShader(ShaderManager::ShaderTag::BitmapShader));
 	enemy->putParticleShader(SM.GetShader(ShaderManager::ShaderTag::NonBitmapShader));
@@ -97,6 +108,7 @@ void SCENE_INGAME::InitBuffer()
 void SCENE_INGAME::InitTexture()
 {
 	field->initTexture(SM.GetShader(ShaderManager::ShaderTag::BitmapShader));
+	cloud->initTexture(SM.GetShader(ShaderManager::ShaderTag::NonBitmapShader));
 	player->initTexture(SM.GetShader(ShaderManager::ShaderTag::BitmapShader));
 	enemy->initTexture(SM.GetShader(ShaderManager::ShaderTag::BitmapShader));
 	manual->initTexture(SM.GetShader(ShaderManager::ShaderTag::ManualShader));
@@ -219,6 +231,7 @@ void SCENE_INGAME::NonBitmapRender()
 
 	glEnable(GL_DEPTH_TEST);
 
+	cloud->Render(modelLocation);
 	enemy->ParticleRender(modelLocation);
 
 	glDisable(GL_DEPTH_TEST);
@@ -227,6 +240,7 @@ void SCENE_INGAME::NonBitmapRender()
 void SCENE_INGAME::Update(float fTimeElapsed)
 {
 	field->Update(fTimeElapsed);
+	cloud->Update(fTimeElapsed);
 	player->Update(fTimeElapsed);
 	enemy->Update(fTimeElapsed);
 	manual->Update(fTimeElapsed);
@@ -266,6 +280,12 @@ void SCENE_INGAME::Update(float fTimeElapsed)
 				enemy->EnemyCreate(cEnemyObjectData[iNoteReadPoint] - 48);
 			}
 			iNoteReadPoint++;
+			if (iNoteReadPoint > iEnemyObjectNum) {
+				fPhaseTimer = 0.0f;
+				iPhaseIndex = ClearPhase;
+				iCameraPosIndex = 1;
+				m_pMusicSound->Stop();
+			}
 		}
 
 		for (int i = 0; i < MAX_ENEMY_CREATE; i++) {
@@ -276,8 +296,10 @@ void SCENE_INGAME::Update(float fTimeElapsed)
 				if (player->getHP() == 0) {
 					iManualIndex = player->getHP() + OBJECT_MANUAL::ManualTag::HP_BAR0;
 					fPhaseTimer = 0.0f;
-					iPhaseIndex = DiePhase;
-					iCameraPosIndex = 2;
+					if (iPhaseIndex != ClearPhase) {
+						iPhaseIndex = DiePhase;
+					}
+					iCameraPosIndex = 1;
 					m_pMusicSound->Stop();
 				}
 			}
@@ -287,13 +309,26 @@ void SCENE_INGAME::Update(float fTimeElapsed)
 		fPhaseTimer += fTimeElapsed;
 
 		if (fPhaseTimer >= 1.0f && fPhaseTimer < 4.0f) {
-			fCameraPosArray[2][0] = fCameraPosArray[0][0] + (fCameraPosArray[1][0] - fCameraPosArray[0][0]) / 2 * (fPhaseTimer - 1.0f);
-			fCameraPosArray[2][1] = fCameraPosArray[0][1] + (fCameraPosArray[1][1] - fCameraPosArray[0][1]) / 2 * (fPhaseTimer - 1.0f);
-			fCameraPosArray[2][2] = fCameraPosArray[0][2] + (fCameraPosArray[1][2] - fCameraPosArray[0][2]) / 2 * (fPhaseTimer - 1.0f);
+			fCameraPosArray[1][0] = fCameraPosArray[0][0] + (fCameraPosArray[2][0] - fCameraPosArray[0][0]) / 2 * (fPhaseTimer - 1.0f);
+			fCameraPosArray[1][1] = fCameraPosArray[0][1] + (fCameraPosArray[2][1] - fCameraPosArray[0][1]) / 2 * (fPhaseTimer - 1.0f);
+			fCameraPosArray[1][2] = fCameraPosArray[0][2] + (fCameraPosArray[2][2] - fCameraPosArray[0][2]) / 2 * (fPhaseTimer - 1.0f);
 		}
 		else if (fPhaseTimer >= 4.0f) {
-			iCameraPosIndex = 1;
+			iCameraPosIndex = 2;
 			iManualIndex = OBJECT_MANUAL::ManualTag::GAME_OVER;
+		}
+	}
+	else if (iPhaseIndex == ClearPhase) {
+		fPhaseTimer += fTimeElapsed;
+
+		if (fPhaseTimer >= 2.0f && fPhaseTimer < 5.0f) {
+			fCameraPosArray[1][0] = fCameraPosArray[0][0] + (fCameraPosArray[3][0] - fCameraPosArray[0][0]) / 3 * (fPhaseTimer - 2.0f);
+			fCameraPosArray[1][1] = fCameraPosArray[0][1] + (fCameraPosArray[3][1] - fCameraPosArray[0][1]) / 3 * (fPhaseTimer - 2.0f);
+			fCameraPosArray[1][2] = fCameraPosArray[0][2] + (fCameraPosArray[3][2] - fCameraPosArray[0][2]) / 3 * (fPhaseTimer - 2.0f);
+		}
+		else if (fPhaseTimer >= 5.0f) {
+			iCameraPosIndex = 3;
+			iManualIndex = OBJECT_MANUAL::ManualTag::GAME_CLEAR;
 		}
 	}
 }
