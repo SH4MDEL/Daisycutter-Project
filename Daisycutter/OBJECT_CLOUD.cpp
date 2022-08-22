@@ -15,13 +15,6 @@ OBJECT_CLOUD::~OBJECT_CLOUD()
 void OBJECT_CLOUD::OnCreate()
 {
 	char Text[100];
-	std::random_device rd;
-	std::default_random_engine dre(rd());
-	std::uniform_int_distribution<int> status(0, 1);
-	std::uniform_real_distribution<float> coordinate(-10.0f, 10.0f);
-	std::uniform_real_distribution<float> zcoordinate(-150.0f, 10.0f);
-	std::uniform_real_distribution<float> speed(5.0f, 6.0f);
-	std::uniform_real_distribution<float> color(0.7f, 0.9f);
 
 	for (int i = 0; i < 2; i++) {
 		sprintf(Text, "GRAPHIC\\OBJECT\\CLOUD\\CLOUD%d.obj", i);
@@ -29,30 +22,24 @@ void OBJECT_CLOUD::OnCreate()
 	}
 	pData = new CloudData[MAX_CLOUD_CREATE];
 	for (int i = 0; i < MAX_CLOUD_CREATE; i++) {
-		pData[i].fObject_x = coordinate(dre);
-		pData[i].fObject_y = coordinate(dre);
-		pData[i].fObject_z = zcoordinate(dre);
-		pData[i].ObjectSpeed = speed(dre);
-		pData[i].iObjectStatus = status(dre);
+		pData[i].fObject_x = RandomDevice::GetRandomGLfloat(-10.0f, 10.0f);
+		pData[i].fObject_y = RandomDevice::GetRandomGLfloat(-10.0f, 10.0f);
+		pData[i].fObject_z = RandomDevice::GetRandomGLfloat(-150.0f, 10.0f);
+		pData[i].ObjectSpeed = RandomDevice::GetRandomGLfloat(5.0f, 6.0f);
+		pData[i].iObjectStatus = RandomDevice::GetRandomGLint(0, 1);
 
-		pData[i].fColor_r = pData[i].fColor_g = pData[i].fColor_b = color(dre);
+		pData[i].fColor_r = pData[i].fColor_g = pData[i].fColor_b = RandomDevice::GetRandomGLfloat(0.7f, 0.9f);
 		pData[i].fColor_a = 0.3f;
 	}
 }
 
 void OBJECT_CLOUD::CoordiSet(GLint index)
 {
-	std::random_device rd;
-	std::default_random_engine dre(rd());
-	std::uniform_real_distribution<float> coordinate(-10.0f, 10.0f);
-	std::uniform_real_distribution<float> speed(5.0f, 6.0f);
-	std::uniform_real_distribution<float> color(0.7f, 0.9f);
-
-	pData[index].fObject_x = coordinate(dre);
-	pData[index].fObject_y = coordinate(dre);
+	pData[index].fObject_x = RandomDevice::GetRandomGLfloat(-10.0f, 10.0f);
+	pData[index].fObject_y = RandomDevice::GetRandomGLfloat(-10.0f, 10.0f);
 	pData[index].fObject_z = -150.0f;
-	pData[index].ObjectSpeed = speed(dre);
-	pData[index].fColor_r = pData[index].fColor_g = pData[index].fColor_b = color(dre);
+	pData[index].ObjectSpeed = RandomDevice::GetRandomGLfloat(5.0f, 6.0f);
+	pData[index].fColor_r = pData[index].fColor_g = pData[index].fColor_b = RandomDevice::GetRandomGLfloat(0.7f, 0.9f);
 }
 
 void OBJECT_CLOUD::initBuffer(GLint ShaderProgram)

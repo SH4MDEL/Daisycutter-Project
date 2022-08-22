@@ -41,3 +41,23 @@
 #define MAX_PARTICLE_CREATE 20
 #define MAX_CLOUD_CREATE 100
 
+namespace RandomDevice
+{
+	inline GLfloat GetRandomGLfloat(float start, float end)
+	{
+		std::random_device rd;
+		std::default_random_engine dre(rd());
+
+		std::uniform_real_distribution<GLfloat> value(start, end);
+		return value(dre);
+	}
+
+	inline GLint GetRandomGLint(int start, int end)
+	{
+		std::random_device rd;
+		std::default_random_engine dre(rd());
+
+		std::uniform_int_distribution<GLint> value(start, end);
+		return value(dre);
+	}
+}
